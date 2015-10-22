@@ -129,3 +129,27 @@ h1 {
 @media screen and (orientation: landscape) {
   img { max-height: 100%; width:100%;}
 } 
+
+#email {
+    display:none;
+    font-size: 12px;
+    text-transform:none;
+    color: red;
+    text-decoration: underline;
+    padding-left: 10px;
+}
+p {
+    display: inline;
+}
+ons-button {
+    text-transform:none;
+}
+
+.register {
+  font-size: 12px;
+}
+
+#transformText {
+    text-transform:none;
+}
+
