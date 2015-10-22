@@ -40,18 +40,93 @@
         <title>Hello World</title>
         </script>
     </head>
-    <body>
+    <body ng-controller="AppController">
+
         <ons-navigator title="Navigator" var="myNavigator">
             <ons-page>
               <div id="deviceready" class="blink">
                 <p class="event listening"></p>
                 <p class="event received"></p>
-              </div>
+              </div> 
               <div id="splashLogo">
                     <img src="img/CityRUS_logo.png">
               </div>
             </ons-page>
         </ons-navigator>
+
+        <ons-template id="login.html">
+            <ons-page id="startPage">
+                <div id="logo">
+                    <img src="img/CityRUS_logo.png">
+                </div>
+                <div>
+                    <ons-modal var="modal">
+                      <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+                      <br>
+                      <br> Please wait...
+                      <br>
+                    </ons-modal>
+                    <form name="myForm">
+                        <section style="padding: 8px">
+                          <input type="text" class="text-input" name="user" ng-model="username_v" placeholder="Username" style="display: block; width: 100%" required>
+                        </section>
+                        <section style="padding: 8px">
+                          <input type="password" class="text-input" name="pass" ng-model="password_v" placeholder="Password" style="display: block; width: 100%" required>
+                        </section>
+                        <section style="padding: 0 8px 8px">
+                            <ons-button modifier="large" class="login-button" ng-click="logIn(username_v, password_v)"> Login </ons-button>
+                        </section>
+                        <section style="padding: 0 0px 0px">
+                          <ons-button modifier="quiet" ng-click="myNavigator.pushPage('register.html', {animation: 'fade'})"> Register </ons-button>
+                        </section>
+                        <section style="padding: 0 0px 0px">
+                          <ons-button modifier="quiet"> Forgot Password? </ons-button>
+                        </section>
+                    </form>
+                </div>
+            </ons-page>
+        </ons-template>
+
+       <ons-template id="account.html">
+            <ons-page>
+                <ons-toolbar fixed-style>
+                  <div class="center" id="transformText">MyAccount</div>
+                  <div class="right"><ons-toolbar-button ng-click="logOut()" modifier="outline">Logout</ons-toolbar-button></div>
+                </ons-toolbar>
+            </ons-page>
+        </ons-template>
+
+        <ons-template id="register.html">
+            <ons-page>
+                <ons-toolbar fixed-style>
+                  <div class="left" style="line-height: 44px">
+                    <ons-back-button>Back</ons-back-button>
+                  </div>
+                  <div class="center" id="transformText">Register</div>
+                </ons-toolbar>
+                <section style="padding: 8px">
+                  <input type="text" class="text-input" ng-model="username_r" placeholder="Username" style="display: block; width: 100%">
+                </section>
+                <section style="padding: 8px">
+                  <input type="text" class="text-input" ng-model="email" placeholder="email" style="display: block; width: 100%">
+                </section>
+                <section style="padding: 8px">
+                  <input type="password" class="text-input" ng-model="password_r" placeholder="Password" style="display: block; width: 100%">
+                </section>
+                <div id="email">
+                    <ons-icon
+                      icon="ion-information-circled"
+                      size="20px"
+                      fixed-width="false"
+                      style="color: red">
+                    </ons-icon>
+                    <p> Enter valid email address. </p>
+                </div>
+                <section style="padding: 0 8px 8px">
+                    <ons-button modifier="large" class="login-button" ng-click="register(username_r, email, password_r)"> Register </ons-button>
+                </section>
+            </ons-page>
+        </ons-template>  
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
