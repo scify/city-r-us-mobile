@@ -28,6 +28,14 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener("backbutton", onBackKeyDown, false);
+
+        function onBackKeyDown() {
+        // Handle the back button
+            if (myNavigator.getCurrentPage().options.pagevalue == "loginPage") {
+              navigator.app.exitApp();
+            }
+        }
     },
     // deviceready Event Handler
     //
@@ -37,12 +45,14 @@ var app = {
         app.receivedEvent('deviceready');
         console.log("device is ready");
 
+        document.addEventListener("showkeyboard", function(){ alert("Keyboard is ON");}, false);
+
         var login = checkLogin();
         if (login) {
           myNavigator.pushPage('account.html', {animation: "fade"});
         } else {
           setTimeout(function () {
-            myNavigator.pushPage('login.html', {animation: "fade"});
+            myNavigator.pushPage('login.html', {animation: "fade", pagevalue: "loginPage"});
 
           }, 3000)
         }
@@ -51,14 +61,14 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function(id) {
 
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+        //var parentElement = document.getElementById(id);
+        //var listeningElement = parentElement.querySelector('.listening');
+        //var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        //listeningElement.setAttribute('style', 'display:none;');
+        //receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        //console.log('Received Event: ' + id);
     }
 };
 
@@ -70,48 +80,132 @@ module.controller('AppController', function($scope) {
   ons.ready(function() {
     console.log("onsen ready!!!");
   });
+
   $scope.logIn = function (username, password) {
     console.log("button pressed!");
-    validateLogin (username, password);
+    if (checkConnection()) {
+      modal.show();
+      validateLogin (username, password);
+    } else {
+      ons.notification.alert({
+        message: 'Check your connection in order to procced with Login.',
+        title: 'Connection error',
+        buttonLabel: 'OK',
+        animation: 'default',
+        callback: function() {
+        }
+      });
+    }
   }
   $scope.logOut = function () {
     console.log("logout pressed!");
     localStorage.removeItem("logintoken");
-    myNavigator.pushPage('login.html', {animation: "fade"});
+    myNavigator.pushPage('login.html', {animation: "fade", pagevalue: "loginPage"});
   } 
   $scope.register = function (username, email, password) {
     console.log("register pressed!");
-    registration(username, email, password);
+    if (checkConnection()) {
+      modal.show();
+      registration(username, email, password);
+    }  else {
+      ons.notification.alert({
+        message: 'Check your connection in order to procced with Register.',
+        title: 'Connection error',
+        buttonLabel: 'OK',
+        animation: 'default',
+        callback: function() {
+        }
+      });
+    }
   }
 });
 
 function validateLogin(username, password) {
-    if (username == "giannis" && password == "giannis") {
-        console.log("Login completed");
-        modal.show();
-        setTimeout(function () {
-          modal.hide();
-          saveLocalStorage();
+  if (isEmpty(username) && isEmpty(password)) {
+    modal.hide();
+    ons.notification.alert({
+      message: 'Enter your email address and password.',
+      title: 'Login Failed',
+      buttonLabel: 'OK',
+      animation: 'default',
+      callback: function() {
+      }
+    });
+  } else if (isEmpty(username)) {
+    modal.hide();
+    ons.notification.alert({
+      message: 'Please check your email address.',
+      title: 'Login Failed',
+      buttonLabel: 'OK',
+      animation: 'default',
+      callback: function() {
+      }
+    });
+  } else if (isEmpty(password)) {
+    modal.hide();
+    ons.notification.alert({
+      message: 'Please check your password.',
+      title: 'Login Failed',
+      buttonLabel: 'OK',
+      animation: 'default',
+      callback: function() {
+      }
+    });
+  } else {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/authenticate?email=" + username + "&password=" + password +"", true);
+    xhttp.send();
+
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        modal.hide();
+        var response = JSON.parse(xhttp.responseText)
+        if (response.status == "success") {
+          saveLocalStorage(response.message.token);
           myNavigator.pushPage('account.html', {animation: "fade"});
-        }, 2000)
-    } else {
-        console.log("Login failed!");
+        } else {
+          ons.notification.alert({
+            message: "" + response.message.description,
+            title: 'Login Failed',
+            buttonLabel: 'OK',
+            animation: 'default',
+            callback: function() {
+            }
+          });
+        }
+      } else if (xhttp.readyState == 4 && xhttp.status == 400) {
+        modal.hide();
         ons.notification.alert({
-          message: 'Check your username or password.',
-          // or messageHTML: '<div>Message in HTML</div>',
-          title: 'Login Failed',
+          message: "" + response.message.description,
+          title: 'Unauthorized action',
           buttonLabel: 'OK',
           animation: 'default',
           callback: function() {
           }
-        });
-    } 
+        }); 
+      } else if (xhttp.readyState == 4 && xhttp.status == 404) {
+        modal.hide();
+        ons.notification.alert({
+          message: "" + response.message.description,
+          title: 'User not found',
+          buttonLabel: 'OK',
+          animation: 'default',
+          callback: function() {
+          }
+        }); 
+      }
+    }
+
+  }
 }
 
-function saveLocalStorage() {
-  console.log("typeofStorage " + typeof(Storage));
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
+function saveLocalStorage(logintoken) {
   if(typeof(Storage) !== "undefined") {
-      localStorage.setItem("logintoken", true);
+      localStorage.setItem("logintoken", logintoken);
   } else {
 
   }
@@ -123,18 +217,13 @@ function registration(username, email, password) {
       if (email_validation.test(email)){
         console.log("register ok");
         document.getElementById("email").style.display = "none";
-        ons.notification.alert({
-          message: 'Registration completed!',
-          title: 'message',
-          buttonLabel: 'OK',
-          animation: 'default',
-          callback: function() {
-          }
-        });
+        sendRegisterRequest(username, email, password);
       } else {
+        modal.hide();
         document.getElementById("email").style.display = "inline";
       }
     } else {
+      modal.hide();
       if (email_validation.test(email)){
         document.getElementById("email").style.display = "none";
       } else {
@@ -151,11 +240,74 @@ function registration(username, email, password) {
     }
 }
 
+function sendRegisterRequest(username, email, password) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("POST", "http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/users/register?name=" + username + "&email=" + email + "&password=" + password +"", true);
+  xhttp.send();
+
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      modal.hide();
+      var response = JSON.parse(xhttp.responseText)
+      if (response.status == "success") {
+        modal.show();
+        setTimeout(function () {
+          modal.hide();
+          saveLocalStorage(response.message.token);
+          myNavigator.pushPage('account.html', {animation: "fade"});
+        }, 2000)
+      } else {
+        ons.notification.alert({
+          message: "" + response.message.description,
+          title: 'register Failed',
+          buttonLabel: 'OK',
+          animation: 'default',
+          callback: function() {
+          }
+        });
+      }
+    } else if (xhttp.readyState == 4 && xhttp.status == 400) {
+      modal.hide();
+      var response = JSON.parse(xhttp.responseText)
+      ons.notification.alert({
+        message: "" + response.message.description,
+        title: 'Bad Request',
+        buttonLabel: 'OK',
+        animation: 'default',
+        callback: function() {
+        }
+      }); 
+    } else if (xhttp.readyState == 4 && xhttp.status == 409) {
+      modal.hide();
+      var response = JSON.parse(xhttp.responseText)
+      ons.notification.alert({
+        message: "" + response.message.description,
+        title: 'Email already exists',
+        buttonLabel: 'OK',
+        animation: 'default',
+        callback: function() {
+        }
+      }); 
+    }
+  }
+}
+
 function checkLogin() {
   if(localStorage.getItem("logintoken") === null) {
       return false;
-  } else if (localStorage.getItem("logintoken")) {
+  } else {
       return true;
   }
 }
+
+function checkConnection() {
+    var networkState = navigator.connection.type;
+
+    if (networkState == "none") {
+      return false;
+    } else {
+      return true;
+    }
+}
+
 

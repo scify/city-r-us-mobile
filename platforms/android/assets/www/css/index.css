@@ -24,7 +24,7 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
+    /*background-color:#E4E4E4;
     background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
@@ -35,39 +35,82 @@ body {
         color-stop(0, #A7A7A7),
         color-stop(0.51, #E4E4E4)
     );
-    background-attachment:fixed;
+    background-attachment:fixed; 
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:12px;
     height:100%;
     margin:0px;
     padding:0px;
     text-transform:uppercase;
-    width:100%;
+    width:100%;*/
+}
+
+.page {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  background: linear-gradient(135deg,  #62d7c0 0%,#2e5a85 100%);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: visible;
+  font-size: 17px;
+  color: #1f1f21;
+}
+.page::-webkit-scrollbar {
+  display: none;
+}
+.page__content {
+  background: linear-gradient(135deg,  #62d7c0 0%,#2e5a85 100%);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: -1px;
+}
+.page__background {
+  background: linear-gradient(135deg,  #62d7c0 0%,#2e5a85 100%);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* Portrait layout (default) */
-.app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
+/*.app {
+    background:url(../img/logo.png) no-repeat center top;
+    position:absolute;             
     left:50%;
     top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
+    height:50px;                  
+    width:225px;                   
     text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
-}
+    padding:180px 0px 0px 0px;    
+    margin:-115px 0px 0px -112px; 
+                                   
+} */
 
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
         background-position:left center;
-        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
-        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
+        padding:75px 0px 75px 170px; 
+        margin:-90px 0px 0px -198px; 
+                                      
     }
-}
+} 
 
 h1 {
     font-size:24px;
@@ -81,7 +124,7 @@ h1 {
 .event {
     border-radius:4px;
     -webkit-border-radius:4px;
-    color:#FFFFFF;
+    /*color:#FFFFFF;*/
     font-size:12px;
     margin:0px 30px;
     padding:2px 0px;
@@ -114,21 +157,113 @@ h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
-#splashLogo {
+#splashImage { 
+    max-height: 50%;
+    max-width: 50%;
     position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+#logo {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -70%);
+    transform: translate(-50%,-70%);
+}
+
+#loginForm {
+    position: absolute;
+    width: 70%;
     top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
+    left: 50%;
+    -webkit-transform: translate(-50%, -30%);
+    transform: translate(-50%,-30%);
+    overflow: scroll;
+}
+
+#loginPage {
+    /*position: absolute;*/
+}
+
+#createAccount {
+    position: fixed;
+    top: 110%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 100%);
+    transform: translate(-50%,100%);
 }
 
 @media screen and (orientation: portrait) {
-  img { max-width: 100%; height:auto;}
+  #loginImage {
+    background-size: 100px 100px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    color: #999;
+    height: 100px;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.3em;
+    margin: 0 auto;
+    padding-top: 45px;
+    text-decoration: none;
+    width: 100px;
+    text-indent: -9999px;
+    outline: none;
+    overflow: scroll;
+    display: block;
+  }
+  #quietButtonRegister {
+    color: #FFFFFF;
+    font-size: 20px;
+  }
+
+  #centerRegister {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    margin: 0 auto;
+    z-index: -1;
+  }
 }
 
 @media screen and (orientation: landscape) {
-  img { max-height: 100%; width:100%;}
-} 
+  #loginImage {
+    background-size: 100px 100px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    color: #999;
+    height: 100px;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1.3em;
+    margin: 0 auto;
+    padding-top: 45px;
+    text-decoration: none;
+    width: 100px;
+    text-indent: -9999px;
+    outline: none;
+    overflow: scroll;
+    display: block;
+  }
+  #quietButtonRegister {
+    color: #FFFFFF;
+    font-size: 20px;
+  }
+
+  #centerRegister {
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    margin: auto;
+    z-index: -1;
+    overflow: scroll;
+  }
+}
 
 #email {
     display:none;
@@ -141,9 +276,6 @@ h1 {
 p {
     display: inline;
 }
-ons-button {
-    text-transform:none;
-}
 
 .register {
   font-size: 12px;
@@ -153,3 +285,39 @@ ons-button {
     text-transform:none;
 }
 
+#inputText {
+    border-radius: 15px;
+    height: 40px;
+    display: block;
+    width: 100%;
+    background-color: #C5D9E4;
+    font-size: 20px;
+}
+
+#buttons {
+    border-radius: 15px;
+    background-color: #56CDB7;
+    font-size: 20px;
+    display:block;
+}
+
+#quietButtonForgotPass {
+    color: #D8D8D8;
+    font-style: italic; 
+    font-size: 14px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #FFFFFF;
+    text-align: center;
+}
+
+#registerForm {
+    position: absolute;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -30%);
+    transform: translate(-50%,-30%);
+    overflow: scroll;
+}

@@ -28,7 +28,8 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'none' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1*">-->
+        <!--<meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1*">-->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -47,42 +48,42 @@
               <div id="deviceready" class="blink">
                 <p class="event listening"></p>
                 <p class="event received"></p>
-              </div> 
-              <div id="splashLogo">
-                    <img src="img/CityRUS_logo.png">
+              </div>
+              <div>
+                  <img id="splashImage" src="img/CityRUS_logo.png">
               </div>
             </ons-page>
         </ons-navigator>
 
         <ons-template id="login.html">
-            <ons-page id="startPage">
+            <ons-page id="loginPage">
                 <div id="logo">
-                    <img src="img/CityRUS_logo.png">
+                    <img id="loginImage" src="img/CityRUS_logo.png">
                 </div>
-                <div>
+                <div align="center">
                     <ons-modal var="modal">
                       <ons-icon icon="ion-load-c" spin="true"></ons-icon>
                       <br>
                       <br> Please wait...
                       <br>
                     </ons-modal>
-                    <form name="myForm">
-                        <section style="padding: 8px">
-                          <input type="text" class="text-input" name="user" ng-model="username_v" placeholder="Username" style="display: block; width: 100%" required>
+                    <form name="myForm" id="loginForm">
+                        <section style="padding-bottom: 3px">
+                          <input type="text" class="text-input" id="inputText" name="user" ng-model="username_v" placeholder="email" required>
                         </section>
-                        <section style="padding: 8px">
-                          <input type="password" class="text-input" name="pass" ng-model="password_v" placeholder="Password" style="display: block; width: 100%" required>
+                        <section style="padding-bottom: 15px">
+                          <input type="password" class="text-input" id="inputText" name="pass" ng-model="password_v" placeholder="password" required>
                         </section>
-                        <section style="padding: 0 8px 8px">
-                            <ons-button modifier="large" class="login-button" ng-click="logIn(username_v, password_v)"> Login </ons-button>
+                        <section style="padding-bottom: 2px">
+                            <ons-button modifier="large" class="login-button" id="buttons" ng-click="logIn(username_v, password_v)"> Login </ons-button>
                         </section>
-                        <section style="padding: 0 0px 0px">
-                          <ons-button modifier="quiet" ng-click="myNavigator.pushPage('register.html', {animation: 'fade'})"> Register </ons-button>
-                        </section>
-                        <section style="padding: 0 0px 0px">
-                          <ons-button modifier="quiet"> Forgot Password? </ons-button>
+                        <section>
+                          <ons-button modifier="quiet" id="quietButtonForgotPass"> Forgot your password? </ons-button>
                         </section>
                     </form>
+                    <section id="centerRegister">
+                      <ons-button modifier="quiet" id="quietButtonRegister" ng-click="myNavigator.pushPage('register.html', {animation: 'fade'})"> Create an account </ons-button>
+                    </section>
                 </div>
             </ons-page>
         </ons-template>
@@ -98,20 +99,30 @@
 
         <ons-template id="register.html">
             <ons-page>
-                <ons-toolbar fixed-style>
-                  <div class="left" style="line-height: 44px">
-                    <ons-back-button>Back</ons-back-button>
-                  </div>
-                  <div class="center" id="transformText">Register</div>
-                </ons-toolbar>
-                <section style="padding: 8px">
-                  <input type="text" class="text-input" ng-model="username_r" placeholder="Username" style="display: block; width: 100%">
+              <!--<ons-toolbar fixed-style>
+                <div class="left" style="line-height: 44px">
+                  <ons-back-button>Back</ons-back-button>
+                </div>
+                <div class="center" id="transformText">Register</div>
+              </ons-toolbar>-->
+              <ons-modal var="modal">
+                <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+                <br>
+                <br> Please wait...
+                <br>
+              </ons-modal>
+              <div id="logo">
+                  <img id="loginImage" src="img/CityRUS_logo.png">
+              </div>
+              <form name="registerForm" id="registerForm">
+                <section style="padding-bottom: 3px">
+                  <input type="text" class="text-input" id="inputText" ng-model="username_r" placeholder="Username">
                 </section>
-                <section style="padding: 8px">
-                  <input type="text" class="text-input" ng-model="email" placeholder="email" style="display: block; width: 100%">
+                <section style="padding-bottom: 3px">
+                  <input type="text" class="text-input" id="inputText" ng-model="email" placeholder="email">
                 </section>
-                <section style="padding: 8px">
-                  <input type="password" class="text-input" ng-model="password_r" placeholder="Password" style="display: block; width: 100%">
+                <section style="padding-bottom: 15px">
+                  <input type="password" class="text-input" id="inputText" ng-model="password_r" placeholder="Password">
                 </section>
                 <div id="email">
                     <ons-icon
@@ -122,9 +133,13 @@
                     </ons-icon>
                     <p> Enter valid email address. </p>
                 </div>
-                <section style="padding: 0 8px 8px">
-                    <ons-button modifier="large" class="login-button" ng-click="register(username_r, email, password_r)"> Register </ons-button>
+                <section>
+                    <ons-button modifier="large" class="login-button" id="buttons" ng-click="register(username_r, email, password_r)"> Register </ons-button>
                 </section>
+              </form>
+              <section id="centerRegister" align="center">
+                <ons-button modifier="quiet" id="quietButtonRegister" ng-click="myNavigator.pushPage('login.html', {animation: 'fade'})"> I already have an account </ons-button>
+              </section>
             </ons-page>
         </ons-template>  
         <script type="text/javascript" src="cordova.js"></script>
