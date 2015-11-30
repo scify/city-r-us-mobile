@@ -35,24 +35,26 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" href="onsen/css/onsenui.css">
-        <link rel="stylesheet" href="onsen/css/onsen-css-components.css">
+        <!--<link rel="stylesheet" href="onsen/css/onsen-css-components.css">-->
+        <link rel="stylesheet" type="text/css" href="css/onsen-css-components.min.css">
         <script src="onsen/js/angular/angular.js"></script>
         <script src="onsen/js/onsenui.js"></script>
+        <!--<script type="text/javascript" src="menu.js"></script>-->
         <title>Hello World</title>
         </script>
     </head>
     <body ng-controller="AppController">
 
         <ons-navigator title="Navigator" var="myNavigator">
-            <ons-page>
-              <div id="deviceready" class="blink">
-                <p class="event listening"></p>
-                <p class="event received"></p>
-              </div>
-              <div>
-                  <img id="splashImage" src="img/CityRUS_logo.png">
-              </div>
-            </ons-page>
+          <ons-page>
+            <div id="deviceready" class="blink">
+              <p class="event listening"></p>
+              <p class="event received"></p>
+            </div>
+            <div>
+                <img id="splashImage" src="img/CityRUS_logo.png">
+            </div>
+          </ons-page>
         </ons-navigator>
 
         <ons-template id="login.html">
@@ -86,6 +88,30 @@
                     </section>
                 </div>
             </ons-page>
+        </ons-template>
+
+        <!-- Εδώ δημιουργείται το μενού της εφαρμογής -->
+        <ons-template id="tabs.html">
+          <ons-page ng-controller="TabsController">
+            <ons-tabbar class="menu" var="app.tabbar">
+              <ons-tabbar-item class="menu-item"
+                icon="fa fa-home"
+                label="MyAccount"
+                page="account.html"></ons-tabbar-item>
+              <ons-tabbar-item class="menu-item"
+                icon="ion-android-bicycle"
+                label="CityMissions"
+                page="missions.html" ng-click="callMissions()"></ons-tabbar-item>
+              <ons-tabbar-item class="menu-item"
+                icon="ion-share"
+                label="MyContribution"
+                page="missions.html"></ons-tabbar-item>
+              <ons-tabbar-item class="menu-item"
+                icon="ion-information-circled"
+                label="About"
+                page="missions.html"></ons-tabbar-item>
+            </ons-tabbar>
+          </ons-page>
         </ons-template>
 
        <ons-template id="account.html">
@@ -142,6 +168,41 @@
               </section>
             </ons-page>
         </ons-template>  
+
+        <ons-template id="missions.html">
+            <ons-page id="mission">
+                <ons-toolbar fixed-style>
+                  <div class="left" style="line-height: 44px">
+                    <ons-back-button>Back</ons-back-button>
+                  </div>
+                  <div class="center" id="transformText">Suggest Missions</div>
+                </ons-toolbar>
+                
+                <!-- Εδώ θέλω να βγαίνει το grid δυναμικά-->
+                <!--<div id="gridview">
+
+                </div>-->
+
+               <!-- Αυτό είναι το δοκιμαστικό grid που έφτιαξα -->
+               <!-- <ons-row> 
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission1 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission2 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                </ons-row>
+                <ons-row>
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission3 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission4 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                </ons-row>
+                <ons-row>
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission5 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission6 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                </ons-row>
+                <ons-row>
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission7 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                  <ons-col id="grid-column" width="46%"><img src="http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png" alt="scify" height="100" width="100" align="middle"> <p id="mission_description">Mission8 Description</p> <p id="contributions">12 contributors</p> </ons-col>
+                </ons-row> -->
+
+            </ons-page>
+        </ons-template>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>

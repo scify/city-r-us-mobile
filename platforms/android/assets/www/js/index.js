@@ -49,7 +49,8 @@ var app = {
 
         var login = checkLogin();
         if (login) {
-          myNavigator.pushPage('account.html', {animation: "fade"});
+          //myNavigator.pushPage('account.html', {animation: "fade"});
+          myNavigator.pushPage('tabs.html', {params: { tab: 0 }});
         } else {
           setTimeout(function () {
             myNavigator.pushPage('login.html', {animation: "fade", pagevalue: "loginPage"});
@@ -118,6 +119,19 @@ module.controller('AppController', function($scope) {
       });
     }
   }
+  $scope.callMissions = function () {
+    //myNavigator.pushPage('missions.html', {animation: "fade"});
+    alert("callMissions pressed!");
+    getMissions();
+  } 
+});
+
+/* Κώδικας απαραίτητος προκειμένου να παίζω σωστά ο navigator μαζί με το menu */
+module.controller('TabsController', function() {
+  setImmediate(function() {
+    var tabIndex = myNavigator.getCurrentPage().options.params.tab;
+    app.tabbar.setActiveTab(tabIndex);
+  });
 });
 
 function validateLogin(username, password) {
@@ -162,7 +176,8 @@ function validateLogin(username, password) {
         var response = JSON.parse(xhttp.responseText)
         if (response.status == "success") {
           saveLocalStorage(response.message.token);
-          myNavigator.pushPage('account.html', {animation: "fade"});
+          //myNavigator.pushPage('account.html', {animation: "fade"});
+          myNavigator.pushPage('tabs.html', {params: { tab: 0 }});
         } else {
           ons.notification.alert({
             message: "" + response.message.description,
@@ -254,7 +269,8 @@ function sendRegisterRequest(username, email, password) {
         setTimeout(function () {
           modal.hide();
           saveLocalStorage(response.message.token);
-          myNavigator.pushPage('account.html', {animation: "fade"});
+          //myNavigator.pushPage('account.html', {animation: "fade"});
+          myNavigator.pushPage('tabs.html', {params: { tab: 0 }});
         }, 2000)
       } else {
         ons.notification.alert({
@@ -303,10 +319,64 @@ function checkLogin() {
 function checkConnection() {
     var networkState = navigator.connection.type;
 
+    //var states = {};
+    //states[Connection.UNKNOWN]  = 'Unknown connection';
+    //states[Connection.ETHERNET] = 'Ethernet connection';
+    //states[Connection.WIFI]     = 'WiFi connection';
+    //states[Connection.CELL_2G]  = 'Cell 2G connection';
+    //states[Connection.CELL_3G]  = 'Cell 3G connection';
+    //states[Connection.CELL_4G]  = 'Cell 4G connection';
+    //states[Connection.CELL]     = 'Cell generic connection';
+    //states[Connection.NONE]     = 'No network connection';
+
+    //alert('Connection type: ' + states[networkState]);
+
     if (networkState == "none") {
       return false;
     } else {
       return true;
+    }
+}
+
+function getMissions() {
+  var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/missions", true);
+    xhttp.send();
+
+    xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        var response = JSON.parse(xhttp.responseText)
+        if (response.status == "success") {
+          //Εδώ δοκίμασα να παράγω το grid και να το κολλήσω στην html.
+          //var newdiv = document.createElement("div");
+          //newdiv.innerHTML = "<ons-row> <ons-col id='grid-column' width='46%'><img src='http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png' alt='scify' height='100' width='100' align='middle'> <p id='mission_description'>Mission1 Description</p> <p id='contributions'>12 contributors</p> </ons-col> <ons-col id='grid-column' width='46%'><img src='http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png' alt='scify' height='100' width='100' align='middle'> <p id='mission_description'>Mission2 Description</p> <p id='contributions'>12 contributors</p> </ons-col> </ons-row>";
+          //document.getElementById("gridview").appendChild(newdiv);
+
+          //Εδώ κάνω μια επανάληψη τον πίνακα των αποστολών για να πάρω περιγραφές και τα σχετικά.
+          for (var i = 0; i < response.message.missions.length; i++) {
+            alert(response.message.missions[i].description);
+          }
+        } else {
+          ons.notification.alert({
+            message: "" + response.message.description,
+            title: 'Login Failed',
+            buttonLabel: 'OK',
+            animation: 'default',
+            callback: function() {
+            }
+          });
+        }
+      } else if (xhttp.readyState == 4 && xhttp.status == 400) {
+        modal.hide();
+        ons.notification.alert({
+          message: "" + response.message.description,
+          title: 'Unauthorized action',
+          buttonLabel: 'OK',
+          animation: 'default',
+          callback: function() {
+          }
+        }); 
+      }
     }
 }
 
