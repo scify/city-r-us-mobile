@@ -1,0 +1,374 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    /*background-color:#E4E4E4;
+    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+    background-image:-webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #A7A7A7),
+        color-stop(0.51, #E4E4E4)
+    );
+    background-attachment:fixed; 
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    text-transform:uppercase;
+    width:100%;*/
+}
+
+.page {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    font-size: 17px;
+    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    overflow: visible;
+    font-size: 17px;
+    color: #1f1f21;
+}
+
+.page::-webkit-scrollbar {
+    display: none;
+}
+
+.page__content {
+    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: -1px;
+}
+
+.page__background {
+    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Portrait layout (default) */
+/*.app {
+    background:url(../img/logo.png) no-repeat center top;
+    position:absolute;             
+    left:50%;
+    top:50%;
+    height:50px;                  
+    width:225px;                   
+    text-align:center;
+    padding:180px 0px 0px 0px;    
+    margin:-115px 0px 0px -112px; 
+                                   
+} */
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width: 400px) {
+    .app {
+        background-position: left center;
+        padding: 75px 0px 75px 170px;
+        margin: -90px 0px 0px -198px;
+
+    }
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0px;
+    overflow: visible;
+    padding: 0px;
+    text-align: center;
+}
+
+.event {
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    /*color:#FFFFFF;*/
+    font-size: 12px;
+    margin: 0px 30px;
+    padding: 2px 0px;
+}
+
+.event.listening {
+    /*background-color:#333333;*/
+    display: block;
+}
+
+.event.received {
+    /*background-color:#4B946A;*/
+    display: none;
+}
+
+@keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes fade {
+    from {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1.0;
+    }
+}
+
+.blink {
+    animation: fade 3000ms infinite;
+    -webkit-animation: fade 3000ms infinite;
+}
+
+#splashImage {
+    max-height: 50%;
+    max-width: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+#logo {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -70%);
+    transform: translate(-50%, -70%);
+}
+
+#loginForm {
+    position: absolute;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -30%);
+    transform: translate(-50%, -30%);
+    overflow: scroll;
+}
+
+#loginPage {
+    /*position: absolute;*/
+}
+
+#createAccount {
+    position: fixed;
+    top: 110%;
+    left: 50%;
+    -webkit-transform: translate(-50%, 100%);
+    transform: translate(-50%, 100%);
+}
+
+@media screen and (orientation: portrait) {
+    #loginImage {
+        background-size: 100px 100px;
+        background-position: center top;
+        background-repeat: no-repeat;
+        color: #999;
+        height: 100px;
+        font-size: 20px;
+        font-weight: normal;
+        line-height: 1.3em;
+        margin: 0 auto;
+        padding-top: 45px;
+        text-decoration: none;
+        width: 100px;
+        text-indent: -9999px;
+        outline: none;
+        overflow: scroll;
+        display: block;
+    }
+
+    #quietButtonRegister {
+        color: #FFFFFF;
+        font-size: 20px;
+    }
+
+    #centerRegister {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin: 0 auto;
+        z-index: -1;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    #loginImage {
+        background-size: 100px 100px;
+        background-position: center top;
+        background-repeat: no-repeat;
+        color: #999;
+        height: 100px;
+        font-size: 20px;
+        font-weight: normal;
+        line-height: 1.3em;
+        margin: 0 auto;
+        padding-top: 45px;
+        text-decoration: none;
+        width: 100px;
+        text-indent: -9999px;
+        outline: none;
+        overflow: scroll;
+        display: block;
+    }
+
+    #quietButtonRegister {
+        color: #FFFFFF;
+        font-size: 20px;
+    }
+
+    #centerRegister {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin: auto;
+        z-index: -1;
+        overflow: scroll;
+    }
+}
+
+#email {
+    display: none;
+    font-size: 12px;
+    text-transform: none;
+    color: red;
+    text-decoration: underline;
+    padding-left: 10px;
+}
+
+p {
+    display: inline;
+}
+
+.register {
+    font-size: 12px;
+}
+
+#transformText {
+    text-transform: none;
+}
+
+#inputText {
+    border-radius: 15px;
+    height: 40px;
+    display: block;
+    width: 100%;
+    background-color: #C5D9E4;
+    font-size: 20px;
+}
+
+#buttons {
+    border-radius: 15px;
+    background-color: #56CDB7;
+    font-size: 20px;
+    display: block;
+}
+
+#quietButtonForgotPass {
+    color: #D8D8D8;
+    font-style: italic;
+    font-size: 14px;
+}
+
+::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#registerForm {
+    position: absolute;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -30%);
+    transform: translate(-50%, -30%);
+    overflow: scroll;
+}
+
+.menu-item:active {
+    opacity: 0.7;
+    background-color: #44a492;
+}
+
+#missionsList ons-list {
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+#missionsList .imgWrapper {
+    text-align: center;
+    background-color: #ccc;
+}
+
+#missionsList ons-list-item {
+    border-bottom: none;
+}
+
+#missionsList .missionName{
+    line-height: 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+#missionsList .contributors{
+    font-size: 0.7em;
+    text-align: right;
+    color: #898585;
+}

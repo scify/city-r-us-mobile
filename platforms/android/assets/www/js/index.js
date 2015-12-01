@@ -121,7 +121,6 @@ module.controller('AppController', function($scope) {
   }
   $scope.callMissions = function () {
     //myNavigator.pushPage('missions.html', {animation: "fade"});
-    alert("callMissions pressed!");
     getMissions();
   } 
 });
@@ -348,13 +347,14 @@ function getMissions() {
         var response = JSON.parse(xhttp.responseText)
         if (response.status == "success") {
           //Εδώ δοκίμασα να παράγω το grid και να το κολλήσω στην html.
-          //var newdiv = document.createElement("div");
-          //newdiv.innerHTML = "<ons-row> <ons-col id='grid-column' width='46%'><img src='http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png' alt='scify' height='100' width='100' align='middle'> <p id='mission_description'>Mission1 Description</p> <p id='contributions'>12 contributors</p> </ons-col> <ons-col id='grid-column' width='46%'><img src='http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png' alt='scify' height='100' width='100' align='middle'> <p id='mission_description'>Mission2 Description</p> <p id='contributions'>12 contributors</p> </ons-col> </ons-row>";
-          //document.getElementById("gridview").appendChild(newdiv);
+            var gridview = document.createElement("div").setAttribute('id', 'gridview');
+            var newdiv = document.createElement("div");
+          newdiv.innerHTML = "<ons-row> <ons-col id='grid-column' width='46%'><img src='http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png' alt='scify' height='100' width='100' align='middle'> <p id='mission_description'>Mission1 Description</p> <p id='contributions'>12 contributors</p> </ons-col> <ons-col id='grid-column' width='46%'><img src='http://cityrus.projects.development1.scify.org/www/city-r-us-web/public/img/mission.png' alt='scify' height='100' width='100' align='middle'> <p id='mission_description'>Mission2 Description</p> <p id='contributions'>12 contributors</p> </ons-col> </ons-row>";
+          document.getElementById("gridview").appendChild(newdiv);
 
           //Εδώ κάνω μια επανάληψη τον πίνακα των αποστολών για να πάρω περιγραφές και τα σχετικά.
           for (var i = 0; i < response.message.missions.length; i++) {
-            alert(response.message.missions[i].description);
+            console.log(response.message.missions[i].description);
           }
         } else {
           ons.notification.alert({

@@ -1,0 +1,21 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
+        }
+    },
+    "dependent_plugins": {}
+}
