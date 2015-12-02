@@ -332,7 +332,7 @@ ons-row {
   height: 48%;
 }
 
-#grid-column {
+.missions-grid-column {
   position: relative;
   display:block;
   background-color: #b2b2b2;
@@ -344,7 +344,7 @@ ons-row {
   width: 100%;
 }
 
-#contributions {
+.contributions {
   position: absolute;
   right: 0;
   bottom:0;
@@ -355,14 +355,14 @@ ons-row {
   background-color: #FFFFFF;
 }
 
-.img {
+.missions-grid-column img {
   height: 70%;
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
 
-#mission_description {
+.mission_description {
   position: absolute;
   bottom:0;
   left: 0;
