@@ -1,0 +1,36 @@
+<ons-page id="loginPage">
+    <div class="logo">
+        <img class="loginImage" src="img/CityRUS_logo.png">
+    </div>
+    <div align="center">
+        <ons-modal var="modal">
+            <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+            <br>
+            <br> Please wait...
+            <br>
+        </ons-modal>
+        <form name="myForm" id="loginForm">
+            <section style="padding-bottom: 3px">
+                <input type="text" class="text-input" class="inputText" name="user" ng-model="username_v"
+                       placeholder="email" required>
+            </section>
+            <section style="padding-bottom: 15px">
+                <input type="password" class="text-input" class="inputText" name="pass" ng-model="password_v"
+                       placeholder="password" required>
+            </section>
+            <section style="padding-bottom: 2px">
+                <ons-button modifier="large" class="login-button" id="buttons"
+                            ng-click="logIn(username_v, password_v)"> Login
+                </ons-button>
+            </section>
+            <section>
+                <ons-button modifier="quiet" id="quietButtonForgotPass"> Forgot your password?</ons-button>
+            </section>
+        </form>
+        <section class="centerRegister">
+            <ons-button modifier="quiet" class="quietButtonRegister"
+                        ng-click="myNavigator.pushPage('register.html', {animation: 'fade'})"> Create an account
+            </ons-button>
+        </section>
+    </div>
+</ons-page>
