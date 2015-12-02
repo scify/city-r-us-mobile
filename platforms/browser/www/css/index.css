@@ -346,6 +346,7 @@ p {
     background-color: #44a492;
 }
 
+/* missions list */
 #missionsList ons-list {
     border: none;
     -webkit-border-radius: 0;
@@ -361,14 +362,56 @@ p {
     border-bottom: none;
 }
 
-#missionsList .missionName{
+#missionsList .missionName {
     line-height: 20px;
     font-size: 0.9em;
     font-weight: 600;
 }
 
-#missionsList .contributors{
+#missionsList .contributors {
     font-size: 0.7em;
     text-align: right;
     color: #898585;
+}
+
+/* mission details */
+.page--mission-details__content {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px !important;
+    bottom: 0px;
+    background-color: #fff !important;
+}
+
+.card {
+    color: #eee;
+    height: 230px;
+}
+
+.rating {
+    text-align: right;
+    position: relative;
+    background-color: #fff;
+    margin-top: -10px;
+    padding-right: 10px;
+}
+
+.start-button {
+    background-color: #009080 !important;
+    margin-top: -30px !important;
+    border-radius: 0px !important;
+    font-size: 25px !important;
+    padding: 10px !important;
+}
+
+.prop-desc {
+    font-size: 14px;
+    line-height: 25px;
+}
+
+.prop-desc ons-icon {
+    font-size: 14px;
+    vertical-align: -0px;
+    opacity: 0.5;
 }

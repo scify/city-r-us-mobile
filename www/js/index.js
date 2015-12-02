@@ -136,12 +136,10 @@ module.controller('AppController', function ($scope, $http) {
             alert("error");
         });
     }
-
-
     $scope.showMission = function(index){
-
         console.log(missions[index]);
-        $scope.ons.navigator.pushPage('mission.html', missions[index]);
+        $scope.mission = missions[index];
+        myNavigator.pushPage('mission.html');
     }
 });
 

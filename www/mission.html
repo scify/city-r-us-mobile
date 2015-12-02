@@ -1,9 +1,34 @@
-<ons-page id="mission">
+<ons-page id="mission" modifier="mission-details">
     <ons-toolbar fixed-style>
         <div class="left" style="line-height: 44px">
             <ons-back-button>Back</ons-back-button>
         </div>
         <div class="center" class="transformText">One mission</div>
     </ons-toolbar>
-    {{papari}} {{mission.name}}
+
+
+    <div class="card"
+         style="background: url({{mission.img_path}}) no-repeat;  background-size: cover; background-color:#eee;">
+    </div>
+
+    <div class="rating">
+        <ons-button modifier="material" class="start-button">START</ons-button>
+   </div>
+
+
+
+    <ons-list>
+        <ons-list-item>
+            <div class="prop-desc">
+                <h4>{{ mission.name }} </h4>
+            </div>
+        </ons-list-item>
+
+        <ons-list-item>
+            <div class="prop-desc">
+                <p>{{ mission.description }} </p>
+            </div>
+        </ons-list-item>
+    </ons-list>
+
 </ons-page>
