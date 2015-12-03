@@ -12,23 +12,30 @@
     </div>
 
     <div class="rating">
-        <ons-button modifier="material" class="start-button">START</ons-button>
-   </div>
+        <ons-button modifier="material" class="start-button">    <ons-ripple></ons-ripple>
+            START</ons-button>
+    </div>
 
 
-
-    <ons-list>
+    <ons-list class="mission">
         <ons-list-item>
-            <div class="prop-desc">
-                <h4>{{ mission.name }} </h4>
+            <div class="mission-name">
+                <h3>{{ mission.name }} </h3>
             </div>
         </ons-list-item>
 
         <ons-list-item>
-            <div class="prop-desc">
+            <div class="mission-desc">
                 <p>{{ mission.description }} </p>
+
             </div>
         </ons-list-item>
-    </ons-list>
 
+        <ons-list-item>
+            <div class="mission-contributors">
+                <p>12 contributors</p>
+            </div>
+        </ons-list-item>
+
+    </ons-list>
 </ons-page>
