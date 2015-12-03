@@ -63,12 +63,13 @@
 <!-- Εδώ δημιουργείται το μενού της εφαρμογής -->
 <ons-template id="tabs.html">
     <ons-page ng-controller="TabsController">
-        <ons-tabbar class="menu" var="app.tabbar">
+        <ons-tabbar var="app.tabbar">
             <ons-tab ng-repeat="tab in tabs"
-                class="menu-item"
                 page="{{tab.page}}">
-                <img src="{{tab.icon}}" alt="{{tab.label}}">
-                <span>{{tab.label}}</span>
+                <div class="tab-content">
+                    <img src="{{tab.icon}}" alt="{{tab.label}}">
+                    <span>{{tab.label}}</span>
+                </div>
             </ons-tab>
         </ons-tabbar>
     </ons-page>
