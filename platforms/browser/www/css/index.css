@@ -368,7 +368,6 @@ p {
     line-height: 20px;
     font-size: 0.9em;
     font-weight: 600;
-    margin-top:5px;
 }
 
 #missionsList .contributors {
@@ -415,17 +414,17 @@ p {
     box-shadow: 2px 2px 7px -1px rgba(0,0,0,0.75);
 }
 
-#mission .missionName h3 {
+.mission-name h3 {
     margin-bottom: 10px;
 }
 
-#mission .missionDesc {
+.mission-desc {
     font-size: 14px;
     line-height: 25px;
     margin-bottom: 10px;
 }
 
-#mission .missionContributors {
+.mission-contributors {
     font-size: 12px !important;
     line-height: 25px !important;
     border-top: 1px solid #A9A9A9 !important;
