@@ -64,22 +64,12 @@
 <ons-template id="tabs.html">
     <ons-page ng-controller="TabsController">
         <ons-tabbar class="menu" var="app.tabbar">
-            <ons-tabbar-item class="menu-item"
-                             icon="ion-android-bicycle"
-                             label="CityMissions"
-                             page="missions.html" ng-click="callMissions()"></ons-tabbar-item>
-            <ons-tabbar-item class="menu-item"
-                             icon="fa fa-home"
-                             label="MyAccount"
-                             page="account.html"></ons-tabbar-item>
-            <ons-tabbar-item class="menu-item"
-                             icon="ion-share"
-                             label="MyContribution"
-                             page="contribution.html"></ons-tabbar-item>
-            <ons-tabbar-item class="menu-item"
-                             icon="ion-information-circled"
-                             label="About"
-                             page="about.html"></ons-tabbar-item>
+            <ons-tab ng-repeat="tab in tabs"
+                class="menu-item"
+                page="{{tab.page}}">
+                <img src="{{tab.icon}}" alt="{{tab.label}}">
+                <span>{{tab.label}}</span>
+            </ons-tab>
         </ons-tabbar>
     </ons-page>
 </ons-template>
