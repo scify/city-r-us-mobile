@@ -18,63 +18,64 @@
     under the License.
 -->
 <html>
-<head>
-    <!--
-    Customize this policy to fit your own app's needs. For more guidance, see:
-        https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-    Some notes:
-        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-        * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-            * Enable inline JS: add 'unsafe-inline' to default-src
-    -->
-    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'none' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1*">-->
-    <!--<meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1*">-->
-    <meta charset="UTF-8">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport"
-          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" href="onsen/css/onsenui.css">
-    <link rel="stylesheet" type="text/css" href="css/onsen-css-components.min.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500&subset=latin,greek' rel='stylesheet' type='text/css'>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'none' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1*">-->
+        <!--<meta http-equiv="Content-Security-Policy" content="connect-src 'self' http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1*">-->
+        <meta charset="UTF-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport"
+              content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" href="onsen/css/onsenui.css">
+        <link rel="stylesheet" type="text/css" href="css/onsen-css-components.min.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500&subset=latin,greek' rel='stylesheet' type='text/css'>
+        <title>Hello World</title>
+    </head>
+    <body ng-controller="AppController">
+
+    <ons-navigator title="Navigator" var="myNavigator">
+        <ons-page>
+            <div id="deviceready" class="blink">
+                <p class="event listening"></p>
+
+                <p class="event received"></p>
+            </div>
+            <div>
+                <img id="splashImage" src="img/CityRUS_logo.png">
+            </div>
+        </ons-page>
+    </ons-navigator>
+
+    <ons-template id="tabs.html">
+        <ons-page ng-controller="TabsController">
+            <ons-tabbar var="app.tabbar">
+                <ons-tab ng-repeat="tab in tabs"
+                         page="{{tab.page}}">
+                    <div class="tab-content">
+                        <img src="{{tab.icon}}" alt="{{tab.label}}">
+                        <span>{{tab.label}}</span>
+                    </div>
+                </ons-tab>
+            </ons-tabbar>
+        </ons-page>
+    </ons-template>
+
     <script src="onsen/js/angular/angular.js"></script>
     <script src="onsen/js/onsenui.js"></script>
     <script src="js/angular-translate.min.js"></script>
-    <title>Hello World</title>
-</head>
-<body ng-controller="AppController">
-
-<ons-navigator title="Navigator" var="myNavigator">
-    <ons-page>
-        <div id="deviceready" class="blink">
-            <p class="event listening"></p>
-
-            <p class="event received"></p>
-        </div>
-        <div>
-            <img id="splashImage" src="img/CityRUS_logo.png">
-        </div>
-    </ons-page>
-</ons-navigator>
-
-<ons-template id="tabs.html">
-    <ons-page ng-controller="TabsController">
-        <ons-tabbar var="app.tabbar">
-            <ons-tab ng-repeat="tab in tabs"
-                page="{{tab.page}}">
-                <div class="tab-content">
-                    <img src="{{tab.icon}}" alt="{{tab.label}}">
-                    <span>{{tab.label}}</span>
-                </div>
-            </ons-tab>
-        </ons-tabbar>
-    </ons-page>
-</ons-template>
-
-
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/map.js"></script>
 </body>
 </html>

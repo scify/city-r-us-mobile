@@ -448,6 +448,10 @@ p {
 
 /*TOOL BAR*/
 
+ons-toolbar ~ .page__content {
+    top: 0px;
+}
+
 .hidden-toolbar {
     background: none;
 }
@@ -490,4 +494,11 @@ div.tab-bar ons-tab span {
 div.tab-bar ons-tab.active {
     background-color: #67D2C2;
     box-shadow: 0px 1px 0px 1px #6CA8C5;
+}
+
+/* MAP */
+
+#map-container {
+    width: 100%;
+    height: 100%;
 }

@@ -162,7 +162,8 @@ module.controller('TabsController', function ($scope, $translate) {
 });
 
 module.controller('PointTaggingMissionController', function ($scope, $translate) {
-    
+    var map = new Map();
+    map.initialize();
 });
 
 function validateLogin(username, password) {
