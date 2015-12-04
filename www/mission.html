@@ -1,21 +1,19 @@
 <ons-page id="mission" modifier="mission-details">
-    <ons-toolbar fixed-style>
+    <ons-toolbar fixed-style class="hidden-toolbar">
         <div class="left" style="line-height: 44px">
-            <ons-back-button>Back</ons-back-button>
+            <ons-back-button></ons-back-button>
         </div>
-        <div class="center" class="transformText">One mission</div>
     </ons-toolbar>
 
-
-    <div class="card"
-         style="background: url({{mission.img_path}}) no-repeat;  background-size: cover; background-color:#eee;">
+    <div class="card" style="background: url({{mission.img_path}}) no-repeat;  background-size: cover; background-color:#eee;">
     </div>
 
     <div class="rating">
-        <ons-button modifier="material" class="start-button">    <ons-ripple></ons-ripple>
-            START</ons-button>
+        <ons-button modifier="material" class="start-button">
+            <ons-ripple></ons-ripple>
+            START
+        </ons-button>
     </div>
-
 
     <ons-list class="list">
         <ons-list-item>
@@ -23,19 +21,15 @@
                 <h3>{{ mission.name }} </h3>
             </div>
         </ons-list-item>
-
         <ons-list-item>
             <div class="missionDesc">
                 <p>{{ mission.description }} </p>
-
             </div>
         </ons-list-item>
-
         <ons-list-item>
             <div class="missionContributors">
                 <p>12 contributors</p>
             </div>
         </ons-list-item>
-
     </ons-list>
 </ons-page>

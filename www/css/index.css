@@ -446,6 +446,13 @@ p {
     height: 100%;
 }
 
+/*TOOL BAR*/
+
+.hidden-toolbar {
+    background: none;
+}
+
+
 /*MENU BAR*/
 
 div.tab-bar {
