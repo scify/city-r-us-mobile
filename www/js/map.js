@@ -30,10 +30,15 @@ function Map() {
                 {
                     zoom: 18,
                     center: new google.maps.LatLng(lat, lon),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    disableDefaultUI: true,
+                    zoomControl: true,
+                    mapTypeControl: false,
+                    scaleControl: false,
+                    streetViewControl: false,
+                    mapTypeId: google.maps.MapTypeId.HYBRID
                 });
     };
-    
+
     this.addMarkerToMap = function (lat, lon) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
