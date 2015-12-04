@@ -92,12 +92,12 @@ module.controller('AppController', function ($scope, $http) {
                 }
             });
         }
-    }
+    };
     $scope.logOut = function () {
         console.log("logout pressed!");
         localStorage.removeItem("logintoken");
         myNavigator.pushPage('login.html', {animation: "fade", pagevalue: "loginPage"});
-    }
+    };
     $scope.register = function (username, email, password) {
         console.log("register pressed!");
         if (checkConnection()) {
@@ -113,7 +113,7 @@ module.controller('AppController', function ($scope, $http) {
                 }
             });
         }
-    }
+    };
     $scope.callMissions = function () {
         $http({
             method: 'GET',
@@ -125,12 +125,23 @@ module.controller('AppController', function ($scope, $http) {
         }).error(function () {
             alert("error");
         });
-    }
+    };
     $scope.showMission = function (index) {
         console.log(missions[index]);
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
-    }
+    };
+    $scope.startMission = function (missionType) {
+        switch (missionType) {
+            case "1":
+                myNavigator.pushPage('point_tagging_mission.html');
+                break;
+            case "2":
+                break;
+            default:
+                break;
+        }
+    };
 });
 
 module.controller('MissionsController', function ($scope) {
@@ -148,6 +159,10 @@ module.controller('TabsController', function ($scope, $translate) {
     $translate("ACCOUNT").then(function (label) {
         $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/user.svg", "page": "account.html"});
     });
+});
+
+module.controller('PointTaggingMissionController', function ($scope, $translate) {
+    
 });
 
 function validateLogin(username, password) {
