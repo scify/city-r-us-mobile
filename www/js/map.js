@@ -32,11 +32,13 @@ function Map() {
                     center: new google.maps.LatLng(lat, lon),
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
-    }
+    };
     
     this.addMarkerToMap = function (lat, lon) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
+            draggable: true,
+            animation: google.maps.Animation.DROP,
             map: this.map
         });
     };
