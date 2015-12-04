@@ -157,8 +157,18 @@ module.controller('AppController', function ($scope, $http) {
     }
 });
 
+module.controller('MissionsController', function ($scope) {
+    $scope.callMissions();
+});
+
 /* Κώδικας απαραίτητος προκειμένου να παίζω σωστά ο navigator μαζί με το menu */
-module.controller('TabsController', function () {
+module.controller('TabsController', function ($scope) {
+    $scope.tabs=[
+        {"label" : "Missions", "icon" : "img/icons/white/svg/flag2.svg", "page" : "missions.html"},
+        {"label" : "Invite", "icon" : "img/icons/white/svg/plus.svg", "page" : "invite.html"},
+        {"label" : "Account", "icon" : "img/icons/white/svg/user.svg", "page" : "account.html"}
+    ];
+    
     setImmediate(function () {
         var tabIndex = myNavigator.getCurrentPage().options.params.tab;
         app.tabbar.setActiveTab(tabIndex);
