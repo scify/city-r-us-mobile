@@ -132,14 +132,28 @@ module.controller('AppController', function ($scope, $http) {
             missions = data.message.missions;
             $scope.missions  = data.message.missions;
 
-        }).error(function(){
+        }).error(function(error){
             alert("error");
+            console.log(error);
         });
     }
     $scope.showMission = function(index){
         console.log(missions[index]);
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
+    }
+
+    $scope.showUser = function () {
+        $http({
+            method: 'GET',
+            url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/missions'
+        }).success(function(data){
+            missions = data.message.missions;
+            $scope.missions  = data.message.missions;
+
+        }).error(function(){
+            alert("error");
+        });
     }
 });
 

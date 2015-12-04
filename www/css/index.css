@@ -53,7 +53,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     font-size: 17px;
-    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
+    background: linear-gradient(70deg, #5cc3c3 0%, #4c8cc9 100%);
     position: absolute;
     top: 0px;
     left: 0px;
@@ -106,6 +106,11 @@ body {
     margin:-115px 0px 0px -112px; 
                                    
 } */
+
+
+.list, .list .list__item{
+    border:none !important;
+}
 
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width: 400px) {
