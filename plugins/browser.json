@@ -18,6 +18,9 @@
         },
         "cordova-plugin-globalization": {
             "PACKAGE_NAME": "gr.scify.cityrus"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
         }
     },
     "dependent_plugins": {}

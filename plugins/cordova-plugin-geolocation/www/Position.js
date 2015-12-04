@@ -1,4 +1,5 @@
 /*
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -7,7 +8,7 @@
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
@@ -15,29 +16,18 @@
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- */
+ *
+*/
 
-function Map() {
+var Coordinates = require('./Coordinates');
 
-    this.initialize = function (lat, lon) {
-        this.map = this.show(lat, lon);
-        this.addMarkerToMap(lat, lon);
+var Position = function(coords, timestamp) {
+    if (coords) {
+        this.coords = new Coordinates(coords.latitude, coords.longitude, coords.altitude, coords.accuracy, coords.heading, coords.velocity, coords.altitudeAccuracy);
+    } else {
+        this.coords = new Coordinates();
     }
+    this.timestamp = (timestamp !== undefined) ? timestamp : new Date();
+};
 
-    this.show = function (lat, lon) {
-        return new google.maps.Map(
-                document.getElementById("map-container"),
-                {
-                    zoom: 18,
-                    center: new google.maps.LatLng(lat, lon),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                });
-    }
-    
-    this.addMarkerToMap = function (lat, lon) {
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat, lon),
-            map: this.map
-        });
-    };
-}
+module.exports = Position;

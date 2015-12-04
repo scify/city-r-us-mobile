@@ -162,8 +162,12 @@ module.controller('TabsController', function ($scope, $translate) {
 });
 
 module.controller('PointTaggingMissionController', function ($scope, $translate) {
-    var map = new Map();
-    map.initialize();
+    var options = {enableHighAccuracy: true};
+    navigator.geolocation.getCurrentPosition(function (position) {
+        $scope.position = position;
+        var map = new Map();
+        map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
+    }, null, options);
 });
 
 function validateLogin(username, password) {
