@@ -17,33 +17,41 @@
  * under the License.
  */
 
-var app = {
-    // Application Constructor
-    initialize: function () {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function () {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-        document.addEventListener("backbutton", onBackKeyDown, false);
+var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
 
-        function onBackKeyDown() {
-            // Handle the back button
-            if (myNavigator.getCurrentPage().options.pagevalue == "loginPage") {
-                navigator.app.exitApp();
-            }
+module.config(function ($translateProvider) {
+    $translateProvider.translations('en', {
+        "MISSIONS": "Missions",
+        "INVITE": "Invite",
+        "ACCOUNT": "Account"
+    });
+    $translateProvider.translations('el', {
+        "MISSIONS": "Αποστολές",
+        "INVITE": "Προσκάλεσε",
+        "ACCOUNT": "Λογαριασμός"
+    });
+    $translateProvider.preferredLanguage("en");
+    $translateProvider.fallbackLanguage("en");
+    $translateProvider.useSanitizeValueStrategy("escape");
+});
+
+module.run(function ($translate) {
+    document.addEventListener('deviceready', onDeviceReady, false);
+    document.addEventListener("backbutton", onBackKeyDown, false);
+
+    function onBackKeyDown() {
+        if (myNavigator.getCurrentPage().options.pagevalue === "loginPage") {
+            navigator.app.exitApp();
         }
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function () {
-        app.receivedEvent('deviceready');
-        console.log("device is ready");
+    }
+
+    function onDeviceReady() {
+        console.log("Device is ready");
+        if (typeof navigator.globalization !== "undefined") {
+            navigator.globalization.getPreferredLanguage(function (language) {
+                $translate.use((language.value).split("-")[0]);
+            }, null);
+        }
 
         document.addEventListener("showkeyboard", function () {
             alert("Keyboard is ON");
@@ -51,7 +59,6 @@ var app = {
 
         var login = checkLogin();
         if (login) {
-            //myNavigator.pushPage('account.html', {animation: "fade"});
             myNavigator.pushPage('tabs.html', {params: {tab: 0}});
         } else {
             setTimeout(function () {
@@ -60,28 +67,11 @@ var app = {
             }, 3000)
         }
         console.log("start.html");
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function (id) {
-
-        //var parentElement = document.getElementById(id);
-        //var listeningElement = parentElement.querySelector('.listening');
-        //var receivedElement = parentElement.querySelector('.received');
-
-        //listeningElement.setAttribute('style', 'display:none;');
-        //receivedElement.setAttribute('style', 'display:block;');
-
-        //console.log('Received Event: ' + id);
     }
-};
+});
 
-app.initialize();
-
-var module = ons.bootstrap('app', ['onsen']);
 module.controller('AppController', function ($scope, $http) {
-
     var missions;
-
     console.log("Angular ready!!!");
     ons.ready(function () {
         console.log("onsen ready!!!");
@@ -128,15 +118,15 @@ module.controller('AppController', function ($scope, $http) {
         $http({
             method: 'GET',
             url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/missions'
-        }).success(function(data){
+        }).success(function (data) {
             missions = data.message.missions;
-            $scope.missions  = data.message.missions;
+            $scope.missions = data.message.missions;
 
-        }).error(function(){
+        }).error(function () {
             alert("error");
         });
     }
-    $scope.showMission = function(index){
+    $scope.showMission = function (index) {
         console.log(missions[index]);
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
@@ -147,17 +137,16 @@ module.controller('MissionsController', function ($scope) {
     $scope.callMissions();
 });
 
-/* Κώδικας απαραίτητος προκειμένου να παίζω σωστά ο navigator μαζί με το menu */
-module.controller('TabsController', function ($scope) {
-    $scope.tabs=[
-        {"label" : "Missions", "icon" : "img/icons/white/svg/flag2.svg", "page" : "missions.html"},
-        {"label" : "Invite", "icon" : "img/icons/white/svg/plus.svg", "page" : "invite.html"},
-        {"label" : "Account", "icon" : "img/icons/white/svg/user.svg", "page" : "account.html"}
-    ];
-    
-    setImmediate(function () {
-        var tabIndex = myNavigator.getCurrentPage().options.params.tab;
-        app.tabbar.setActiveTab(tabIndex);
+module.controller('TabsController', function ($scope, $translate) {
+    $scope.tabs = [];
+    $translate("MISSIONS").then(function (label) {
+        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/flag2.svg", "page": "missions.html"});
+    });
+    $translate("INVITE").then(function (label) {
+        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/plus.svg", "page": "invite.html"});
+    });
+    $translate("ACCOUNT").then(function (label) {
+        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/user.svg", "page": "account.html"});
     });
 });
 
@@ -246,10 +235,8 @@ function isEmpty(str) {
 }
 
 function saveLocalStorage(logintoken) {
-    if (typeof(Storage) !== "undefined") {
+    if (typeof Storage !== "undefined") {
         localStorage.setItem("logintoken", logintoken);
-    } else {
-
     }
 }
 
@@ -364,7 +351,3 @@ function checkConnection() {
         return true;
     }
 }
-
-
-
-
