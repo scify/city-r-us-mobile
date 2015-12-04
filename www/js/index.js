@@ -23,12 +23,14 @@ module.config(function ($translateProvider) {
     $translateProvider.translations('en', {
         "MISSIONS": "Missions",
         "INVITE": "Invite",
-        "ACCOUNT": "Account"
+        "ACCOUNT": "Account",
+        "TAG LOCATION": "Tag Location"
     });
     $translateProvider.translations('el', {
         "MISSIONS": "Αποστολές",
         "INVITE": "Προσκάλεσε",
-        "ACCOUNT": "Λογαριασμός"
+        "ACCOUNT": "Λογαριασμός",
+        "TAG LOCATION": "Σήμανση Σημείου"
     });
     $translateProvider.preferredLanguage("en");
     $translateProvider.fallbackLanguage("en");

@@ -502,3 +502,10 @@ div.tab-bar ons-tab.active {
     width: 100%;
     height: 100%;
 }
+
+.map-button {
+    position: absolute;
+    bottom: 30px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
