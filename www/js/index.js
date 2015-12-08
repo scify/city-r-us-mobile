@@ -61,11 +61,10 @@ module.run(function ($translate) {
 
         var login = checkLogin();
         if (login) {
-            myNavigator.pushPage('tabs.html', {params: {tab: 0}});
+            myNavigator.replacePage('tabs.html', {params: {tab: 0}});
         } else {
             setTimeout(function () {
-                myNavigator.pushPage('login.html', {animation: "fade", pagevalue: "loginPage"});
-
+                myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
             }, 3000)
         }
         console.log("start.html");
