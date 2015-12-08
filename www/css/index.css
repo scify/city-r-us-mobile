@@ -17,92 +17,6 @@
  * under the License.
  */
 
-body {
-    -webkit-touch-callout: none;    /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;      /* prevent copy paste, to allow, change 'none' to 'text' */
-    font-family: 'Roboto', sans-serif !important;
-}
-
-.page {
-    font-family: 'Roboto', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 400;
-    font-size: 17px;
-    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    overflow: visible;
-    font-size: 17px;
-    color: #1f1f21;
-}
-
-.page::-webkit-scrollbar {
-    display: none;
-}
-
-.page__content {
-    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-top: -1px;
-}
-
-.page__background {
-    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width: 400px) {
-    .app {
-        background-position: left center;
-        padding: 75px 0px 75px 170px;
-        margin: -90px 0px 0px -198px;
-    }
-}
-
-h1 {
-    font-size: 24px;
-    font-weight: normal;
-    margin: 0px;
-    overflow: visible;
-    padding: 0px;
-    text-align: center;
-}
-
-.event {
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    font-size: 12px;
-    margin: 0px 30px;
-    padding: 2px 0px;
-}
-
-.event.listening {
-    display: block;
-}
-
-.event.received {
-    display: none;
-}
 
 @keyframes fade {
     from {
@@ -128,6 +42,39 @@ h1 {
     }
 }
 
+/* GENERAL */
+
+* {
+    color: white;
+    margin: auto;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1em;
+    text-align: center;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+*::-webkit-input-placeholder {
+    color: #FFFFFF;
+}
+
+body {
+    -webkit-touch-callout: none;    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;      /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.page__background {
+    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
+}
+
 .blink {
     animation: fade 3000ms infinite;
     -webkit-animation: fade 3000ms infinite;
@@ -144,158 +91,185 @@ h1 {
     margin: auto;
 }
 
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.4em;
+}
+
+h4 {
+    font-size: 1.2em;
+}
+
+h5 {
+    font-size: 0.95em;
+}
+
+h6 {
+    font-size: 0.75em;
+}
+
+h7 {
+    font-size: 0.6em;
+}
+
+.cruButton {
+    border-radius: 5.5%/40%;
+    -webkit-border-radius: 5.5%/40%;
+    background-color: #59CAB5;
+    display: block;
+    margin: auto;
+}
+
+.cruButton > .label {
+    display: table;
+    height: 100%;
+}
+
+.cruButton > .label > span {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* EVENTS */
+
+.event {
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    font-size: 0.7em;
+    margin: 0px 30px;
+    padding: 2px 0px;
+}
+
+.event.listening {
+    display: block;
+}
+
+.event.received {
+    display: none;
+}
+
+/* NAVBAR */
+
+/* LOGIN - REGISTER */
+
 .logo {
     position: absolute;
-    top: 20%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -70%);
-    transform: translate(-50%, -70%);
+    height: 20%;
+    width: 100%;
+    top: 7%;
+}
+
+.loginImage {
+    height: 64%;
+    margin-bottom: 15px;
+}
+
+.inputText {
+    border-radius: 5.5%/40%;
+    -webkit-border-radius: 5.5%/40%;
+    display: block;
+    background-color: #96C4DB;
+    font-size: 1.8em;
+    border: none;
+}
+
+.inputText + .inputText {
+    margin-top: 5px;
+}
+
+.loginButtonContainer {
+    width: 100%;
+    height: 40%;
+}
+
+.loginButtonContainer::before {
+    content: "";
+    display: block;
+    height: 32%;
+}
+
+.loginButtonContainer::after {
+    content: "";
+    display: block;
+    height: 8%;
+}
+
+.loginButtonContainer > .cruButton {
+    height: 60%;
+    width: 77%;
+}
+
+.loginButtonContainer > .cruButton span span {
+    font-size: 1.8em;
+}
+
+.centerRegister {
+    position: absolute;
+    bottom: 5%;
+    width: 100%;
 }
 
 #loginForm {
     position: absolute;
-    width: 70%;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -30%);
-    transform: translate(-50%, -30%);
-    overflow: scroll;
-}
-
-#createAccount {
-    position: fixed;
-    top: 110%;
-    left: 50%;
-    -webkit-transform: translate(-50%, 100%);
-    transform: translate(-50%, 100%);
-}
-
-@media screen and (orientation: portrait) {
-    .loginImage {
-        background-size: 100px 100px;
-        background-position: center top;
-        background-repeat: no-repeat;
-        color: #999;
-        height: 100px;
-        font-size: 20px;
-        font-weight: normal;
-        line-height: 1.3em;
-        margin: 0 auto;
-        padding-top: 45px;
-        text-decoration: none;
-        width: 100px;
-        text-indent: -9999px;
-        outline: none;
-        overflow: scroll;
-        display: block;
-    }
-
-    .quietButtonRegister {
-        color: #FFFFFF;
-        font-size: 20px;
-    }
-
-    .centerRegister {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        margin: 0 auto;
-        z-index: -1;
-    }
-}
-
-@media screen and (orientation: landscape) {
-    .loginImage {
-        background-size: 100px 100px;
-        background-position: center top;
-        background-repeat: no-repeat;
-        color: #999;
-        height: 100px;
-        font-size: 20px;
-        font-weight: normal;
-        line-height: 1.3em;
-        margin: 0 auto;
-        padding-top: 45px;
-        text-decoration: none;
-        width: 100px;
-        text-indent: -9999px;
-        outline: none;
-        overflow: scroll;
-        display: block;
-    }
-
-    .quietButtonRegister {
-        color: #FFFFFF;
-        font-size: 20px;
-    }
-
-    .centerRegister {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        margin: auto;
-        z-index: -1;
-        overflow: scroll;
-    }
-}
-
-#email {
-    display: none;
-    font-size: 12px;
-    text-transform: none;
-    color: red;
-    text-decoration: underline;
-    padding-left: 10px;
-}
-
-p {
-    display: inline;
-}
-
-.register {
-    font-size: 12px;
-}
-
-.transformText {
-    text-transform: none;
-}
-
-.inputText {
-    border-radius: 15px;
-    height: 40px;
-    display: block;
+    height: 36%;
     width: 100%;
-    background-color: #C5D9E4;
-    font-size: 20px;
+    top: 36%;
 }
 
-#buttons {
-    border-radius: 15px;
-    background-color: #56CDB7;
-    font-size: 20px;
-    display: block;
+#loginForm > * {
+    width: 77%;
 }
 
-#quietButtonForgotPass {
-    color: #D8D8D8;
+#loginForm > .loginButtonContainer {
+    width: 100%;
+}
+
+#loginForm .inputText {
+    height: 22%;
+}
+
+#loginForm h4 {
+    color: #B2C5D0;
     font-style: italic;
-    font-size: 14px;
-}
-
-::-webkit-input-placeholder {
-    /* WebKit, Blink, Edge */
-    color: #FFFFFF;
-    text-align: center;
 }
 
 #registerForm {
     position: absolute;
-    width: 70%;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -30%);
-    transform: translate(-50%, -30%);
-    overflow: scroll;
+    height: 36%;
+    width: 100%;
+    top: 36%;
+}
+
+#registerForm > * {
+    width: 77%;
+}
+
+#registerForm > .loginButtonContainer {
+    width: 100%;
+}
+
+#registerForm .inputText {
+    height: 22%;
+}
+
+#email {
+    display: none;
+    margin-top: 2px;
+    margin-bottom: -2px;
+    height: 0px;
+    overflow: visible;
+}
+
+#email * {
+    color: red;
+    text-decoration: underline;
 }
 
 /* MISSIONS LIST */
@@ -328,7 +302,8 @@ p {
     color: #898585;
 }
 
-/* mission details */
+/* MISSION */
+
 .page--mission-details__content {
     position: absolute;
     left: 0px;
@@ -399,10 +374,31 @@ p {
     height: 100%;
 }
 
+/* MISSION MAP */
+
+#map-container {
+    width: 100%;
+    height: 100%;
+}
+
+#map-container + .cruButton {
+    background-color: #366AA9;
+    position: absolute;
+    bottom: 2%;
+    height: 7%;
+    width: 75%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+#map-container + .cruButton span span {
+    font-size: 1.9em;
+}
+
 /*TOOL BAR*/
 
 ons-toolbar ~ .page__content {
-    top: 0px;
+    top: 0;
 }
 
 .hidden-toolbar {
@@ -410,10 +406,10 @@ ons-toolbar ~ .page__content {
 }
 
 ons-back-button span i {
-    margin-left: 16px !important;
-    line-height: 0px !important;
-    font-size: 50px !important;
-    padding-top: 5px !important;
+    line-height: 0 !important;
+    font-size: 3em !important;
+    margin-left: 0.4em !important;
+    padding-top: 0.1em !important;
     text-shadow: -1px 2px 5px black;
     color: rgba(255, 255, 255, 1);
 }
@@ -421,8 +417,8 @@ ons-back-button span i {
 /*MENU BAR*/
 
 div.tab-bar {
-    height: 100px;
-    background-color: #A2C1DF;
+    height: 12%;
+    background-color: #96C4DB;
 }
 
 div.tab-bar ons-tab * {
@@ -430,35 +426,26 @@ div.tab-bar ons-tab * {
     height: 100%;
 }
 
-div.tab-bar ons-tab .tab-content {
-    box-sizing: border-box;
-    padding: 12px 0px 0px 0px;
+div.tab-bar ons-tab .tab-content::before {
+    content: "";
+    display: block;
+    height: 13%;
 }
 
 div.tab-bar ons-tab img {
-    height: 54%;
+    height: 46%;
     margin: auto;
 }
 
 div.tab-bar ons-tab span {
-    line-height: 50px;
+    font-size: 1em;
+    line-height: 2.5em;
 }
 
 div.tab-bar ons-tab.active {
     background-color: #67D2C2;
-    box-shadow: 0px 1px 0px 1px #6CA8C5;
 }
 
-/* MAP */
+/* ACCOUNT */
 
-#map-container {
-    width: 100%;
-    height: 100%;
-}
-
-.map-button {
-    position: absolute;
-    bottom: 30px;
-    margin-left: 50%;
-    transform: translateX(-50%);
-}
+/* INVITE */
