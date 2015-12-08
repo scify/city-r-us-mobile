@@ -270,7 +270,7 @@ function registration(username, email, password) {
             sendRegisterRequest(username, email, password);
         } else {
             modal.hide();
-            document.getElementById("email").style.display = "inline";
+            document.getElementById("email").style.display = "block";
         }
     } else {
         modal.hide();
