@@ -396,14 +396,11 @@ p {
 }
 
 .start-button {
-    background-color: #009080 !important;
-    margin-top: -30px !important;
-    border-radius: 0px !important;
-    font-size: 25px !important;
-    padding: 10px !important;
-    -webkit-box-shadow: 2px 2px 7px -1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 2px 2px 7px -1px rgba(0,0,0,0.75);
-    box-shadow: 2px 2px 7px -1px rgba(0,0,0,0.75);
+    background-color: #59CAB5;
+    margin-top: -30px;
+    border-radius: 20px;
+    font-size: 25px;
+    padding: 10px 50px;
 }
 
 #mission .missionName h3 {
