@@ -7,8 +7,39 @@
 
     <div id="map-container">
     </div>
-    <ons-button modifier="material" class="start-button map-button" ng-click="tagLocation()">
+    <ons-button modifier="material" class="cruButton map-button" ng-click="tagLocation()">
         <ons-ripple></ons-ripple>
         {{"TAG LOCATION" | translate}}
     </ons-button>
+
+    <ons-modal class="confirmationModal" var="confirmation">
+        <div class="confirmationDiv">
+            <i class="ion-ios-arrow-back modalBackButton" ng-click="confirmation.hide()"></i>
+            <h1>{{mission.name}}</h1>
+            <hr/>
+            <h2>{{"SUBMIT_POINT_TEXT" | translate}}</h2>
+            <ons-button modifier="material" class="cruButton" ng-click="sendLocation()">
+                <ons-ripple></ons-ripple>
+                {{"CONFIRM" | translate}}
+            </ons-button>
+        </div>
+    </ons-modal>
+    
+    <ons-modal var="loading">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+        <br>
+        <br> {{"SENDING" | translate}}
+    </ons-modal>
+    
+    <ons-modal var="success">
+        <br> {{"SUCCESS" | translate}}
+    </ons-modal>
+    
+    <ons-modal var="fail">
+        <br> {{"FAIL" | translate}}
+    </ons-modal>
+    
+    <ons-modal var="results">
+        
+    </ons-modal>
 </ons-page>
