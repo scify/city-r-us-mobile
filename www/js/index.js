@@ -24,13 +24,25 @@ module.config(function ($translateProvider) {
         "MISSIONS": "Missions",
         "INVITE": "Invite",
         "ACCOUNT": "Account",
-        "TAG LOCATION": "Tag Location"
+        "TAG LOCATION": "Tag Location",
+        "CONFIRM": "Send",
+        "SUBMIT_POINT_TEXT": "Click to send the point you recorded and contribute to this mission.",
+        "SUBMIT_ROUTE_TEXT": "Click to send the route you recorded and contribute to this mission.",
+        "SENDING": "Sending",
+        "SUCCESS": "Thank you for contributing! You received 10 points.",
+        "FAIL": "Something went wrong, please try again"
     });
     $translateProvider.translations('el', {
         "MISSIONS": "Αποστολές",
         "INVITE": "Προσκάλεσε",
         "ACCOUNT": "Λογαριασμός",
-        "TAG LOCATION": "Σήμανση Σημείου"
+        "TAG LOCATION": "Σήμανση Σημείου",
+        "CONFIRM": "Αποστολή",
+        "SUBMIT_POINT_TEXT": "Καταχώρησε το σημείο που κατέγραψες για να συνησφέρεις στην αποστολή.",
+        "SUBMIT_ROUTE_TEXT": "Καταχώρησε τη διαδρομή την οποία κατέγραψες για να συνησφέρεις στην αποστολή.",
+        "SENDING": "Αποστολή δεδομένων",
+        "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίθηκαν 10 βαθμοί.",
+        "FAIL": "Αποτυχία σύνδεσης, παρακαλλώ προσπαθήστε ξανά"
     });
     $translateProvider.preferredLanguage("en");
     $translateProvider.fallbackLanguage("en");
@@ -175,13 +187,51 @@ module.controller('TabsController', function ($scope, $translate) {
     });
 });
 
-module.controller('PointTaggingMissionController', function ($scope, $translate) {
+module.controller('PointTaggingMissionController', function ($scope, $http, $translate) {
+    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
     var options = {enableHighAccuracy: true};
     navigator.geolocation.getCurrentPosition(function (position) {
         $scope.position = position;
-        var map = new Map();
-        map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
+        $scope.map = new Map();
+        $scope.map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
     }, null, options);
+
+    $scope.tagLocation = function () {
+        confirmation.show();
+    }
+
+    $scope.sendLocation = function () {
+        loading.show();
+        var marker = $scope.map.getMarkers()[0];
+        $http.post(
+            'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/observations/store',
+            {
+                "device_uuid": device.uuid,
+                "mission_id": $scope.mission.id,
+                "latitude": marker.position.latitude,
+                "longitude": marker.position.longitude,
+                "observation_date": new Date(),
+                "measurements": [{
+                    "latitude": marker.position.latitude,
+                    "longitude": marker.position.longitude,
+                    "observation_date": new Date()
+                }]
+            }, null).then(
+                function (data) {
+                    loading.hide();
+                    success.show();
+                    setTimeout(function() {
+                        success.hide();
+                    }, 2000);
+                }, function (error) {
+                    loading.hide();
+                    fail.show();
+                    setTimeout(function() {
+                        fail.hide();
+                    }, 2000);
+                }
+            );
+    };
 });
 
 function validateLogin(username, password) {

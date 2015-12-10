@@ -19,6 +19,8 @@
 
 function Map() {
 
+    this.markers = [];
+
     this.initialize = function (lat, lon) {
         this.map = this.show(lat, lon);
         this.addMarkerToMap(lat, lon);
@@ -35,7 +37,7 @@ function Map() {
                     mapTypeControl: false,
                     scaleControl: false,
                     streetViewControl: false,
-                    mapTypeId: google.maps.MapTypeId.HYBRID
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
                 });
     };
 
@@ -46,5 +48,10 @@ function Map() {
             animation: google.maps.Animation.DROP,
             map: this.map
         });
+        this.markers.push(marker);
+    };
+    
+    this.getMarkers = function() {
+        return this.markers;
     };
 }
