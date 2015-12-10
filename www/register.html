@@ -1,10 +1,4 @@
 <ons-page>
-    <!--<ons-toolbar fixed-style>
-      <div class="left" style="line-height: 44px">
-        <ons-back-button>Back</ons-back-button>
-      </div>
-      <div class="center" class="transformText">Register</div>
-    </ons-toolbar>-->
     <ons-modal var="modal">
         <ons-icon icon="ion-load-c" spin="true"></ons-icon>
         <br>
@@ -13,35 +7,25 @@
     </ons-modal>
     <div class="logo">
         <img class="loginImage" src="img/CityRUS_logo.png">
+        <h1>cityRus</h1>
     </div>
     <form name="registerForm" id="registerForm">
-        <section style="padding-bottom: 3px">
-            <input type="text" class="text-input" class="inputText" ng-model="username_r" placeholder="Username">
-        </section>
-        <section style="padding-bottom: 3px">
-            <input type="text" class="text-input" class="inputText" ng-model="email" placeholder="email">
-        </section>
-        <section style="padding-bottom: 15px">
-            <input type="password" class="text-input" class="inputText" ng-model="password_r" placeholder="Password">
-        </section>
+        <input type="text" class="inputText" ng-model="username_r" placeholder="Username">
+        <input type="text" class="inputText" ng-model="email" placeholder="email">
+        <input type="password" class="inputText" ng-model="password_r" placeholder="Password">
         <div id="email">
-            <ons-icon
-                    icon="ion-information-circled"
-                    size="20px"
-                    fixed-width="false"
-                    style="color: red">
-            </ons-icon>
-            <p> Enter valid email address. </p>
+            <ons-icon icon="ion-information-circled"> Enter a valid email address</ons-icon>
         </div>
-        <section>
-            <ons-button modifier="large" class="login-button" id="buttons"
-                        ng-click="register(username_r, email, password_r)"> Register
+        <section class="loginButtonContainer">
+            <ons-button modifier="large" class="cruButton"
+                        ng-click="register(username_r, email, password_r)">
+                Register
             </ons-button>
         </section>
     </form>
     <section class="centerRegister" align="center">
-        <ons-button modifier="quiet" class="quietButtonRegister"
-                    ng-click="myNavigator.pushPage('login.html', {animation: 'fade'})"> I already have an account
+        <ons-button modifier="quiet" ng-click="myNavigator.pushPage('login.html', {animation: 'fade'})">
+            <h2>I already have an account</h2>
         </ons-button>
     </section>
 </ons-page>

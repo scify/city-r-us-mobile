@@ -7,6 +7,12 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
+        },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "gr.scify.cityrus"
         },

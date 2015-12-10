@@ -1,0 +1,14 @@
+<ons-page id="point_tagging_mission" ng-controller="PointTaggingMissionController">
+    <ons-toolbar fixed-style class="hidden-toolbar">
+        <div class="left">
+            <ons-back-button></ons-back-button>
+        </div>
+    </ons-toolbar>
+
+    <div id="map-container">
+    </div>
+    <ons-button modifier="material" class="start-button map-button" ng-click="tagLocation()">
+        <ons-ripple></ons-ripple>
+        {{"TAG LOCATION" | translate}}
+    </ons-button>
+</ons-page>

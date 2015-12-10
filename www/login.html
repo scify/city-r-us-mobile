@@ -1,6 +1,7 @@
 <ons-page id="loginPage">
     <div class="logo">
         <img class="loginImage" src="img/CityRUS_logo.png">
+        <h1>cityRus</h1>
     </div>
     <div align="center">
         <ons-modal var="modal">
@@ -10,26 +11,21 @@
             <br>
         </ons-modal>
         <form name="myForm" id="loginForm">
-            <section style="padding-bottom: 3px">
-                <input type="text" class="text-input" class="inputText" name="user" ng-model="username_v"
-                       placeholder="email" required>
-            </section>
-            <section style="padding-bottom: 15px">
-                <input type="password" class="text-input" class="inputText" name="pass" ng-model="password_v"
-                       placeholder="password" required>
-            </section>
-            <section style="padding-bottom: 2px">
-                <ons-button modifier="large" class="login-button" id="buttons"
-                            ng-click="logIn(username_v, password_v)"> Login
+            <input type="text" class="inputText" name="user" ng-model="username_v"
+                   placeholder="email" required>
+            <input type="password" class="inputText" name="pass" ng-model="password_v"
+                   placeholder="password" required>
+            <section class="loginButtonContainer">
+                <ons-button modifier="large" class="cruButton"
+                            ng-click="logIn(username_v, password_v)">
+                    Login
                 </ons-button>
             </section>
-            <section>
-                <ons-button modifier="quiet" id="quietButtonForgotPass"> Forgot your password?</ons-button>
-            </section>
+            <ons-button modifier="quiet"><h4>Forgot your password?</h4></ons-button>
         </form>
         <section class="centerRegister">
-            <ons-button modifier="quiet" class="quietButtonRegister"
-                        ng-click="myNavigator.pushPage('register.html', {animation: 'fade'})"> Create an account
+            <ons-button modifier="quiet" ng-click="myNavigator.pushPage('register.html', {animation: 'fade'})">
+                <h2>Create an account</h2>
             </ons-button>
         </section>
     </div>

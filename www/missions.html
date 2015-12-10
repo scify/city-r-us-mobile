@@ -1,34 +1,12 @@
 <ons-page id="missions" ng-controller="MissionsController">
-    <ons-toolbar fixed-style>
-        <div class="left" style="line-height: 44px">
-            <ons-back-button>Back</ons-back-button>
-        </div>
-        <div class="center" class="transformText">Suggest Missions</div>
-    </ons-toolbar>
-
-    <!--ons-row id="missionsList">
-        <ons-col width="46%"  ng-repeat='mission in missions'>
-            <ons-list modifier="inset" style="margin-top: 10px; background: url({{mission.img_path}}); background-size: cover; background-color:#fff;">
-                <ons-list-item>
-                    <h4>{{ mission.name }}</h4>
-                </ons-list-item>
-                <ons-list-item>
-                   <span class="contributors">12 contributors</span>
-                </ons-list-item>
-            </ons-list>
-        </ons-col>
-    </ons--->
-
-
-    <ons-row id="missionsList">
-        <ons-col width="46%" ng-repeat='mission in missions'>
-            <ons-list modifier="inset" style="margin-top: 10px">
-                <ons-list-item class="to-wrapper imgWrapper">
-                    <img src="{{ mission.img_path }}" alt="{{ mission.name }}" height="100" width="100"
-                         ng-click="showMission($index)">
-                </ons-list-item>
-                <ons-list-item class="missionName">
+    <ons-row id="missions">
+        <ons-col width="50%" ng-repeat='mission in missions'>
+            <ons-list modifier="inset" style="margin-top: 10px" ng-click="showMission($index)">
+                <ons-list-item class="name">
                     <span>{{ mission.name }}</span>
+                </ons-list-item>
+                <ons-list-item class="created">
+                    <span>Posted in {{ mission.created_at }}</span>
                 </ons-list-item>
                 <ons-list-item class="contributors">
                     <span>12 contributors</span>
