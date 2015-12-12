@@ -69,6 +69,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Roboto', sans-serif !important;
+    height: 100%;
 }
 
 .page__background {
@@ -535,3 +536,99 @@ div.tab-bar ons-tab.active {
 /* ACCOUNT */
 
 /* INVITE */
+
+.header {
+    color:white;
+    height: 30%;
+}
+
+.header .title1{
+    font-weight: 400;
+    font-size: 20px;
+    padding: 40px 0 0 8%;
+    float:left;
+    width: 84%;
+    text-align: left;
+}
+
+.header .title2{
+    font-weight: 700;
+    font-size: 20px;
+    padding: 0 0 40px 8%;
+    float:left;
+    width: 84%;
+    text-align: left;
+}
+
+.section {
+    background-color:white;
+    height: 70%;
+}
+
+.section .message {
+    color:black;
+    float:left;
+    padding: 30px 8% 0 8%;
+    font-weight: 700;
+    font-size: 17px;
+    width: 84%;
+    text-align: left;
+}
+
+.section .textAreaDescr {
+    color:#B2C5D0;
+    text-align: left;
+    padding: 52px 8% 0 8%;
+    width: 84%;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.section .textarea{
+    padding: 0 1% 0 1%;
+    width: 84%;
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.section .text-input--underbar {
+    padding: 10px 8% 0 0;
+    width: 84%;
+    font-size: 12px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #B2C5D0;
+    font-size: 12px;
+    font-style: italic;
+    text-align: left;
+}
+
+#email {
+    display:none;
+    font-size: 12px;
+    text-transform:none;
+    color: red;
+    text-decoration: underline;
+    padding: 2% 8% 4% 8%;
+    text-align: left;
+    width: 84%;
+    float:left;
+}
+
+.sectionButton {
+    width: 84%;
+    padding: 5% 8% 0 8%;
+}
+
+.section .login-button {
+    float: right;
+    border-radius: 15px;
+    background-color: #56CDB7;
+    font-size: 20px;
+    width: 42%;
+    padding: 0 0 0 0;
+    text-align: center;
+    margin: auto;
+}
