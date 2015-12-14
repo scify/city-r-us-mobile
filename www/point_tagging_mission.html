@@ -15,31 +15,34 @@
     <ons-modal class="confirmationModal" var="confirmation">
         <div class="confirmationDiv">
             <i class="ion-ios-arrow-back modalBackButton" ng-click="confirmation.hide()"></i>
+
             <h1>{{mission.name}}</h1>
             <hr/>
             <h2>{{"SUBMIT_POINT_TEXT" | translate}}</h2>
-            <ons-button modifier="material" class="cruButton" ng-click="sendLocation()">
-                <ons-ripple></ons-ripple>
-                {{"CONFIRM" | translate}}
-            </ons-button>
+            <div class="senButton">
+                <ons-button modifier="material" class="cruButton" ng-click="sendLocation()">
+                    <ons-ripple></ons-ripple>
+                    {{"CONFIRM" | translate}}
+                </ons-button>
+            </div>
         </div>
     </ons-modal>
-    
+
     <ons-modal var="loading">
         <ons-icon icon="ion-load-c" spin="true"></ons-icon>
         <br>
         <br> {{"SENDING" | translate}}
     </ons-modal>
-    
+
     <ons-modal var="success">
         <br> {{"SUCCESS" | translate}}
     </ons-modal>
-    
+
     <ons-modal var="fail">
         <br> {{"FAIL" | translate}}
     </ons-modal>
-    
+
     <ons-modal var="results">
-        
+
     </ons-modal>
 </ons-page>

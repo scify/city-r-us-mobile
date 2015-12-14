@@ -19,6 +19,7 @@
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
 var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+//var apiUrl = 'http://city-r-us-service/api/v1';
 
 
 module.config(function ($translateProvider) {
@@ -227,14 +228,16 @@ module.controller('AccountController', function ($scope, $http) {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("logintoken")
         }
-    }).success(function (data) {
+    }).success(function (data, status, headers, config) {
+        var token = headers('Authorization').replace("Bearer ", "");
+        saveLocalStorage(token);
         $scope.user = data.message.user;
-    }).error(function () {
-        alert("error");
+    }).error(function (error) {
+        alert(error)
     });
 });
 
-module.controller('PointTaggingMissionController', function ($scope, $http, $translate) {
+module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
     var options = {enableHighAccuracy: true};
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -250,18 +253,21 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
     $scope.sendLocation = function () {
         loading.show();
         var marker = $scope.map.getMarkers()[0];
+        var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
+        var  deviceUUID = "xadias";
+
         $http.post(
             apiUrl + '/observations/store',
             {
-                "device_uuid": device.uuid,
+                "device_uuid": deviceUUID,
                 "mission_id": $scope.mission.id,
-                "latitude": marker.position.latitude,
-                "longitude": marker.position.longitude,
-                "observation_date": new Date(),
+                "latitude": marker.position.lat(),
+                "longitude": marker.position.lng(),
+                "observation_date": now,
                 "measurements": [{
-                    "latitude": marker.position.latitude,
-                    "longitude": marker.position.longitude,
-                    "observation_date": new Date()
+                    "latitude": marker.position.lat(),
+                    "longitude": marker.position.lng(),
+                    "observation_date": now
                 }]
             }, null).then(
             function (data) {
