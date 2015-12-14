@@ -18,6 +18,8 @@
  */
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
+var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+
 
 module.config(function ($translateProvider) {
     $translateProvider.translations('en', {
@@ -121,7 +123,7 @@ module.controller('AppController', function ($scope, $http) {
     $scope.callMissions = function () {
         $http({
             method: 'GET',
-            url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/missions'
+            url: apiUrl + '/missions'
         }).success(function (data) {
             missions = data.message.missions;
 
@@ -153,19 +155,6 @@ module.controller('AppController', function ($scope, $http) {
         }
     };
 
-    $scope.account = function () {
-        console.log('aaa')
-        $http({
-            method: 'GET',
-            url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/users/byJWT'
-        }).success(function (data) {
-            missions = data.message.missions;
-            $scope.missions = data.message.missions;
-            myNavigator.pushPage('account.html');
-        }).error(function () {
-            alert("error");
-        });
-    };
     $scope.Invite = function (email) {
         var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         if (checkConnection()) {
@@ -223,7 +212,25 @@ module.controller('TabsController', function ($scope, $translate) {
         $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/plus.svg", "page": "invite.html"});
     });
     $translate("ACCOUNT").then(function (label) {
-        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/user.svg", "page": "", "ng-click": "55555555"});
+        $scope.tabs.push({
+            "label": label,
+            "icon": "img/icons/white/svg/user.svg",
+            "page": "account.html"
+        });
+    });
+});
+
+module.controller('AccountController', function ($scope, $http) {
+    $http({
+        method: 'GET',
+        url: apiUrl + '/users/byJWT',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("logintoken")
+        }
+    }).success(function (data) {
+        $scope.user = data.message.user;
+    }).error(function () {
+        alert("error");
     });
 });
 
@@ -244,7 +251,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         loading.show();
         var marker = $scope.map.getMarkers()[0];
         $http.post(
-            'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/observations/store',
+            apiUrl + '/observations/store',
             {
                 "device_uuid": device.uuid,
                 "mission_id": $scope.mission.id,
@@ -273,6 +280,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         );
     };
 });
+
 
 module.controller('inviteController', function ($scope, $translate) {
     //$scope.name = 'Whirled';
@@ -311,7 +319,7 @@ function validateLogin(username, password) {
         });
     } else {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/authenticate?email=" + username + "&password=" + password + "", true);
+        xhttp.open("POST", apiUrl + "/authenticate?email=" + username + "&password=" + password + "", true);
         xhttp.send();
 
         xhttp.onreadystatechange = function () {
@@ -399,7 +407,7 @@ function registration(username, email, password) {
 
 function sendRegisterRequest(username, email, password) {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/users/register?name=" + username + "&email=" + email + "&password=" + password + "", true);
+    xhttp.open("POST", apiUrl + "/users/register?name=" + username + "&email=" + email + "&password=" + password + "", true);
     xhttp.send();
 
     xhttp.onreadystatechange = function () {

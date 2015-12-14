@@ -1,31 +1,24 @@
-<ons-page id="account" modifier="about">
-    <div class="card">
-        <div class="name">Yiannis Nikolopoulos</div>
-        <div class="score">Total score: <strong>150</strong></div>
+<ons-page id="account" modifier="about" ng-controller="AccountController">
+    <div class="header">
+        <div class="title1">{{ user.name }}</div>
+        <div class="title2">Total score: <strong>{{ user.points }}</strong></div>
     </div>
+    <div class="section">
+        <div class="message">
+            <h4>About</h4>
 
-    <ons-list>
-        <ons-list-item>
-            <div>
-                <h4>About</h4>
+            <p>Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text
+                ever since the 1500s.</p>
+        </div>
+        <div class="message">
+            <h4>Privacy</h4>
 
-                <p>Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy text
-                    ever since the 1500s.</p>
-            </div>
-        </ons-list-item>
-
-        <ons-list-item>
-            <div>
-                <h4>Privacy</h4>
-
-                <p>Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy text
-                    ever since the 1500s.</p>
-            </div>
-        </ons-list-item>
-
-    </ons-list>
+            <p>Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry. Lorem Ipsum
+                has been the industry's standard dummy text
+                ever since the 1500s.</p>
+        </div>
+    </div>
 </ons-page>
