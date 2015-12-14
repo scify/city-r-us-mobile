@@ -131,7 +131,7 @@ module.controller('AppController', function ($scope, $http) {
             });
 
             $scope.missions = data.message.missions;
-        }).error(function(error){
+        }).error(function (error) {
             alert("error");
             console.log(error);
         });
@@ -158,13 +158,55 @@ module.controller('AppController', function ($scope, $http) {
         $http({
             method: 'GET',
             url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/users/byJWT'
-        }).success(function(data){
+        }).success(function (data) {
             missions = data.message.missions;
-            $scope.missions  = data.message.missions;
+            $scope.missions = data.message.missions;
             myNavigator.pushPage('account.html');
-        }).error(function(){
+        }).error(function () {
             alert("error");
         });
+    };
+    $scope.Invite = function (email) {
+        var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if (checkConnection()) {
+            if (email) {
+                if (email_validation.test(email)) {
+                    document.getElementById("email").style.display = "none";
+                    document.getElementById("p").style.display = "none";
+                    ons.notification.alert({
+                        message: 'Η λειτουργία αυτή δεν έχει υλοποιηθεί ακόμα.',
+                        title: 'Invite',
+                        buttonLabel: 'OK',
+                        animation: 'default',
+                        callback: function () {
+                        }
+                    });
+                }
+                else {
+                    document.getElementById("email").style.display = "inline";
+                    document.getElementById("p").style.display = "inline";
+                }
+            }
+            else {
+                ons.notification.alert({
+                    message: 'Check your email.',
+                    title: 'Invitation Failed',
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
+        } else {
+            ons.notification.alert({
+                message: 'Check your connection in order to procced with Login.',
+                title: 'Connection error',
+                buttonLabel: 'OK',
+                animation: 'default',
+                callback: function () {
+                }
+            });
+        }
     };
 });
 
@@ -181,7 +223,7 @@ module.controller('TabsController', function ($scope, $translate) {
         $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/plus.svg", "page": "invite.html"});
     });
     $translate("ACCOUNT").then(function (label) {
-        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/user.svg", "page" : "", "ng-click": "55555555"});
+        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/user.svg", "page": "", "ng-click": "55555555"});
     });
 });
 
@@ -218,18 +260,22 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
             function (data) {
                 loading.hide();
                 success.show();
-                setTimeout(function() {
+                setTimeout(function () {
                     success.hide();
                 }, 2000);
             }, function (error) {
                 loading.hide();
                 fail.show();
-                setTimeout(function() {
+                setTimeout(function () {
                     fail.hide();
                 }, 2000);
             }
         );
     };
+});
+
+module.controller('inviteController', function ($scope, $translate) {
+    //$scope.name = 'Whirled';
 });
 
 function validateLogin(username, password) {
