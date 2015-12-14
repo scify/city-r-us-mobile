@@ -254,7 +254,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         loading.show();
         var marker = $scope.map.getMarkers()[0];
         var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
-        var  deviceUUID = "xadias";
+        var  deviceUUID = "test";
 
         $http.post(
             apiUrl + '/observations/store',
