@@ -60,7 +60,6 @@ module.run(function ($translate) {
     }
 
     function onDeviceReady() {
-        console.log("Device is ready");
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function (language) {
                 $translate.use((language.value).split("-")[0]);
@@ -79,19 +78,13 @@ module.run(function ($translate) {
                 myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
             }, 3000)
         }
-        console.log("start.html");
     }
 });
 
 module.controller('AppController', function ($scope, $http) {
     var missions;
-    console.log("Angular ready!!!");
-    ons.ready(function () {
-        console.log("onsen ready!!!");
-    });
 
     $scope.logIn = function (username, password) {
-        console.log("button pressed!");
         if (checkConnection()) {
             modal.show();
             validateLogin(username, password);
@@ -107,12 +100,10 @@ module.controller('AppController', function ($scope, $http) {
         }
     };
     $scope.logOut = function () {
-        console.log("logout pressed!");
         localStorage.removeItem("logintoken");
         myNavigator.pushPage('login.html', {animation: "fade", pagevalue: "loginPage"});
     };
     $scope.register = function (username, email, password) {
-        console.log("register pressed!");
         if (checkConnection()) {
             modal.show();
             registration(username, email, password);
@@ -133,6 +124,12 @@ module.controller('AppController', function ($scope, $http) {
             url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/missions'
         }).success(function (data) {
             missions = data.message.missions;
+
+            //formatting date
+            angular.forEach(missions, function (value, key) {
+                value.created = Date.parse(value.created_at);
+            });
+
             $scope.missions = data.message.missions;
         }).error(function(error){
             alert("error");
@@ -140,23 +137,10 @@ module.controller('AppController', function ($scope, $http) {
         });
     };
     $scope.showMission = function (index) {
-        console.log(missions[index]);
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
     }
 
-    $scope.showUser = function () {
-        $http({
-            method: 'GET',
-            url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/missions'
-        }).success(function(data){
-            missions = data.message.missions;
-            $scope.missions  = data.message.missions;
-
-        }).error(function(){
-            alert("error");
-        });
-    };
     $scope.startMission = function (missionType) {
         switch (missionType) {
             case "1":
@@ -167,6 +151,20 @@ module.controller('AppController', function ($scope, $http) {
             default:
                 break;
         }
+    };
+
+    $scope.account = function () {
+        console.log('aaa')
+        $http({
+            method: 'GET',
+            url: 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1/users/byJWT'
+        }).success(function(data){
+            missions = data.message.missions;
+            $scope.missions  = data.message.missions;
+            myNavigator.pushPage('account.html');
+        }).error(function(){
+            alert("error");
+        });
     };
 });
 
@@ -183,7 +181,7 @@ module.controller('TabsController', function ($scope, $translate) {
         $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/plus.svg", "page": "invite.html"});
     });
     $translate("ACCOUNT").then(function (label) {
-        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/user.svg", "page": "account.html"});
+        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/user.svg", "page" : "", "ng-click": "55555555"});
     });
 });
 
@@ -217,20 +215,20 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
                     "observation_date": new Date()
                 }]
             }, null).then(
-                function (data) {
-                    loading.hide();
-                    success.show();
-                    setTimeout(function() {
-                        success.hide();
-                    }, 2000);
-                }, function (error) {
-                    loading.hide();
-                    fail.show();
-                    setTimeout(function() {
-                        fail.hide();
-                    }, 2000);
-                }
-            );
+            function (data) {
+                loading.hide();
+                success.show();
+                setTimeout(function() {
+                    success.hide();
+                }, 2000);
+            }, function (error) {
+                loading.hide();
+                fail.show();
+                setTimeout(function() {
+                    fail.hide();
+                }, 2000);
+            }
+        );
     };
 });
 

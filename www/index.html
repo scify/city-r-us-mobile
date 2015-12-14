@@ -60,10 +60,16 @@
         <ons-page ng-controller="TabsController">
             <ons-tabbar var="app.tabbar">
                 <ons-tab ng-repeat="tab in tabs"
-                         page="{{tab.page}}">
+                         page="{{tab.page}}" ng-if="tab.page!=''">
                     <div class="tab-content">
                         <img src="{{tab.icon}}" alt="{{tab.label}}">
                         <span>{{tab.label}}</span>
+                    </div>
+                </ons-tab>
+                <ons-tab ng-repeat="tab in tabs" ng-if="tab.page==''" ng-click="tab.ng-click">
+                    <div class="tab-content">
+                        <img src="{{tab.icon}}" alt="{{tab.label}}">
+                        <span>{{tab.label}} {{tab.ng-click}}</span>
                     </div>
                 </ons-tab>
             </ons-tabbar>

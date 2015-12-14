@@ -5,8 +5,7 @@
         </div>
     </ons-toolbar>
 
-
-    <ons-list class="list">
+    <ons-list class="list" id="mission">
         <ons-list-item>
             <div class="contributors">
                 <span>12 contributors</span>
@@ -23,16 +22,13 @@
             </div>
         </ons-list-item>
         <ons-list-item class="created">
-            <span>Posted in {{ mission.created_at }}</span>
+            <span>Posted in {{mission.created | date:'dd-MM-yyyy'}}</span>
         </ons-list-item>
-        <ons-list-item>
-
-            <ons-button modifier="material" class="start-button" ng-click="startMission(mission.type.id)">
+        <ons-list-item class="start-button">
+            <ons-button modifier="material" ng-click="startMission(mission.type.id)">
                 <ons-ripple></ons-ripple>
                 START
             </ons-button>
-
         </ons-list-item>
-
     </ons-list>
 </ons-page>

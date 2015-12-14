@@ -6,7 +6,7 @@
                     <span>{{ mission.name }}</span>
                 </ons-list-item>
                 <ons-list-item class="created">
-                    <span>Posted in {{ mission.created_at }}</span>
+                    <span>Posted in {{mission.created | date:'dd-MM-yyyy'}}</span>
                 </ons-list-item>
                 <ons-list-item class="contributors">
                     <span>12 contributors</span>
