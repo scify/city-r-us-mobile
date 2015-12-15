@@ -32,7 +32,7 @@ module.config(function ($translateProvider) {
         "SUBMIT_POINT_TEXT": "Click to send the point you recorded and contribute to this mission.",
         "SUBMIT_ROUTE_TEXT": "Click to send the route you recorded and contribute to this mission.",
         "SENDING": "Sending",
-        "SUCCESS": "Thank you for contributing! You received 10 points.",
+        "SUCCESS": "Thank you for contributing! You received {{value}} points.",
         "FAIL": "Something went wrong, please try again"
     });
     $translateProvider.translations('el', {
@@ -44,7 +44,7 @@ module.config(function ($translateProvider) {
         "SUBMIT_POINT_TEXT": "Καταχώρησε το σημείο που κατέγραψες για να συνησφέρεις στην αποστολή.",
         "SUBMIT_ROUTE_TEXT": "Καταχώρησε τη διαδρομή την οποία κατέγραψες για να συνησφέρεις στην αποστολή.",
         "SENDING": "Αποστολή δεδομένων",
-        "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίθηκαν 10 βαθμοί.",
+        "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίθηκαν {{value}} βαθμοί.",
         "FAIL": "Αποτυχία σύνδεσης, παρακαλλώ προσπαθήστε ξανά"
     });
     $translateProvider.preferredLanguage("en");
@@ -272,6 +272,9 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
             }, null).then(
             function (data) {
                 loading.hide();
+                $scope.translationData = {
+                    value: data.data.message.points
+                };
                 success.show();
                 setTimeout(function () {
                     success.hide();
