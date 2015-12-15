@@ -137,6 +137,11 @@ h7 {
     vertical-align: middle;
 }
 
+.navigation-bar, .list__item, .list__item:first-child{
+    border:none;
+    background-image:none;
+}
+
 /* EVENTS */
 
 .event {
@@ -426,8 +431,10 @@ h7 {
     bottom: 2%;
     height: 7%;
     width: 75%;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
 }
 
 #map-container + .cruButton span span {
@@ -540,7 +547,7 @@ div.tab-bar ons-tab img {
 
 div.tab-bar ons-tab span {
     font-size: 1em;
-    line-height: 2.5em;
+    line-height: 2.1em;
 }
 
 div.tab-bar ons-tab.active {
