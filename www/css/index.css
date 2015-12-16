@@ -47,10 +47,58 @@
     color: white;
     margin: auto;
     font-family: inherit;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: normal;
     line-height: 1em;
     text-align: center;
+}
+
+@media screen and (max-device-width: 320px) and (orientation: portrait) {
+    * {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-device-width: 420px) and (min-device-width: 321px) and (orientation: portrait) {
+    * {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-device-width: 540px) and (min-device-width: 421px) and (orientation: portrait) {
+    * {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-device-width: 760px) and (min-device-width: 541px) and (orientation: portrait) {
+    * {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-device-height: 320px) and (orientation: landscape) {
+    * {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-device-height: 420px) and (min-device-width: 321px) and (orientation: landscape) {
+    * {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-device-height: 540px) and (min-device-width: 421px) and (orientation: landscape) {
+    * {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-device-height: 760px) and (min-device-width: 541px) and (orientation: landscape) {
+    * {
+        font-size: 18px;
+    }
 }
 
 *::-webkit-scrollbar {
