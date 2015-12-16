@@ -32,6 +32,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "gr.scify.cityrus"
+        },
+        "cordova-plugin-mauron85-background-geolocation": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
         }
     },
     "dependent_plugins": {}
