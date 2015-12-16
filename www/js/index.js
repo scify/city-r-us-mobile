@@ -233,18 +233,14 @@ module.controller('TabsController', function ($scope, $translate) {
 });
 
 module.controller('AccountController', function ($scope, $http) {
+    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
     $http({
         method: 'GET',
-        url: apiUrl + '/users/byJWT',
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("logintoken")
-        }
-    }).success(function (data, status, headers, config) {
-        var token = headers('Authorization').replace("Bearer ", "");
-        saveLocalStorage(token);
+        url: apiUrl + '/users/byJWT'
+    }).success(function (data) {
         $scope.user = data.message.user;
     }).error(function (error) {
-        alert(error)
+        console.log(error);
     });
 });
 
