@@ -334,7 +334,7 @@ h7 {
 }
 
 #missions ons-list-item, #mission ons-list-item {
-    line-height: 15px;
+    line-height: 0.9em;
     text-align: left;
 }
 
@@ -405,9 +405,9 @@ h7 {
 }
 
 #mission .description span {
-    font-size: 14px;
-    line-height: 40px;
-    margin-bottom: 10px;
+    font-size: 0.75em;
+    line-height: 2.9em;
+    margin-bottom: 0.55em;
     color: #000;
 }
 
@@ -434,12 +434,12 @@ h7 {
 
 #account .name{
     font-weight: 600;
-    font-size: 20px;
+    font-size: 1.1em;
     padding: 40px 0 0 20px;
 }
 #account .score{
     font-weight: 400;
-    font-size: 16px;
+    font-size: 0.9;
     padding: 10px 0 0 20px;
 }
 
@@ -447,7 +447,7 @@ h7 {
     color:#000;
     text-align:left;
     margin-top:5%;
-    line-height: 20px;
+    line-height: 0.9em;
 }
 #account h4{
     font-size: 1em;
@@ -459,7 +459,7 @@ h7 {
 }
 
 #account{
-    line-height:20px;
+    line-height: 1.1em;
 }
 
 .list {
@@ -613,7 +613,7 @@ div.tab-bar ons-tab.active {
 
 .header .title1{
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1.1em;
     padding: 40px 0 0 8%;
     float:left;
     width: 84%;
@@ -622,7 +622,7 @@ div.tab-bar ons-tab.active {
 
 .header .title2{
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1.1em;
     padding: 0 0 40px 8%;
     float:left;
     width: 84%;
@@ -639,7 +639,7 @@ div.tab-bar ons-tab.active {
     float:left;
     padding: 30px 8% 0 8%;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 0.9em;
     width: 84%;
     text-align: left;
 }
@@ -649,7 +649,7 @@ div.tab-bar ons-tab.active {
     text-align: left;
     padding: 52px 8% 0 8%;
     width: 84%;
-    font-size: 12px;
+    font-size: 0.7em;
     font-style: italic;
 }
 
@@ -657,26 +657,26 @@ div.tab-bar ons-tab.active {
     padding: 0 1% 0 1%;
     width: 84%;
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 0.7em;
     text-align: left;
 }
 
 .section .text-input--underbar {
     padding: 10px 8% 0 0;
     width: 84%;
-    font-size: 12px;
+    font-size: 0.7em;
 }
 
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+::-webkit-input-placeholder {
     color: #B2C5D0;
-    font-size: 12px;
+    font-size: 0.7em;
     font-style: italic;
     text-align: left;
 }
 
 #email {
     display:none;
-    font-size: 12px;
+    font-size: 0.7em;
     text-transform:none;
     color: red;
     text-decoration: underline;
@@ -695,7 +695,7 @@ div.tab-bar ons-tab.active {
     float: right;
     border-radius: 15px;
     background-color: #56CDB7;
-    font-size: 20px;
+    font-size: 1.1em;
     width: 42%;
     padding: 0 0 0 0;
     text-align: center;
