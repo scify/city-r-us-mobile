@@ -206,7 +206,7 @@ module.controller('MissionsController', function ($scope) {
 module.controller('TabsController', function ($scope, $translate) {
     $scope.tabs = [];
     $translate("MISSIONS").then(function (label) {
-        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/flag2.svg", "page": "missions.html"});
+        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/flag2.svg", "page": "missions.html", "active": true});
     });
     $translate("INVITE").then(function (label) {
         $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/plus.svg", "page": "invite.html"});
