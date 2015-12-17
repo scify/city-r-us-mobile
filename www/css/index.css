@@ -110,13 +110,12 @@
 }
 
 body {
-    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
+    -webkit-touch-callout: none;    /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-user-select: none;      /* prevent copy paste, to allow, change 'none' to 'text' */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Roboto', sans-serif !important;
-    height: 100%;
 }
 
 .page__background {
@@ -195,25 +194,6 @@ h7 {
     background-image: none;
 }
 
-/* EVENTS */
-
-.event {
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    font-size: 0.7em;
-    margin: 0px 30px;
-    padding: 2px 0px;
-}
-
-.event.listening {
-    display: block;
-}
-
-.event.received {
-    display: none;
-}
-
-/* NAVBAR */
 
 /* LOGIN - REGISTER */
 
@@ -333,58 +313,62 @@ h7 {
 /* MISSIONS LIST */
 
 #missions ons-list {
-    border: none;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-}
-
-#missions ons-list-item, #mission ons-list-item {
-    line-height: 0.9em;
-    text-align: left;
-}
-
-#missions .imgWrapper {
-    text-align: center;
-    background-color: #ccc;
+    background: none;
+    padding: 1.5% 0;
 }
 
 #missions ons-list-item {
-    border-bottom: none;
-    margin-top: 5%;
+    background: white;
+    width: 45.3%;
+    float: left;
+    padding: 0;
+    margin: 1.5%;
+    padding: 2% 1% 1% 2%;
+}
+
+#missions ons-list-item:nth-child(odd) {
+    margin-left: 3%;
+}
+
+#missions ons-list-item:nth-child(even) {
+    margin-right: 3%;
 }
 
 #missions .name {
-    font-size: 2em;
-    font-weight: 600;
+    font-size: 2.4em;
+    height: 4em;
+    overflow: hidden;
+    color: #41454C;
+    text-align: left;
 }
 
-#missions .name span {
-    color: #000;
-}
-
-#missions .created span {
-    color: #009982;
-    font-size: 0.7em;
+#missions .created {
+    color: #59CAB5;
+    font-size: 0.75em;
     font-style: italic;
+    margin: 1em 0;
+    text-align: left;
 }
 
 #missions .contributors {
+    font-size: 0.8em;
+    color: #B2C5D0;
     text-align: right;
-}
-
-#missions .contributors span {
-    font-size: 0.7em;
-    text-align: right;
-    color: #898585;
 }
 
 /* MISSION */
+
 #mission {
     padding-top: 20%;
 }
 
-.start-button {
-    text-align: center !important;
+ #mission ons-list-item {
+    line-height: 0.9em;
+    text-align: left;
+}
+
+.start-button{
+    text-align:center !important;
 }
 
 .start-button ons-button {
@@ -600,7 +584,7 @@ div.tab-bar ons-tab img {
 }
 
 div.tab-bar ons-tab span {
-    font-size: 1em;
+    font-size: 1.1em;
     line-height: 2.1em;
 }
 
