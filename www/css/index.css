@@ -184,6 +184,12 @@ h7 {
     vertical-align: middle;
 }
 
+::-webkit-input-placeholder {
+    color: #B2C5D0;
+    font-style: italic;
+    text-align: left;
+}
+
 /* LOGIN - REGISTER */
 
 .logo {
@@ -400,54 +406,6 @@ h7 {
     line-height: 1.6em;
 }
 
-/* ACCOUNT PAGE */
-
-#account * {
-    text-align: left;
-}
-
-#account .header {
-    height: 33%;
-    padding: 5em;
-    box-sizing: border-box;
-}
-
-#account .content {
-    height: 67%;
-    background: white;
-    padding: 1em 2.5em;
-    box-sizing: border-box;
-}
-
-#account .name{
-    font-size: 2.5em;
-    text-align: left;
-}
-
-#account .score {
-    display: inline;
-}
-
-#account .scoreNumber {
-    display: inline;
-    font-size: 1.5em;
-    font-weight: bold;
-    vertical-align: middle;
-    padding-left: 0.3em;
-}
-
-#account .content .message {
-    margin-top: 2em;
-}
-
-#account .content .message * {
-    color: #41454C;
-}
-
-#account .content .message p {
-    line-height: 1.4em;
-}
-
 /* MISSION MAP */
 
 #map-container {
@@ -590,102 +548,131 @@ div.tab-bar ons-tab.active {
     background-color: #67D2C2;
 }
 
-/* ACCOUNT */
+/* ACCOUNT PAGE */
+
+#account * {
+    text-align: left;
+}
+
+#account .header {
+    height: 33%;
+    padding: 5em;
+    box-sizing: border-box;
+}
+
+#account .content {
+    height: 67%;
+    background: white;
+    padding: 1em 2.5em;
+    box-sizing: border-box;
+}
+
+#account .name{
+    font-size: 2.5em;
+}
+
+#account .score {
+    display: inline;
+}
+
+#account .scoreNumber {
+    display: inline;
+    font-size: 1.5em;
+    font-weight: bold;
+    vertical-align: middle;
+    padding-left: 0.3em;
+}
+
+#account .content .message {
+    margin-top: 2em;
+}
+
+#account .content .message * {
+    color: #41454C;
+}
+
+#account .content .message p {
+    line-height: 1.4em;
+}
 
 /* INVITE */
 
-.header {
-    color:white;
-    height: 30%;
-}
-
-.header .title1{
-    font-weight: 400;
-    font-size: 1.1em;
-    padding: 40px 0 0 8%;
-    float:left;
-    width: 84%;
+#invite * {
     text-align: left;
 }
 
-.header .title2{
-    font-weight: 700;
-    font-size: 1.1em;
-    padding: 0 0 40px 8%;
-    float:left;
-    width: 84%;
-    text-align: left;
+#invite .header {
+    height: 33%;
+    padding: 3em;
+    box-sizing: border-box;
 }
 
-.section {
-    background-color:white;
-    height: 70%;
+#invite .content {
+    height: 67%;
+    background: white;
+    padding: 1em 2.2em;
+    box-sizing: border-box;
 }
 
-.section .message {
-    color:black;
-    float:left;
-    padding: 30px 8% 0 8%;
-    font-weight: 700;
-    font-size: 0.9em;
-    width: 84%;
-    text-align: left;
+#invite .title1{
+    font-size: 2.5em;
 }
 
-.section .textAreaDescr {
-    color:#B2C5D0;
-    text-align: left;
-    padding: 52px 8% 0 8%;
-    width: 84%;
-    font-size: 0.7em;
-    font-style: italic;
+#invite .title2 {
+    font-size: 2.2em;
+    font-weight: bold;
 }
 
-.section .textarea{
-    padding: 0 1% 0 1%;
-    width: 84%;
-    margin-top: 5px;
-    font-size: 0.7em;
-    text-align: left;
+#invite .content .message {
+    margin-top: 2em;
 }
 
-.section .text-input--underbar {
-    padding: 10px 8% 0 0;
-    width: 84%;
-    font-size: 0.7em;
+#invite .content .message > * {
+    color: #41454C;
 }
 
-::-webkit-input-placeholder {
+#invite .content h2 {
+    font-weight: bold;
+    margin-bottom: 0.7em;
+}
+
+#invite .content .textAreaDescr {
     color: #B2C5D0;
-    font-size: 0.7em;
+    font-size: 0.9em;
     font-style: italic;
-    text-align: left;
 }
 
-#email {
+#invite .content .textarea{
+    width: 84%;
+    margin-top: 1em;
+    font-size: 0.9em;
+    border-radius: 0;
+    border-color: #41454C;
+    padding: 0.5em;
+    box-sizing: border-box;
+}
+
+#invite .content .text-input--underbar {
+    padding: 0 8% 0 0;
+    width: 100%;
+    margin-top: -0.4em;
+    border-color: #41454C;
+}
+
+#invite .cruButton {
+    margin-top: 1em;
+    width: 40%;
+    margin-left: 60%;
+}
+
+#invite .cruButton span span {
+    font-size: 1.4em;
+    line-height: 1.6em;
+}
+
+#invite .content #email {
     display:none;
-    font-size: 0.7em;
-    text-transform:none;
     color: red;
     text-decoration: underline;
-    padding: 2% 8% 4% 8%;
-    text-align: left;
-    width: 84%;
     float:left;
-}
-
-.sectionButton {
-    width: 84%;
-    padding: 5% 8% 0 8%;
-}
-
-.section .login-button {
-    float: right;
-    border-radius: 15px;
-    background-color: #56CDB7;
-    font-size: 1.1em;
-    width: 42%;
-    padding: 0 0 0 0;
-    text-align: center;
-    margin: auto;
 }

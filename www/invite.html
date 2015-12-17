@@ -1,26 +1,30 @@
 <ons-page id="invite" modifier="invite" ng-controller="inviteController">
-    <!--<h3> Η λειτουργεία είναι υπό κατασκευή. </h3>-->
     <div class="header">
-        <h1 class="title1">Having fun?</h1>
-        <h1 class="title2">Invite your friends...</h1>
+        <p class="title1">Having fun?</p>
+        <p class="title2">Invite your friends...</p>
     </div>
-    <div class="section">
-        <h4 class="message">Message</h4>
-        <div class="textAreaDescr">Click to edit the message below:</div>
-        <textarea class="textarea" rows="5" placeholder="invitation message" ng-model="data" ng-init="data='I\'d like to invite you to the CityRus app.'"></textarea>
-        <h4 class="message">Email</h4>
-        <input type="text" class="text-input text-input--underbar" ng-model="email" placeholder="Type your frend's email" value="" name="input" required>
-        <div id="email">
-            <ons-icon id="icon"
-              icon="ion-information-circled"
-              size="15px"
-              fixed-width="false"
-              style="color: red">
-            </ons-icon>
-            <p id="p" style="font-size: 12px"> Enter valid email address. </p>
+    <div class="content">
+        <div class="message">
+            <h2>Message</h2>
+            <div class="textAreaDescr">Click to edit the message below:</div>
+            <textarea class="textarea" rows="5" placeholder="invitation message" ng-model="data" ng-init="data = 'I\'d like to invite you to the CityRus app.'"></textarea>
         </div>
-        <section style="padding-top: 3%" class="sectionButton">
-            <ons-button modifier="large" class="login-button" ng-click="Invite(email)"> Invite </ons-button>
-        </section>
-    </div> 
+        <div class="message">
+            <h2>Email</h2>
+            <input type="text" class="text-input text-input--underbar" ng-model="email" placeholder="Type your frend's email" value="" name="input" required>
+            <div id="email">
+                <ons-icon id="icon"
+                          icon="ion-information-circled"
+                          size="15px"
+                          fixed-width="false"
+                          style="color: red">
+                </ons-icon>
+                <p id="p" style="font-size: 0.8em"> Enter a valid email address. </p>
+            </div>
+        </div>
+        <ons-button modifier="material" class="cruButton" ng-click="Invite(email)">
+            <ons-ripple></ons-ripple>
+            {{"INVITE"| translate}}
+        </ons-button>
+    </div>
 </ons-page>
