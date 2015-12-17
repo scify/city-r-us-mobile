@@ -404,9 +404,9 @@ function validateLogin(username, password) {
         xhttp.send();
 
         xhttp.onreadystatechange = function () {
+            var response = JSON.parse(xhttp.responseText)
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 modal.hide();
-                var response = JSON.parse(xhttp.responseText)
                 if (response.status == "success") {
                     saveLocalStorage(response.message.token);
                     //myNavigator.pushPage('account.html', {animation: "fade"});
