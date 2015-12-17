@@ -1,20 +1,18 @@
 <ons-page id="account" modifier="about" ng-controller="AccountController">
     <div class="header">
-        <div class="title1">{{ user.name }}</div>
-        <div class="title2">Total score: <strong>{{ user.points }}</strong></div>
+        <p class="name">{{ user.name}}</p>
+        <p class="score">Total score: </p><p class="scoreNumber">{{ user.points}}</p>
     </div>
-    <div class="section">
+    <div class="content">
         <div class="message">
-            <h4>About</h4>
-
+            <h1>About</h1>
             <p>Lorem Ipsum is simply dummy text of the
                 printing and typesetting industry. Lorem Ipsum
                 has been the industry's standard dummy text
                 ever since the 1500s.</p>
         </div>
         <div class="message">
-            <h4>Privacy</h4>
-
+            <h1>Privacy</h1>
             <p>Lorem Ipsum is simply dummy text of the
                 printing and typesetting industry. Lorem Ipsum
                 has been the industry's standard dummy text

@@ -214,7 +214,9 @@ module.controller('AppController', function ($scope, $http) {
 });
 
 module.controller('MissionsController', function ($scope) {
-    $scope.callMissions();
+    if (typeof $scope.missions === "undefined") {
+        $scope.callMissions();
+    }
 });
 
 module.controller('TabsController', function ($scope, $translate) {
@@ -235,15 +237,17 @@ module.controller('TabsController', function ($scope, $translate) {
 });
 
 module.controller('AccountController', function ($scope, $http) {
-    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-    $http({
-        method: 'GET',
-        url: apiUrl + '/users/byJWT'
-    }).success(function (data) {
-        $scope.user = data.message.user;
-    }).error(function (error) {
-        console.log(error);
-    });
+    if (typeof $scope.user === "undefined") {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+        $http({
+            method: 'GET',
+            url: apiUrl + '/users/byJWT'
+        }).success(function (data) {
+            $scope.user = data.message.user;
+        }).error(function (error) {
+            console.log(error);
+        });
+    }
 });
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
@@ -331,7 +335,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
             "mission_id": $scope.mission.id,
             "measurements": []
         };
-        markers.forEach(function(entry) {
+        markers.forEach(function (entry) {
             data.measurements.push({
                 latitude: entry.marker.position.lat(),
                 longitude: entry.marker.position.lng(),
