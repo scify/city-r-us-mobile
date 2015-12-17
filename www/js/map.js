@@ -24,7 +24,7 @@ function Map() {
     this.initialize = function (lat, lon) {
         this.map = this.show(lat, lon);
         this.addMarkerToMap(lat, lon);
-    }
+    };
 
     this.show = function (lat, lon) {
         return new google.maps.Map(
@@ -41,14 +41,17 @@ function Map() {
                 });
     };
 
-    this.addMarkerToMap = function (lat, lon) {
+    this.addMarkerToMap = function (time, lat, lon, center) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
             draggable: true,
             animation: google.maps.Animation.DROP,
             map: this.map
         });
-        this.markers.push(marker);
+        this.markers.push({marker: marker, time: time});
+        if (center) {
+            this.map.setCenter(marker.getPosition());
+        }
     };
     
     this.getMarkers = function() {

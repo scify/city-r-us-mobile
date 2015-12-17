@@ -4,7 +4,18 @@
         "uninstalled": []
     },
     "config_munge": {
-        "files": {}
+        "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"browser-package\" value=\"Device\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
     },
     "installed_plugins": {
         "cordova-plugin-device": {
@@ -19,10 +30,10 @@
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "gr.scify.cityrus"
         },
-        "cordova-plugin-splashscreen": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "gr.scify.cityrus"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-mauron85-background-geolocation": {
             "PACKAGE_NAME": "gr.scify.cityrus"
         }
     },

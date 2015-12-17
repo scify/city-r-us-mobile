@@ -77,7 +77,7 @@ connect-srv 'self' 'unsafe-inline' 'unsafe-eval'
 <ons-template id="tabs.html">
     <ons-page ng-controller="TabsController">
         <ons-tabbar var="app.tabbar">
-            <ons-tab ng-repeat="tab in tabs" ng-if="tab.page!=''" page="{{tab.page}}">
+            <ons-tab ng-repeat="tab in tabs" ng-if="tab.page!=''" page="{{tab.page}}" ng-attr-active="{{tab.active || undefined}}">
                 <div class="tab-content">
                     <img src="{{tab.icon}}" alt="{{tab.label}}">
                     <span>{{tab.label}}</span>
