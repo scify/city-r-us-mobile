@@ -1,17 +1,9 @@
 <ons-page id="missions" ng-controller="MissionsController">
-    <ons-row id="missions">
-        <ons-col width="50%" ng-repeat='mission in missions'>
-            <ons-list modifier="inset" style="margin-top: 10px" ng-click="showMission($index)">
-                <ons-list-item class="name">
-                    <span>{{ mission.name }}</span>
-                </ons-list-item>
-                <ons-list-item class="created">
-                    <span>Posted in {{mission.created | date:'dd-MM-yyyy'}}</span>
-                </ons-list-item>
-                <ons-list-item class="contributors">
-                    <span>12 contributors</span>
-                </ons-list-item>
-            </ons-list>
-        </ons-col>
-    </ons-row>
+    <ons-list>
+        <ons-list-item class="mission" ng-repeat='mission in missions' ng-click="showMission($index)">
+            <p class="name">{{mission.name}}</p>
+            <p class="created">Posted in {{mission.created | date:'dd-MM-yyyy'}}</p>
+            <p class="contributors">12 contributors</p>
+        </ons-list-item>
+    </ons-list>
 </ons-page>

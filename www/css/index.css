@@ -302,54 +302,58 @@ h7 {
 /* MISSIONS LIST */
 
 #missions ons-list {
-    border: none;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-}
-
-#missions ons-list-item, #mission ons-list-item {
-    line-height: 0.9em;
-    text-align: left;
-}
-
-#missions .imgWrapper {
-    text-align: center;
-    background-color: #ccc;
+    background: none;
+    padding: 1.5% 0;
 }
 
 #missions ons-list-item {
-    border-bottom: none;
-    margin-top: 5%;
+    background: white;
+    width: 45.3%;
+    float: left;
+    padding: 0;
+    margin: 1.5%;
+    padding: 2% 1% 1% 2%;
+}
+
+#missions ons-list-item:nth-child(odd) {
+    margin-left: 3%;
+}
+
+#missions ons-list-item:nth-child(even) {
+    margin-right: 3%;
 }
 
 #missions .name {
-    font-size: 2em;
-    font-weight: 600;
+    font-size: 2.4em;
+    height: 4em;
+    overflow: hidden;
+    color: #41454C;
+    text-align: left;
 }
 
-#missions .name span {
-    color: #000;
-}
-
-#missions .created span {
-    color: #009982;
-    font-size: 0.7em;
+#missions .created {
+    color: #59CAB5;
+    font-size: 0.75em;
     font-style: italic;
+    margin: 1em 0;
+    text-align: left;
 }
 
 #missions .contributors {
+    font-size: 0.8em;
+    color: #B2C5D0;
     text-align: right;
-}
-
-#missions .contributors span {
-    font-size: 0.7em;
-    text-align: right;
-    color: #898585;
 }
 
 /* MISSION */
+
 #mission {
     padding-top: 20%;
+}
+
+ #mission ons-list-item {
+    line-height: 0.9em;
+    text-align: left;
 }
 
 .start-button{
