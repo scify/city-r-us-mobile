@@ -120,7 +120,11 @@ body {
 }
 
 .page__background {
+    background: #2e5a85;
+    background: -moz-linear-gradient(-45deg, #62d7c0 0%, #2e5a85 100%);
+    background: -webkit-linear-gradient(-45deg, #62d7c0 0%, #2e5a85 100%);
     background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62d7c0', endColorstr='#2e5a85', GradientType=1);
 }
 
 .blink {
@@ -131,12 +135,13 @@ body {
 #splashImage {
     max-height: 50%;
     max-width: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+    margin: 30% auto 0 auto;
+}
+
+.splashScreen h1 {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    font-weight: 600;
 }
 
 h1 {
@@ -185,9 +190,9 @@ h7 {
     vertical-align: middle;
 }
 
-.navigation-bar, .list__item, .list__item:first-child{
-    border:none;
-    background-image:none;
+.navigation-bar, .list__item, .list__item:first-child {
+    border: none;
+    background-image: none;
 }
 
 /* EVENTS */
@@ -378,20 +383,20 @@ h7 {
     padding-top: 20%;
 }
 
-.start-button{
-    text-align:center !important;
+.start-button {
+    text-align: center !important;
 }
 
-.start-button ons-button{
+.start-button ons-button {
     background-color: #59CAB5;
     border-radius: 20px;
     font-size: 25px;
     padding: 10px 50px;
-    width:90%;
+    width: 90%;
 }
 
 .start-button ons-button span span {
-    font-size:1.5em;
+    font-size: 1.5em;
 }
 
 #mission .name, #mission .description, #mission .created_at {
@@ -426,39 +431,40 @@ h7 {
     font-style: italic;
 }
 
-
 /* ACCOUNT PAGE */
-#account .card{
+#account .card {
     height: 150px;
 }
 
-#account .name{
+#account .name {
     font-weight: 600;
     font-size: 1.1em;
     padding: 40px 0 0 20px;
 }
-#account .score{
+
+#account .score {
     font-weight: 400;
     font-size: 0.9;
     padding: 10px 0 0 20px;
 }
 
-#account p, #account h4{
-    color:#000;
-    text-align:left;
-    margin-top:5%;
+#account p, #account h4 {
+    color: #000;
+    text-align: left;
+    margin-top: 5%;
     line-height: 0.9em;
 }
-#account h4{
+
+#account h4 {
     font-size: 1em;
     font-weight: 600;
 }
 
-#account p{
+#account p {
     font-size: 0.8em;
 }
 
-#account{
+#account {
     line-height: 1.1em;
 }
 
@@ -531,7 +537,7 @@ h7 {
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 1.6em;
-    font-size:1em;
+    font-size: 1em;
 }
 
 .confirmationDiv .cruButton {
@@ -607,36 +613,36 @@ div.tab-bar ons-tab.active {
 /* INVITE */
 
 .header {
-    color:white;
+    color: white;
     height: 30%;
 }
 
-.header .title1{
+.header .title1 {
     font-weight: 400;
     font-size: 1.1em;
     padding: 40px 0 0 8%;
-    float:left;
+    float: left;
     width: 84%;
     text-align: left;
 }
 
-.header .title2{
+.header .title2 {
     font-weight: 700;
     font-size: 1.1em;
     padding: 0 0 40px 8%;
-    float:left;
+    float: left;
     width: 84%;
     text-align: left;
 }
 
 .section {
-    background-color:white;
+    background-color: white;
     height: 70%;
 }
 
 .section .message {
-    color:black;
-    float:left;
+    color: black;
+    float: left;
     padding: 30px 8% 0 8%;
     font-weight: 700;
     font-size: 0.9em;
@@ -645,7 +651,7 @@ div.tab-bar ons-tab.active {
 }
 
 .section .textAreaDescr {
-    color:#B2C5D0;
+    color: #B2C5D0;
     text-align: left;
     padding: 52px 8% 0 8%;
     width: 84%;
@@ -653,7 +659,7 @@ div.tab-bar ons-tab.active {
     font-style: italic;
 }
 
-.section .textarea{
+.section .textarea {
     padding: 0 1% 0 1%;
     width: 84%;
     margin-top: 5px;
@@ -668,22 +674,22 @@ div.tab-bar ons-tab.active {
 }
 
 ::-webkit-input-placeholder {
-    color: #B2C5D0;
+    color: #ffffff;
     font-size: 0.7em;
-    font-style: italic;
-    text-align: left;
+    text-align: center;
+    font-style: normal;
 }
 
 #email {
-    display:none;
+    display: none;
     font-size: 0.7em;
-    text-transform:none;
+    text-transform: none;
     color: red;
     text-decoration: underline;
     padding: 2% 8% 4% 8%;
     text-align: left;
     width: 84%;
-    float:left;
+    float: left;
 }
 
 .sectionButton {

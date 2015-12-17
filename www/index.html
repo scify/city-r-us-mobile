@@ -39,25 +39,15 @@
 
     <meta http-equiv="Content-Security-Policy" content="
 default-src 'self' data: gap:
-    *;
-script-src 'self' 'unsafe-inline' 'unsafe-eval'
-    *;
-style-src 'self' 'unsafe-inline' 'unsafe-eval'
-    *;
-media-src 'self' 'unsafe-inline' 'unsafe-eval'
-    *;
-img-src 'self' 'unsafe-inline' 'unsafe-eval'
-    *;
-connect-srv 'self' 'unsafe-inline' 'unsafe-eval'
-    *
-">
+    *; script-src 'self' 'unsafe-inline' 'unsafe-eval'
+    *; style-src 'self' 'unsafe-inline' 'unsafe-eval' *; media-src 'self' 'unsafe-inline' 'unsafe-eval' *; img-src 'self' 'unsafe-inline' 'unsafe-eval' *; connect-srv 'self' 'unsafe-inline' 'unsafe-eval' *">
 
 
     <link rel="stylesheet" href="onsen/css/onsenui.css">
     <link rel="stylesheet" type="text/css" href="css/onsen-css-components.min.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500&subset=latin,greek' rel='stylesheet' type='text/css'>
-    <title>Hello World</title>
+    <title>City-R-US</title>
 </head>
 <body ng-controller="AppController">
 
@@ -68,8 +58,10 @@ connect-srv 'self' 'unsafe-inline' 'unsafe-eval'
 
             <p class="event received"></p>
         </div>
-        <div>
+        <div class="splashScreen">
             <img id="splashImage" src="img/CityRUS_logo.png">
+            <h1>City-R-US</h1>
+            <h4>Build the city of your dreams</h4>
         </div>
     </ons-page>
 </ons-navigator>

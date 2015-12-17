@@ -80,9 +80,9 @@ module.run(function ($translate) {
         if (login) {
             myNavigator.replacePage('tabs.html', {params: {tab: 0}});
         } else {
-            setTimeout(function () {
+          /*  setTimeout(function () {
                 myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
-            }, 3000);
+            }, 3000);*/
         }
     }
 });
@@ -461,7 +461,6 @@ function registration(username, email, password) {
     var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     if (username && email && password) {
         if (email_validation.test(email)) {
-            console.log("register ok");
             document.getElementById("email").style.display = "none";
             sendRegisterRequest(username, email, password);
         } else {
@@ -488,7 +487,12 @@ function registration(username, email, password) {
 
 function sendRegisterRequest(username, email, password) {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", apiUrl + "/users/register?name=" + username + "&email=" + email + "&password=" + password + "", true);
+    xhttp.open("POST", apiUrl + "/users/register?name=" + username
+    + "&email=" + email
+    + "&password=" + password
+    + "&deviceUUID=" + device.uuid
+    + "&model=" + device.model
+    + "&manufacturer=" + device.platform, true);
     xhttp.send();
 
     xhttp.onreadystatechange = function () {
