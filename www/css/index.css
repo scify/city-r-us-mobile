@@ -315,6 +315,7 @@ h7 {
 #missions ons-list {
     background: none;
     padding: 1.5% 0;
+    box-sizing: border-box;
 }
 
 #missions ons-list-item {
@@ -358,65 +359,61 @@ h7 {
 
 /* MISSION */
 
-#mission {
-    padding-top: 20%;
+#mission .missionContainer {
+    background: white;
+    height: 100%;
+    padding: 2em;
+    padding-top: 4em;
+    box-sizing: border-box;
 }
 
- #mission ons-list-item {
-    line-height: 0.9em;
+#mission .missionContainer p {
     text-align: left;
 }
 
-.start-button{
-    text-align:center !important;
+#mission .missionContainer .contributors {
+    color: #59CAB5;
+    padding-bottom: 0.5em;
 }
 
-.start-button ons-button {
-    background-color: #59CAB5;
-    border-radius: 20px;
-    font-size: 25px;
-    padding: 10px 50px;
-    width: 90%;
+#mission .missionContainer .name {
+    font-size: 3.6em;
+    height: 3em;
+    overflow: hidden;
+    color: #41454C;
+    margin-bottom: 0.6em;
 }
 
-.start-button ons-button span span {
-    font-size: 1.5em;
+#mission .missionContainer .description {
+    font-size: 1.1em;
+    height: 4em;
+    overflow: hidden;
+    color: #41454C;
+    min-height: 6em;
+    max-height: 8em;
 }
 
-#mission .name, #mission .description, #mission .created_at {
-    text-align: left;
-}
-
-#mission .name span {
-    margin-bottom: 10px;
-    color: #000;
-    font-size: 2em;
-}
-
-#mission .description span {
-    font-size: 0.75em;
-    line-height: 2.9em;
-    margin-bottom: 0.55em;
-    color: #000;
-}
-
-#mission .contributors {
-    text-align: left;
-}
-
-#mission .contributors span {
-    font-size: 0.9em;
-    color: #009982;
-}
-
-#mission .created span {
-    color: #898585;
-    font-size: 0.7em;
+#mission .missionContainer .created {
+    color: #B2C5D0;
     font-style: italic;
+    margin: 1em 0;
+}
+
+#mission .cruButton {
+    position: absolute;
+    bottom: 2%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+#mission .cruButton span span {
+    font-size: 2em;
+    line-height: 1.6em;
 }
 
 /* ACCOUNT PAGE */
-#account .card {
+
+#account .card{
     height: 150px;
 }
 
@@ -558,6 +555,7 @@ ons-back-button span i {
     margin-left: 0.4em !important;
     padding-top: 0.1em !important;
     text-shadow: -1px 2px 5px black;
+    color: #41454C;
 }
 
 /*MENU BAR*/

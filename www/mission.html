@@ -4,31 +4,14 @@
             <ons-back-button></ons-back-button>
         </div>
     </ons-toolbar>
-
-    <ons-list class="list" id="mission">
-        <ons-list-item>
-            <div class="contributors">
-                <span>12 contributors</span>
-            </div>
-        </ons-list-item>
-        <ons-list-item>
-            <div class="name">
-                <span>{{ mission.name }} </span>
-            </div>
-        </ons-list-item>
-        <ons-list-item>
-            <div class="description">
-                <span>{{ mission.description }} </span>
-            </div>
-        </ons-list-item>
-        <ons-list-item class="created">
-            <span>Posted in {{mission.created | date:'dd-MM-yyyy'}}</span>
-        </ons-list-item>
-        <ons-list-item class="start-button">
-            <ons-button modifier="material" ng-click="startMission(mission.type.id)">
-                <ons-ripple></ons-ripple>
-                START
-            </ons-button>
-        </ons-list-item>
-    </ons-list>
+    <div class="missionContainer">
+        <p class="contributors">12 contributors</p>
+        <p class="name">{{ mission.name}}</p>
+        <p class="description">{{ mission.description}}</p>
+        <p class="created">Posted in {{mission.created| date:'dd-MM-yyyy'}}</p>
+    </div>
+    <ons-button modifier="material" class="cruButton" ng-click="startMission(mission.type.id)">
+        <ons-ripple></ons-ripple>
+        {{"START"| translate}}
+    </ons-button>
 </ons-page>

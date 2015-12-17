@@ -18,9 +18,7 @@
  */
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
-//var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
-//var apiUrl = 'http://city-r-us-service/index.php/api/v1';
-var apiUrl = 'http://192.168.1.15/city-r-us-service/public/api/v1';
+var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
 
 
 module.config(function ($translateProvider) {
@@ -35,7 +33,8 @@ module.config(function ($translateProvider) {
         "SENDING": "Sending",
         "SUCCESS": "Thank you for contributing! You received {{value}} points.",
         "FAIL": "Something went wrong, please try again",
-        "RECORDING": "Recording route..."
+        "RECORDING": "Recording route...",
+        "START": "Start"
     });
     $translateProvider.translations('el', {
         "MISSIONS": "Αποστολές",
@@ -48,7 +47,8 @@ module.config(function ($translateProvider) {
         "SENDING": "Αποστολή δεδομένων",
         "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίθηκαν {{value}} βαθμοί.",
         "FAIL": "Αποτυχία σύνδεσης, παρακαλλώ προσπαθήστε ξανά",
-        "RECORDING": "Καταγραφή διαδρομής..."
+        "RECORDING": "Καταγραφή διαδρομής...",
+        "START": "Έναρξη"
     });
     $translateProvider.preferredLanguage("en");
     $translateProvider.fallbackLanguage("en");
