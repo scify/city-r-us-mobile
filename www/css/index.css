@@ -130,12 +130,13 @@ body {
 #splashImage {
     max-height: 50%;
     max-width: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+    margin: 30% auto 0 auto;
+}
+
+.splashScreen h1 {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    font-weight: 600;
 }
 
 h1 {
@@ -185,9 +186,10 @@ h7 {
 }
 
 ::-webkit-input-placeholder {
-    color: #B2C5D0;
-    font-style: italic;
-    text-align: left;
+    color: #ffffff;
+    font-size: 0.7em;
+    text-align: center;
+    font-style: normal;
 }
 
 /* LOGIN - REGISTER */
@@ -331,7 +333,7 @@ h7 {
 }
 
 #missions .name {
-    font-size: 2.4em;
+    font-size: 2em;
     height: 4em;
     overflow: hidden;
     color: #41454C;
@@ -340,14 +342,14 @@ h7 {
 
 #missions .created {
     color: #59CAB5;
-    font-size: 0.75em;
+    font-size: 0.9em;
     font-style: italic;
     margin: 1em 0;
     text-align: left;
 }
 
 #missions .contributors {
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: #B2C5D0;
     text-align: right;
 }
@@ -556,7 +558,7 @@ div.tab-bar ons-tab.active {
 
 #account .header {
     height: 33%;
-    padding: 5em;
+    padding: 3em;
     box-sizing: border-box;
 }
 
@@ -572,15 +574,13 @@ div.tab-bar ons-tab.active {
 }
 
 #account .score {
-    display: inline;
+    margin-top:2%;
+    font-size: 1.2em;
 }
 
-#account .scoreNumber {
-    display: inline;
-    font-size: 1.5em;
-    font-weight: bold;
-    vertical-align: middle;
-    padding-left: 0.3em;
+#account .scoreNumber{
+    font-weight:600;
+    font-size: 1.2em;
 }
 
 #account .content .message {

@@ -18,7 +18,8 @@
  */
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
-var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+//var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+var apiUrl = 'http://city-r-us-service/api/v1';
 
 
 module.config(function ($translateProvider) {
@@ -169,7 +170,7 @@ module.controller('AppController', function ($scope, $http) {
         }
     };
 
-    $scope.Invite = function (email) {
+    $scope.invite = function (email) {
         var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         if (checkConnection()) {
             if (email) {
@@ -222,7 +223,12 @@ module.controller('MissionsController', function ($scope) {
 module.controller('TabsController', function ($scope, $translate) {
     $scope.tabs = [];
     $translate("MISSIONS").then(function (label) {
-        $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/flag2.svg", "page": "missions.html", "active": true});
+        $scope.tabs.push({
+            "label": label,
+            "icon": "img/icons/white/svg/flag2.svg",
+            "page": "missions.html",
+            "active": true
+        });
     });
     $translate("INVITE").then(function (label) {
         $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/plus.svg", "page": "invite.html"});
@@ -236,17 +242,23 @@ module.controller('TabsController', function ($scope, $translate) {
     });
 });
 
+var user;
 module.controller('AccountController', function ($scope, $http) {
-    if (typeof $scope.user === "undefined") {
+
+    if (!user) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
         $http({
             method: 'GET',
             url: apiUrl + '/users/byJWT'
         }).success(function (data) {
+            user = data.message.user;
             $scope.user = data.message.user;
         }).error(function (error) {
             console.log(error);
         });
+    }
+    else{
+        $scope.user = user;
     }
 });
 
@@ -270,38 +282,38 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         var deviceUUID = "test";
 
         $http.post(
-                apiUrl + '/observations/store',
-                {
-                    "device_uuid": deviceUUID,
-                    "mission_id": $scope.mission.id,
+            apiUrl + '/observations/store',
+            {
+                "device_uuid": deviceUUID,
+                "mission_id": $scope.mission.id,
+                "latitude": marker.position.lat(),
+                "longitude": marker.position.lng(),
+                "observation_date": now,
+                "measurements": [{
                     "latitude": marker.position.lat(),
                     "longitude": marker.position.lng(),
-                    "observation_date": now,
-                    "measurements": [{
-                            "latitude": marker.position.lat(),
-                            "longitude": marker.position.lng(),
-                            "observation_date": now
-                        }]
-                }, null)
-                .then(
-                        function (data) {
-                            loading.hide();
-                            $scope.translationData = {
-                                value: data.data.message.points
-                            };
-                            success.show();
-                            setTimeout(function () {
-                                success.hide();
-                            }, 2000);
-                        },
-                        function (error) {
-                            loading.hide();
-                            fail.show();
-                            setTimeout(function () {
-                                fail.hide();
-                            }, 2000);
-                        }
-                );
+                    "observation_date": now
+                }]
+            }, null)
+            .then(
+            function (data) {
+                loading.hide();
+                $scope.translationData = {
+                    value: data.data.message.points
+                };
+                success.show();
+                setTimeout(function () {
+                    success.hide();
+                }, 2000);
+            },
+            function (error) {
+                loading.hide();
+                fail.show();
+                setTimeout(function () {
+                    fail.hide();
+                }, 2000);
+            }
+        );
     };
 });
 
@@ -346,25 +358,25 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         data.longitude = data.measurements[data.measurements.length - 1].longitude;
         data.observation_date = data.measurements[data.measurements.length - 1].observation_date;
         $http.post(apiUrl + '/observations/store', data, null)
-                .then(
-                        function (data) {
-                            loading.hide();
-                            $scope.translationData = {
-                                value: data.data.message.points
-                            };
-                            success.show();
-                            setTimeout(function () {
-                                success.hide();
-                            }, 2000);
-                        },
-                        function (error) {
-                            loading.hide();
-                            fail.show();
-                            setTimeout(function () {
-                                fail.hide();
-                            }, 2000);
-                        }
-                );
+            .then(
+            function (data) {
+                loading.hide();
+                $scope.translationData = {
+                    value: data.data.message.points
+                };
+                success.show();
+                setTimeout(function () {
+                    success.hide();
+                }, 2000);
+            },
+            function (error) {
+                loading.hide();
+                fail.show();
+                setTimeout(function () {
+                    fail.hide();
+                }, 2000);
+            }
+        );
     };
 });
 
