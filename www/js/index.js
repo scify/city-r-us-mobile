@@ -23,10 +23,13 @@ var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-servi
 
 
 module.config(function ($translateProvider) {
-    $translateProvider.translations('en', {
+    $translateProvider.translations('en-US', {
+        //tabs
         "MISSIONS": "Missions",
         "INVITE": "Invite",
         "ACCOUNT": "Account",
+
+        //missions
         "TAG_LOCATION": "Tag Location",
         "TAG_ROUTE": "Tag Route",
         "CONFIRM": "Send",
@@ -38,14 +41,44 @@ module.config(function ($translateProvider) {
         "RECORDING": "Recording route...",
         "START": "Start",
         "CHANGE": "Change",
+
+        //login, register, reset pass
         "REGISTER": "Create an account",
         "LOGIN": "Login",
-        "RESET_PASSWORD": "Forgot your password?"
+        "RESET_PASSWORD": "Forgot your password?",
+        "ALREADY_HAVE_ACCOUNT": "I already have an account",
+        "NAME": "name",
+        "PASSWORD": "password",
+
+        //etc translations
+        "PLEASE_WAIT": "Please wait...",
+        "CONTRIBUTORS": "contributors",
+        "POSTED_IN": "Posted in",
+        "CHANGE_PASSWORD": "Change password",
+        "TOTAL_SCORE": "Total score",
+        "TYPE_NEW_PASSWORD": "Type new password",
+        "CONFIRM_NEW_PASSWORD": "Confirm new password",
+
+        "ABOUT": "About",
+        "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "PRIVACY": "Privacy",
+        "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+
+        "HAVING_FUN": "Having fun?",
+        "INVITE_FRIENDS": "Invite your friends...",
+        "EMAIL_NOT_VALID": "Enter a valid email address",
+        "MESSAGE": "Message",
+        "EDIT_MSG_BELOW": "Click to edit the message below",
+        "INVITE_MSG_PLACEHOLDER": "I\'d like to invite you to the City-R-US app.",
+        "INVITE_EMAIL_PLACEHOLDER": "Type your friend's email"
     });
-    $translateProvider.translations('el', {
+    $translateProvider.translations('el-GR', {
+        //tabs
         "MISSIONS": "Αποστολές",
         "INVITE": "Προσκάλεσε",
         "ACCOUNT": "Λογαριασμός",
+
+        //missions
         "TAG_LOCATION": "Σήμανση Σημείου",
         "TAG_ROUTE": "Σήμανση Διαδρομής",
         "CONFIRM": "Αποστολή",
@@ -56,13 +89,41 @@ module.config(function ($translateProvider) {
         "FAIL": "Αποτυχία σύνδεσης, παρακαλλώ προσπαθήστε ξανά",
         "RECORDING": "Καταγραφή διαδρομής...",
         "START": "Έναρξη",
-        "RESET": "Αλλαγή",
+        "CHANGE": "Αλλαγή",
+
+        //login, register, reset pass
         "REGISTER": "Δημιουργία λογαριασμού",
         "LOGIN": "Σύνδεση",
-        "RESET_PASSWORD": "Ξεχάσατε τον κωδικό σας;"
+        "RESET_PASSWORD": "Ξεχάσατε τον κωδικό σας;",
+        "ALREADY_HAVE_ACCOUNT": "Έχω ήδη λογαριασμό",
+        "NAME": "όνομα",
+        "PASSWORD": "κωδικός",
+
+        //etc translations
+        "PLEASE_WAIT": "Παρακαλώ περιμένετε...",
+        "CONTRIBUTORS": "συμμετέχοντες",
+        "POSTED_IN": "Δημιουργήθηκε στις",
+        "CHANGE_PASSWORD": "Αλλαγή κωδικού",
+        "TOTAL_SCORE": "Συνολική βαθμολογία",
+        "TYPE_NEW_PASSWORD": "Πληκτρολογήστε νέο κωδικό",
+        "CONFIRM_NEW_PASSWORD": "Επιβεβαίωση νέου κωδικού",
+
+        "ABOUT": "Σχετικά με την εφαρμογή",
+        "ABOUT_TXT": "Το City-R-US ειναι μια εφαρμογή που επιτρέπει στους κατοίκους της Αθήνας να συμμετέχουν σε αποστολές. Επίλεξε την αποστολή που σε ενδιαφέρει και βοήθησε τη πόλη σου! Τα δεδομένα των αποστολών συλλέγονται σε δημόσιο χάρτη.",
+        "PRIVACY": "Privacy",
+        "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+
+        "HAVING_FUN": "Διασκεδάζετε;",
+        "INVITE_FRIENDS": "Προσκαλέστε τους φίλους σας...",
+        "EMAIL_NOT_VALID": "Το email δεν είναι έγκυρο",
+        "MESSAGE": "Μήνυμα",
+        "EDIT_MSG_BELOW": "Γράψτε το μήνυμά σας",
+        "INVITE_MSG_PLACEHOLDER": "Θα ήθελα να σε προσκαλέσω στην εφαρμογή City-R-US.",
+        "INVITE_EMAIL_PLACEHOLDER": "Email φίλου"
     });
-    $translateProvider.preferredLanguage("en");
-    $translateProvider.fallbackLanguage("en");
+
+    $translateProvider.preferredLanguage("el-GR");
+    $translateProvider.fallbackLanguage("el-GR");
     $translateProvider.useSanitizeValueStrategy("escape");
 });
 
@@ -145,12 +206,12 @@ module.controller('AppController', function ($scope, $http) {
         }
     };
     $scope.callMissions = function () {
-       // loading.show();
+        // loading.show();
         $http({
             method: 'GET',
             url: apiUrl + '/missions'
         }).success(function (data) {
-          //  loading.hide();
+            //  loading.hide();
             missions = data.message.missions;
 
             //formatting date
@@ -226,7 +287,6 @@ module.controller('AppController', function ($scope, $http) {
 });
 
 
-
 module.controller('MissionsController', function ($scope) {
     if (typeof $scope.missions === "undefined") {
         $scope.callMissions();
@@ -277,7 +337,7 @@ module.controller('AccountController', function ($scope, $http) {
             console.log(error);
         });
     }
-    else{
+    else {
         $scope.user = user;
     }
 });

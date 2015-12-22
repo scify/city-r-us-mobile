@@ -1,17 +1,17 @@
 <ons-page id="invite" modifier="invite" ng-controller="InviteController">
     <div class="header gradient">
-        <p class="title1">Having fun?</p>
-        <p class="title2">Invite your friends...</p>
+        <p class="title1">{{"HAVING_FUN"| translate}}</p>
+        <p class="title2">{{"INVITE_FRIENDS"| translate}}</p>
     </div>
     <div class="content">
         <div class="message">
-            <h2>Message</h2>
-            <div class="textAreaDescr">Click to edit the message below:</div>
-            <textarea class="textarea" rows="5" placeholder="invitation message" ng-model="data" ng-init="data = 'I\'d like to invite you to the CityRus app.'"></textarea>
+            <h2>{{"MESSAGE"| translate}}</h2>
+            <div class="textAreaDescr">{{"EDIT_MSG_BELOW"| translate}}:</div>
+            <textarea class="textarea" rows="5" ng-model="data" placeholder="{{'INVITE_MSG_PLACEHOLDER'| translate}}"></textarea>
         </div>
         <div class="message">
             <h2>Email</h2>
-            <input type="text" class="text-input text-input--underbar" ng-model="email" placeholder="Type your frend's email" value="" name="input" required>
+            <input type="text" class="text-input text-input--underbar" ng-model="email" placeholder="{{'INVITE_EMAIL_PLACEHOLDER'| translate}}" value="" name="input" required>
             <div id="email">
                 <ons-icon id="icon"
                           icon="ion-information-circled"
@@ -19,7 +19,7 @@
                           fixed-width="false"
                           style="color: red">
                 </ons-icon>
-                <p id="p" style="font-size: 0.8em"> Enter a valid email address. </p>
+                <p id="p" style="font-size: 0.8em"> {{"EMAIL_NOT_VALID"| translate} </p>
             </div>
         </div>
         <ons-button modifier="material" class="cruButton" ng-click="Invite(email)">

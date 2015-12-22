@@ -5,10 +5,10 @@
         </div>
     </ons-toolbar>
     <div class="missionContainer">
-        <p class="contributors">12 contributors</p>
+        <p class="contributors">12 {{"CONTRIBUTORS"| translate}}</p>
         <p class="name">{{ mission.name}}</p>
         <p class="description">{{ mission.description}}</p>
-        <p class="created">Posted in {{mission.created| date:'dd-MM-yyyy'}}</p>
+        <p class="created">{{"POSTED_IN"| translate}} {{mission.created| date:'dd-MM-yyyy'}}</p>
     </div>
     <ons-button modifier="material" class="cruButton" ng-click="startMission(mission.type.id)">
         <ons-ripple></ons-ripple>

@@ -669,7 +669,7 @@ div.tab-bar ons-tab.active {
 
 #invite .cruButton, #account .cruButton {
     margin-top: 1em;
-    width: 40%;
+    width: 42%;
     margin-left: 60%;
 }
 
@@ -685,7 +685,7 @@ div.tab-bar ons-tab.active {
     float:left;
 }
 
-#invite input::-webkit-input-placeholder, #account input::-webkit-input-placeholder{
+#invite input::-webkit-input-placeholder, #invite textarea::-webkit-input-placeholder, #account input::-webkit-input-placeholder{
     color: #999999;
     text-align: left;
     font-size: 0.9em;

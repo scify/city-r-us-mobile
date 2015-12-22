@@ -2,8 +2,8 @@
     <ons-list>
         <ons-list-item class="mission" ng-repeat='mission in missions' ng-click="showMission($index)">
             <p class="name">{{mission.name}}</p>
-            <p class="created">Posted in {{mission.created | date:'dd-MM-yyyy'}}</p>
-            <p class="contributors">12 contributors</p>
+            <p class="created">{{"POSTED_IN"| translate}} {{mission.created | date:'dd-MM-yyyy'}}</p>
+            <p class="contributors">12 {{"CONTRIBUTORS"| translate}}</p>
         </ons-list-item>
     </ons-list>
 

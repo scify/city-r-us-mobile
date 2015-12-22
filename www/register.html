@@ -2,30 +2,30 @@
     <ons-modal var="modal">
         <ons-icon icon="ion-load-c" spin="true"></ons-icon>
         <br>
-        <br> Please wait...
+        <br> {{"PLEASE_WAIT"| translate}
         <br>
     </ons-modal>
     <div class="logo">
         <img class="loginImage" src="img/CityRUS_logo.png">
-        <h1>cityRus</h1>
+        <h1>City-R-US</h1>
     </div>
     <form name="registerForm" id="registerForm">
-        <input type="text" class="inputText" ng-model="username_r" placeholder="name">
+        <input type="text" class="inputText" ng-model="username_r" placeholder="{{'NAME'| translate}}">
         <input type="text" class="inputText" ng-model="email" placeholder="email">
-        <input type="password" class="inputText" ng-model="password_r" placeholder="password">
+        <input type="password" class="inputText" ng-model="password_r" placeholder="{{'PASSWORD'| translate}}">
         <div id="email">
-            <ons-icon icon="ion-information-circled"> Enter a valid email address</ons-icon>
+            <ons-icon icon="ion-information-circled"> {{"EMAIL_NOT_VALID"| translate}</ons-icon>
         </div>
         <section class="loginButtonContainer">
             <ons-button modifier="large" class="cruButton"
                         ng-click="register(username_r, email, password_r)">
-                Register
+                {{"REGISTER"| translate}}
             </ons-button>
         </section>
     </form>
     <section class="centerRegister" align="center">
         <ons-button modifier="quiet" ng-click="myNavigator.pushPage('login.html', {animation: 'fade'})">
-            <h2>I already have an account</h2>
+            <h2>{{"ALREADY_HAVE_ACCOUNT"| translate}}</h2>
         </ons-button>
     </section>
 </ons-page>

@@ -1,20 +1,20 @@
 <ons-page id="loginPage" class="gradientPage">
     <div class="logo">
         <img class="loginImage" src="img/CityRUS_logo.png">
-        <h1>cityRus</h1>
+        <h1>City-R-US</h1>
     </div>
     <div align="center">
         <ons-modal var="modal">
             <ons-icon icon="ion-load-c" spin="true"></ons-icon>
             <br>
-            <br> Please wait...
+            <br> {{'PLEASE_WAIT'| translate}
             <br>
         </ons-modal>
         <form name="myForm" id="loginForm">
             <input type="text" class="inputText" name="user" ng-model="username_v"
                    placeholder="email" required>
             <input type="password" class="inputText" name="pass" ng-model="password_v"
-                   placeholder="password" required>
+                   placeholder="{{'PASSWORD'| translate}}" required>
             <section class="loginButtonContainer">
                 <ons-button modifier="large" class="cruButton"
                             ng-click="logIn(username_v, password_v)">
