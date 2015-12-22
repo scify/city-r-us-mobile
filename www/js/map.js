@@ -24,36 +24,33 @@ function Map() {
     this.initialize = function (lat, lon) {
         this.map = this.show(lat, lon);
         this.addMarkerToMap(lat, lon);
-    };
+    }
 
     this.show = function (lat, lon) {
         return new google.maps.Map(
-                document.getElementById("map-container"),
-                {
-                    zoom: 18,
-                    center: new google.maps.LatLng(lat, lon),
-                    disableDefaultUI: true,
-                    zoomControl: true,
-                    mapTypeControl: false,
-                    scaleControl: false,
-                    streetViewControl: false,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                });
+            document.getElementById("map-container"),
+            {
+                zoom: 18,
+                center: new google.maps.LatLng(lat, lon),
+                disableDefaultUI: true,
+                zoomControl: true,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
     };
 
-    this.addMarkerToMap = function (time, lat, lon, center) {
+    this.addMarkerToMap = function (lat, lon) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
             draggable: true,
             animation: google.maps.Animation.DROP,
             map: this.map
         });
-        this.markers.push({marker: marker, time: time});
-        if (center) {
-            this.map.setCenter(marker.getPosition());
-        }
+        this.markers.push(marker);
     };
-    
+
     this.getMarkers = function() {
         return this.markers;
     };

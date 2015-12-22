@@ -60,7 +60,7 @@ module.config(function ($translateProvider) {
         "CONFIRM_NEW_PASSWORD": "Confirm new password",
 
         "ABOUT": "About",
-        "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        "ABOUT_TXT": "City-R-US is an application that allows the citizens of Athens to participate in missions. Choose the mission you are interested in and help your town! The missions data are collected in a public map.",
         "PRIVACY": "Privacy",
         "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
 
@@ -205,6 +205,46 @@ module.controller('AppController', function ($scope, $http) {
             });
         }
     };
+    $scope.resetPassword = function (email) {
+        if (!isEmpty(email)) {
+            $http({
+                method: 'POST',
+                url: apiUrl + '/users/resetPassword',
+                params: {'email': email}
+            }).success(function (data) {
+                if (data.status == 'success')
+                    ons.notification.alert({
+                        message: 'Έχει αποσταλεί προσωρινός κωδικός πρόσβασης στο email που δηλώσατε.',
+                        title: 'Προσωρινός κωδικός',
+                        buttonLabel: 'OK',
+                        animation: 'default',
+                        callback: function () {
+                        }
+                    });
+                else
+                    ons.notification.alert({
+                        message: 'Δεν υπάρχει χρήστης με το email που δηλώσατε.',
+                        title: 'Λανθασμένο email',
+                        buttonLabel: 'OK',
+                        animation: 'default',
+                        callback: function () {
+                        }
+                    });
+            }).error(function (error) {
+                console.log(error);
+            });
+        }
+        else {
+            ons.notification.alert({
+                message: 'Συμπληρώστε το πεδίο email',
+                title: 'Email κενό',
+                buttonLabel: 'OK',
+                animation: 'default',
+                callback: function () {
+                }
+            });
+        }
+    };
     $scope.callMissions = function () {
         // loading.show();
         $http({
@@ -321,35 +361,29 @@ module.controller('TabsController', function ($scope, $translate) {
 });
 
 
-var user;
 module.controller('AccountController', function ($scope, $http) {
-
-    if (!user) {
-        $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-        $http({
-            method: 'GET',
-            url: apiUrl + '/users/byJWT'
-        }).success(function (data) {
-            user = data.message.user;
-            $scope.user = data.message.user;
-            console.log(user);
-        }).error(function (error) {
-            console.log(error);
-        });
-    }
-    else {
-        $scope.user = user;
-    }
+    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+    $http({
+        method: 'GET',
+        url: apiUrl + '/users/byJWT'
+    }).success(function (data) {
+        user = data.message.user;
+        $scope.user = data.message.user;
+        console.log(user);
+    }).error(function (error) {
+        console.log(error);
+    });
 });
+
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
     var options = {enableHighAccuracy: true};
-    navigator.geolocation.getCurrentPosition(function (position) {
-        $scope.position = position;
-        $scope.map = new Map();
-        $scope.map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
-        console.log($scope.position.coords.latitude);
+    var map = new Map();
+    var position;
+    navigator.geolocation.getCurrentPosition(function (pos) {
+        position = pos;
+        map.initialize(position.coords.latitude, position.coords.longitude);
     }, null, options);
 
     $scope.tagLocation = function () {
@@ -358,21 +392,22 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
     $scope.sendLocation = function () {
         loading.show();
-        var marker = $scope.map.getMarkers()[0].marker;
+        var marker = map.getMarkers()[0];
         var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
         var deviceUUID = "test";
+
 
         $http.post(
             apiUrl + '/observations/store',
             {
                 "device_uuid": deviceUUID,
                 "mission_id": $scope.mission.id,
-                "latitude": marker.position.lat(),
-                "longitude": marker.position.lng(),
+                "latitude": marker.getPosition().lat(),
+                "longitude": marker.getPosition().lng(),
                 "observation_date": now,
                 "measurements": [{
-                    "latitude": marker.position.lat(),
-                    "longitude": marker.position.lng(),
+                    "latitude": marker.getPosition().lat(),
+                    "longitude": marker.getPosition().lng(),
                     "observation_date": now
                 }]
             }, null)
@@ -398,6 +433,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
     };
 });
 
+/*
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
     $translate("RECORDING").then(function (label) {
         $scope.currentMessage = label;
@@ -430,8 +466,8 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         };
         markers.forEach(function (entry) {
             data.measurements.push({
-                latitude: entry.marker.position.lat(),
-                longitude: entry.marker.position.lng(),
+                latitude: entry.marker.getPosition.lat(),
+                longitude: entry.marker.getPosition.lng(),
                 observation_date: $filter('date')(new Date(entry.time), "yyyy-MM-dd hh:mm:ss")
             });
         });
@@ -460,6 +496,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         );
     };
 });
+*/
 
 module.controller('InviteController', function ($scope, $translate) {
 });
