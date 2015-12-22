@@ -82,11 +82,11 @@ module.config(function ($translateProvider) {
         "TAG_LOCATION": "Σήμανση Σημείου",
         "TAG_ROUTE": "Σήμανση Διαδρομής",
         "CONFIRM": "Αποστολή",
-        "SUBMIT_POINT_TEXT": "Καταχώρησε το σημείο που κατέγραψες για να συνησφέρεις στην αποστολή.",
-        "SUBMIT_ROUTE_TEXT": "Καταχώρησε τη διαδρομή την οποία κατέγραψες για να συνησφέρεις στην αποστολή.",
+        "SUBMIT_POINT_TEXT": "Καταχωρήστε το σημείο που καταγράψατε για να συνεισφέρετε στην αποστολή.",
+        "SUBMIT_ROUTE_TEXT": "Καταχωρήστε τη διαδρομή που καταγράψατε για να συνεισφέρετε στην αποστολή.",
         "SENDING": "Αποστολή δεδομένων",
-        "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίθηκαν {{value}} βαθμοί.",
-        "FAIL": "Αποτυχία σύνδεσης, παρακαλλώ προσπαθήστε ξανά",
+        "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίσατε {{value}} βαθμούς.",
+        "FAIL": "Αποτυχία σύνδεσης, παρακαλώ προσπαθήστε ξανά",
         "RECORDING": "Καταγραφή διαδρομής...",
         "START": "Έναρξη",
         "CHANGE": "Αλλαγή",
@@ -109,7 +109,7 @@ module.config(function ($translateProvider) {
         "CONFIRM_NEW_PASSWORD": "Επιβεβαίωση νέου κωδικού",
 
         "ABOUT": "Σχετικά με την εφαρμογή",
-        "ABOUT_TXT": "Το City-R-US ειναι μια εφαρμογή που επιτρέπει στους κατοίκους της Αθήνας να συμμετέχουν σε αποστολές. Επίλεξε την αποστολή που σε ενδιαφέρει και βοήθησε τη πόλη σου! Τα δεδομένα των αποστολών συλλέγονται σε δημόσιο χάρτη.",
+        "ABOUT_TXT": "Το City-R-US ειναι μια εφαρμογή που επιτρέπει στους κατοίκους της Αθήνας να συμμετέχουν σε αποστολές. Επιλέξτε την αποστολή που σας ενδιαφέρει και βοηθήστε τη πόλη σας! Τα δεδομένα των αποστολών συλλέγονται σε δημόσιο χάρτη.",
         "PRIVACY": "Privacy",
         "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
 
@@ -283,6 +283,16 @@ module.controller('AppController', function ($scope, $http) {
         }
     };
     $scope.invite = function (email) {
+        ons.notification.alert({
+            message: 'Λειτουργία υπό ανάπτυξη',
+            title: 'Λειτουργία υπό ανάπτυξη',
+            buttonLabel: 'OK',
+            animation: 'default',
+            callback: function () {
+            }
+        });
+        /*
+
         var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         if (checkConnection()) {
             if (email) {
@@ -322,7 +332,7 @@ module.controller('AppController', function ($scope, $http) {
                 callback: function () {
                 }
             });
-        }
+        }*/
     };
 });
 

@@ -1,4 +1,4 @@
-<ons-page id="invite" modifier="invite" ng-controller="InviteController">
+<ons-page id="invite" modifier="invite">
     <div class="header gradient">
         <p class="title1">{{"HAVING_FUN"| translate}}</p>
         <p class="title2">{{"INVITE_FRIENDS"| translate}}</p>
@@ -22,7 +22,7 @@
                 <p id="p" style="font-size: 0.8em"> {{"EMAIL_NOT_VALID"| translate} </p>
             </div>
         </div>
-        <ons-button modifier="material" class="cruButton" ng-click="Invite(email)">
+        <ons-button modifier="material" class="cruButton" ng-click="invite(email)">
             <ons-ripple></ons-ripple>
             {{"INVITE"| translate}}
         </ons-button>
