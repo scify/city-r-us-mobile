@@ -1,4 +1,4 @@
-<ons-page id="missions" ng-controller="MissionsController">
+<ons-page id="missions" class="gradientPage" ng-controller="MissionsController">
     <ons-list>
         <ons-list-item class="mission" ng-repeat='mission in missions' ng-click="showMission($index)">
             <p class="name">{{mission.name}}</p>
@@ -6,4 +6,10 @@
             <p class="contributors">12 contributors</p>
         </ons-list-item>
     </ons-list>
+
+    <ons-modal var="loading">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+    </ons-modal>
+
 </ons-page>
+

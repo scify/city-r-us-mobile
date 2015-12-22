@@ -119,12 +119,16 @@ body {
 }
 
 .page__background {
-    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
+    background-color: #fff;
 }
 
 .blink {
     animation: fade 3000ms infinite;
     -webkit-animation: fade 3000ms infinite;
+}
+
+.splashScreen{
+    height: 100%;
 }
 
 #splashImage {
@@ -190,6 +194,13 @@ h7 {
     font-size: 0.7em;
     text-align: center;
     font-style: normal;
+}
+
+.gradient, .gradientPage .page__background{
+    background: #2e5a85;
+    background: -moz-linear-gradient(-45deg, #62d7c0 0%, #2e5a85 100%);
+    background: -webkit-linear-gradient(-45deg, #62d7c0 0%,#2e5a85 100%);
+    background: linear-gradient(135deg, #62d7c0 0%,#2e5a85 100%);
 }
 
 /* LOGIN - REGISTER */
@@ -333,7 +344,7 @@ h7 {
 }
 
 #missions .name {
-    font-size: 2em;
+    font-size: 1.5em;
     height: 4em;
     overflow: hidden;
     color: #41454C;
@@ -350,7 +361,7 @@ h7 {
 
 #missions .contributors {
     font-size: 0.9em;
-    color: #B2C5D0;
+    color: #999999;
     text-align: right;
 }
 
@@ -370,28 +381,24 @@ h7 {
 
 #mission .missionContainer .contributors {
     color: #59CAB5;
-    padding-bottom: 0.5em;
+    margin: 5% 0;
 }
 
 #mission .missionContainer .name {
-    font-size: 3.6em;
-    height: 3em;
-    overflow: hidden;
+    font-size: 2.5em;
     color: #41454C;
     margin-bottom: 0.6em;
+    font-family: Roboto;
 }
 
 #mission .missionContainer .description {
     font-size: 1.1em;
-    height: 4em;
-    overflow: hidden;
     color: #41454C;
-    min-height: 6em;
-    max-height: 8em;
+    line-height: 120%;
 }
 
 #mission .missionContainer .created {
-    color: #B2C5D0;
+    color: #999999;
     font-style: italic;
     margin: 1em 0;
 }
@@ -587,7 +594,7 @@ div.tab-bar ons-tab.active {
     margin-top: 2em;
 }
 
-#account .content .message * {
+#account .content .message > * {
     color: #41454C;
 }
 
@@ -631,7 +638,7 @@ div.tab-bar ons-tab.active {
     color: #41454C;
 }
 
-#invite .content h2 {
+#invite .content h2, #account .content h2 {
     font-weight: bold;
     margin-bottom: 0.7em;
 }
@@ -652,20 +659,21 @@ div.tab-bar ons-tab.active {
     box-sizing: border-box;
 }
 
-#invite .content .text-input--underbar {
+#invite .content .text-input--underbar, #account .content .text-input--underbar {
     padding: 0 8% 0 0;
     width: 100%;
     margin-top: -0.4em;
     border-color: #41454C;
+    margin-bottom: 5%;
 }
 
-#invite .cruButton {
+#invite .cruButton, #account .cruButton {
     margin-top: 1em;
     width: 40%;
     margin-left: 60%;
 }
 
-#invite .cruButton span span {
+#invite .cruButton span span, #account .cruButton span span {
     font-size: 1.4em;
     line-height: 1.6em;
 }
@@ -675,4 +683,11 @@ div.tab-bar ons-tab.active {
     color: red;
     text-decoration: underline;
     float:left;
+}
+
+#invite input::-webkit-input-placeholder, #account input::-webkit-input-placeholder{
+    color: #999999;
+    text-align: left;
+    font-size: 0.9em;
+    font-style: italic;
 }

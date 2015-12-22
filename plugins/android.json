@@ -17,11 +17,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "xml": "<feature name=\"BackgroundGeoLocation\"><param name=\"android-package\" value=\"com.tenforwardconsulting.cordova.bgloc.BackgroundGeolocationPlugin\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
                             "count": 1
                         },
                         {
@@ -46,6 +46,46 @@
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
                             "count": 1
                         }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<meta-data android:name=\"com.google.android.gms.version\" android:value=\"@integer/google_play_services_version\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"com.tenforwardconsulting.cordova.bgloc.DistanceFilterLocationService\" android:process=\":remote\" android:stopWithTask=\"false\"></service>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<service android:enabled=\"true\" android:exported=\"false\" android:name=\"com.tenforwardconsulting.cordova.bgloc.FusedLocationService\" android:process=\":remote\" android:stopWithTask=\"false\"></service>",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_LOCATION_EXTRA_COMMANDS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -59,6 +99,9 @@
             "PACKAGE_NAME": "gr.scify.cityrus"
         },
         "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
+        },
+        "cordova-plugin-mauron85-background-geolocation": {
             "PACKAGE_NAME": "gr.scify.cityrus"
         },
         "cordova-plugin-network-information": {

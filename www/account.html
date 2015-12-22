@@ -1,9 +1,18 @@
 <ons-page id="account" modifier="about" ng-controller="AccountController">
-    <div class="header">
+    <div class="header gradient">
         <p class="name">{{ user.name}}</p>
         <p class="score">Total score: <span class="scoreNumber">{{ user.totalPoints}}</span></p>
     </div>
     <div class="content">
+        <div class="message">
+            <h2>Change password</h2>
+            <input type="text" class="text-input text-input--underbar" placeholder="Type your new password" value="" name="password" required>
+            <input type="text" class="text-input text-input--underbar" placeholder="Confirm your new password" value="" name="password_confirmation" required>
+            <ons-button modifier="material" class="cruButton" ng-click="Invite(email)">
+                <ons-ripple></ons-ripple>
+                {{"CHANGE"| translate}}
+            </ons-button>
+        </div>
         <div class="message">
             <h1>About</h1>
             <p>Lorem Ipsum is simply dummy text of the

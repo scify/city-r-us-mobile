@@ -18,8 +18,8 @@
  */
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
-//var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
-var apiUrl = 'http://city-r-us-service/api/v1';
+var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+//var apiUrl = 'http://192.168.1.15/city-r-us-service/public//api/v1';
 
 
 module.config(function ($translateProvider) {
@@ -27,7 +27,8 @@ module.config(function ($translateProvider) {
         "MISSIONS": "Missions",
         "INVITE": "Invite",
         "ACCOUNT": "Account",
-        "TAG LOCATION": "Tag Location",
+        "TAG_LOCATION": "Tag Location",
+        "TAG_ROUTE": "Tag Route",
         "CONFIRM": "Send",
         "SUBMIT_POINT_TEXT": "Click to send the point you recorded and contribute to this mission.",
         "SUBMIT_ROUTE_TEXT": "Click to send the route you recorded and contribute to this mission.",
@@ -35,13 +36,18 @@ module.config(function ($translateProvider) {
         "SUCCESS": "Thank you for contributing! You received {{value}} points.",
         "FAIL": "Something went wrong, please try again",
         "RECORDING": "Recording route...",
-        "START": "Start"
+        "START": "Start",
+        "CHANGE": "Change",
+        "REGISTER": "Create an account",
+        "LOGIN": "Login",
+        "RESET_PASSWORD": "Forgot your password?"
     });
     $translateProvider.translations('el', {
         "MISSIONS": "Αποστολές",
         "INVITE": "Προσκάλεσε",
         "ACCOUNT": "Λογαριασμός",
-        "TAG LOCATION": "Σήμανση Σημείου",
+        "TAG_LOCATION": "Σήμανση Σημείου",
+        "TAG_ROUTE": "Σήμανση Διαδρομής",
         "CONFIRM": "Αποστολή",
         "SUBMIT_POINT_TEXT": "Καταχώρησε το σημείο που κατέγραψες για να συνησφέρεις στην αποστολή.",
         "SUBMIT_ROUTE_TEXT": "Καταχώρησε τη διαδρομή την οποία κατέγραψες για να συνησφέρεις στην αποστολή.",
@@ -49,7 +55,11 @@ module.config(function ($translateProvider) {
         "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίθηκαν {{value}} βαθμοί.",
         "FAIL": "Αποτυχία σύνδεσης, παρακαλλώ προσπαθήστε ξανά",
         "RECORDING": "Καταγραφή διαδρομής...",
-        "START": "Έναρξη"
+        "START": "Έναρξη",
+        "RESET": "Αλλαγή",
+        "REGISTER": "Δημιουργία λογαριασμού",
+        "LOGIN": "Σύνδεση",
+        "RESET_PASSWORD": "Ξεχάσατε τον κωδικό σας;"
     });
     $translateProvider.preferredLanguage("en");
     $translateProvider.fallbackLanguage("en");
@@ -135,10 +145,12 @@ module.controller('AppController', function ($scope, $http) {
         }
     };
     $scope.callMissions = function () {
+       // loading.show();
         $http({
             method: 'GET',
             url: apiUrl + '/missions'
         }).success(function (data) {
+          //  loading.hide();
             missions = data.message.missions;
 
             //formatting date
@@ -148,6 +160,7 @@ module.controller('AppController', function ($scope, $http) {
 
             $scope.missions = data.message.missions;
         }).error(function (error) {
+            loading.hide();
             alert("error");
             console.log(error);
         });
@@ -156,7 +169,6 @@ module.controller('AppController', function ($scope, $http) {
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
     };
-
     $scope.startMission = function (missionType) {
         switch (missionType) {
             case "1":
@@ -169,7 +181,6 @@ module.controller('AppController', function ($scope, $http) {
                 break;
         }
     };
-
     $scope.invite = function (email) {
         var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         if (checkConnection()) {
@@ -214,14 +225,18 @@ module.controller('AppController', function ($scope, $http) {
     };
 });
 
+
+
 module.controller('MissionsController', function ($scope) {
     if (typeof $scope.missions === "undefined") {
         $scope.callMissions();
     }
 });
 
+
 module.controller('TabsController', function ($scope, $translate) {
     $scope.tabs = [];
+
     $translate("MISSIONS").then(function (label) {
         $scope.tabs.push({
             "label": label,
@@ -230,9 +245,11 @@ module.controller('TabsController', function ($scope, $translate) {
             "active": true
         });
     });
+
     $translate("INVITE").then(function (label) {
         $scope.tabs.push({"label": label, "icon": "img/icons/white/svg/plus.svg", "page": "invite.html"});
     });
+
     $translate("ACCOUNT").then(function (label) {
         $scope.tabs.push({
             "label": label,
@@ -240,7 +257,9 @@ module.controller('TabsController', function ($scope, $translate) {
             "page": "account.html"
         });
     });
+
 });
+
 
 var user;
 module.controller('AccountController', function ($scope, $http) {
@@ -253,6 +272,7 @@ module.controller('AccountController', function ($scope, $http) {
         }).success(function (data) {
             user = data.message.user;
             $scope.user = data.message.user;
+            console.log(user);
         }).error(function (error) {
             console.log(error);
         });
@@ -269,6 +289,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         $scope.position = position;
         $scope.map = new Map();
         $scope.map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
+        console.log($scope.position.coords.latitude);
     }, null, options);
 
     $scope.tagLocation = function () {
@@ -380,7 +401,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     };
 });
 
-module.controller('inviteController', function ($scope, $translate) {
+module.controller('InviteController', function ($scope, $translate) {
 });
 
 function validateLogin(username, password) {
