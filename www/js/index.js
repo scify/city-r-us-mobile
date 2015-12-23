@@ -23,109 +23,17 @@ var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-servi
 
 
 module.config(function ($translateProvider) {
-    $translateProvider.translations('en-US', {
-        //tabs
-        "MISSIONS": "Missions",
-        "INVITE": "Invite",
-        "ACCOUNT": "Account",
 
-        //missions
-        "TAG_LOCATION": "Tag Location",
-        "TAG_ROUTE": "Tag Route",
-        "CONFIRM": "Send",
-        "SUBMIT_POINT_TEXT": "Click to send the point you recorded and contribute to this mission.",
-        "SUBMIT_ROUTE_TEXT": "Click to send the route you recorded and contribute to this mission.",
-        "SENDING": "Sending",
-        "SUCCESS": "Thank you for contributing! You received {{value}} points.",
-        "FAIL": "Something went wrong, please try again",
-        "RECORDING": "Recording route...",
-        "START": "Start",
-        "CHANGE": "Change",
-
-        //login, register, reset pass
-        "REGISTER": "Create an account",
-        "LOGIN": "Login",
-        "RESET_PASSWORD": "Forgot your password?",
-        "ALREADY_HAVE_ACCOUNT": "I already have an account",
-        "NAME": "name",
-        "PASSWORD": "password",
-
-        //etc translations
-        "PLEASE_WAIT": "Please wait...",
-        "CONTRIBUTORS": "contributors",
-        "POSTED_IN": "Posted in",
-        "CHANGE_PASSWORD": "Change password",
-        "TOTAL_SCORE": "Total score",
-        "TYPE_NEW_PASSWORD": "Type new password",
-        "CONFIRM_NEW_PASSWORD": "Confirm new password",
-
-        "ABOUT": "About",
-        "ABOUT_TXT": "City-R-US is an application that allows the citizens of Athens to participate in missions. Choose the mission you are interested in and help your town! The missions data are collected in a public map.",
-        "PRIVACY": "Privacy",
-        "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-
-        "HAVING_FUN": "Having fun?",
-        "INVITE_FRIENDS": "Invite your friends...",
-        "EMAIL_NOT_VALID": "Enter a valid email address",
-        "MESSAGE": "Message",
-        "EDIT_MSG_BELOW": "Click to edit the message below",
-        "INVITE_MSG_PLACEHOLDER": "I\'d like to invite you to the City-R-US app.",
-        "INVITE_EMAIL_PLACEHOLDER": "Type your friend's email"
-    });
-    $translateProvider.translations('el-GR', {
-        //tabs
-        "MISSIONS": "Αποστολές",
-        "INVITE": "Προσκάλεσε",
-        "ACCOUNT": "Λογαριασμός",
-
-        //missions
-        "TAG_LOCATION": "Σήμανση Σημείου",
-        "TAG_ROUTE": "Σήμανση Διαδρομής",
-        "CONFIRM": "Αποστολή",
-        "SUBMIT_POINT_TEXT": "Καταχωρήστε το σημείο που καταγράψατε για να συνεισφέρετε στην αποστολή.",
-        "SUBMIT_ROUTE_TEXT": "Καταχωρήστε τη διαδρομή που καταγράψατε για να συνεισφέρετε στην αποστολή.",
-        "SENDING": "Αποστολή δεδομένων",
-        "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίσατε {{value}} βαθμούς.",
-        "FAIL": "Αποτυχία σύνδεσης, παρακαλώ προσπαθήστε ξανά",
-        "RECORDING": "Καταγραφή διαδρομής...",
-        "START": "Έναρξη",
-        "CHANGE": "Αλλαγή",
-
-        //login, register, reset pass
-        "REGISTER": "Δημιουργία λογαριασμού",
-        "LOGIN": "Σύνδεση",
-        "RESET_PASSWORD": "Ξεχάσατε τον κωδικό σας;",
-        "ALREADY_HAVE_ACCOUNT": "Έχω ήδη λογαριασμό",
-        "NAME": "όνομα",
-        "PASSWORD": "κωδικός",
-
-        //etc translations
-        "PLEASE_WAIT": "Παρακαλώ περιμένετε...",
-        "CONTRIBUTORS": "συμμετέχοντες",
-        "POSTED_IN": "Δημιουργήθηκε στις",
-        "CHANGE_PASSWORD": "Αλλαγή κωδικού",
-        "TOTAL_SCORE": "Συνολική βαθμολογία",
-        "TYPE_NEW_PASSWORD": "Πληκτρολογήστε νέο κωδικό",
-        "CONFIRM_NEW_PASSWORD": "Επιβεβαίωση νέου κωδικού",
-
-        "ABOUT": "Σχετικά με την εφαρμογή",
-        "ABOUT_TXT": "Το City-R-US ειναι μια εφαρμογή που επιτρέπει στους κατοίκους της Αθήνας να συμμετέχουν σε αποστολές. Επιλέξτε την αποστολή που σας ενδιαφέρει και βοηθήστε τη πόλη σας! Τα δεδομένα των αποστολών συλλέγονται σε δημόσιο χάρτη.",
-        "PRIVACY": "Privacy",
-        "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-
-        "HAVING_FUN": "Διασκεδάζετε;",
-        "INVITE_FRIENDS": "Προσκαλέστε τους φίλους σας...",
-        "EMAIL_NOT_VALID": "Το email δεν είναι έγκυρο",
-        "MESSAGE": "Μήνυμα",
-        "EDIT_MSG_BELOW": "Γράψτε το μήνυμά σας",
-        "INVITE_MSG_PLACEHOLDER": "Θα ήθελα να σε προσκαλέσω στην εφαρμογή City-R-US.",
-        "INVITE_EMAIL_PLACEHOLDER": "Email φίλου"
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'translations/',
+        suffix: '.json'
     });
 
-    $translateProvider.preferredLanguage("el-GR");
-    $translateProvider.fallbackLanguage("el-GR");
+    $translateProvider.preferredLanguage('el-GR');
+    $translateProvider.fallbackLanguage('el-GR');
     $translateProvider.useSanitizeValueStrategy("escape");
 });
+
 
 module.run(function ($translate) {
     document.addEventListener('deviceready', onDeviceReady, false);
@@ -138,11 +46,11 @@ module.run(function ($translate) {
     }
 
     function onDeviceReady() {
-        if (typeof navigator.globalization !== "undefined") {
+        /*if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function (language) {
-                $translate.use((language.value).split("-")[0]);
+                $translate.use(language.value);
             }, null);
-        }
+        }*/
 
         document.addEventListener("showkeyboard", function () {
             alert("Keyboard is ON");
@@ -159,7 +67,7 @@ module.run(function ($translate) {
     }
 });
 
-module.controller('AppController', function ($scope, $http) {
+module.controller('AppController', function ($scope, $http, $filter, $translate) {
     var missions;
 
     $scope.geoConfig = {
@@ -283,9 +191,10 @@ module.controller('AppController', function ($scope, $http) {
         }
     };
     $scope.invite = function (email) {
+        console.log($translate('LOGIN'));
         ons.notification.alert({
             message: 'Λειτουργία υπό ανάπτυξη',
-            title: 'Λειτουργία υπό ανάπτυξη',
+            title:  $filter('translate')('UNDER_CONSTRUCTION'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -345,6 +254,7 @@ module.controller('MissionsController', function ($scope) {
 
 
 module.controller('TabsController', function ($scope, $translate) {
+
     $scope.tabs = [];
 
     $translate("MISSIONS").then(function (label) {
@@ -371,7 +281,7 @@ module.controller('TabsController', function ($scope, $translate) {
 });
 
 
-module.controller('AccountController', function ($scope, $http) {
+module.controller('AccountController', function ($scope, $http, $translate) {
     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
     $http({
         method: 'GET',

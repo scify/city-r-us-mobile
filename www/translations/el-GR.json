@@ -1,0 +1,45 @@
+{
+    "MISSIONS": "Αποστολές",
+    "INVITE": "Προσκάλεσε",
+    "ACCOUNT": "Λογαριασμός",
+
+    "TAG_LOCATION": "Σήμανση Σημείου",
+    "TAG_ROUTE": "Σήμανση Διαδρομής",
+    "CONFIRM": "Αποστολή",
+    "SUBMIT_POINT_TEXT": "Καταχωρήστε το σημείο που καταγράψατε για να συνεισφέρετε στην αποστολή.",
+    "SUBMIT_ROUTE_TEXT": "Καταχωρήστε τη διαδρομή που καταγράψατε για να συνεισφέρετε στην αποστολή.",
+    "SENDING": "Αποστολή δεδομένων",
+    "SUCCESS": "Ευχαριστούμε για την συμμετοχή! Κερδίσατε {{value}} βαθμούς.",
+    "FAIL": "Αποτυχία σύνδεσης, παρακαλώ προσπαθήστε ξανά",
+    "RECORDING": "Καταγραφή διαδρομής...",
+    "START": "Έναρξη",
+    "CHANGE": "Αλλαγή",
+
+    "REGISTER": "Δημιουργία λογαριασμού",
+    "LOGIN": "Σύνδεση",
+    "RESET_PASSWORD": "Ξεχάσατε τον κωδικό σας;",
+    "ALREADY_HAVE_ACCOUNT": "Έχω ήδη λογαριασμό",
+    "NAME": "όνομα",
+    "PASSWORD": "κωδικός",
+
+    "PLEASE_WAIT": "Παρακαλώ περιμένετε...",
+    "CONTRIBUTORS": "συμμετέχοντες",
+    "POSTED_IN": "Δημιουργήθηκε στις",
+    "CHANGE_PASSWORD": "Αλλαγή κωδικού",
+    "TOTAL_SCORE": "Συνολική βαθμολογία",
+    "TYPE_NEW_PASSWORD": "Πληκτρολογήστε νέο κωδικό",
+    "CONFIRM_NEW_PASSWORD": "Επιβεβαίωση νέου κωδικού",
+
+    "ABOUT": "Σχετικά με την εφαρμογή",
+    "ABOUT_TXT": "Το City-R-US ειναι μια εφαρμογή που επιτρέπει στους κατοίκους της Αθήνας να συμμετέχουν σε αποστολές. Επιλέξτε την αποστολή που σας ενδιαφέρει και βοηθήστε τη πόλη σας! Τα δεδομένα των αποστολών συλλέγονται σε δημόσιο χάρτη.",
+    "PRIVACY": "Privacy",
+    "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+
+    "HAVING_FUN": "Διασκεδάζετε;",
+    "INVITE_FRIENDS": "Προσκαλέστε τους φίλους σας...",
+    "EMAIL_NOT_VALID": "Το email δεν είναι έγκυρο",
+    "MESSAGE": "Μήνυμα",
+    "EDIT_MSG_BELOW": "Γράψτε το μήνυμά σας",
+    "INVITE_MSG_PLACEHOLDER": "Θα ήθελα να σε προσκαλέσω στην εφαρμογή City-R-US.",
+    "INVITE_EMAIL_PLACEHOLDER": "Email φίλου"
+}

@@ -1,0 +1,45 @@
+{
+    "MISSIONS": "Missions",
+    "INVITE": "Invite",
+    "ACCOUNT": "Account",
+
+    "TAG_LOCATION": "Tag Location",
+    "TAG_ROUTE": "Tag Route",
+    "CONFIRM": "Send",
+    "SUBMIT_POINT_TEXT": "Click to send the point you recorded and contribute to this mission.",
+    "SUBMIT_ROUTE_TEXT": "Click to send the route you recorded and contribute to this mission.",
+    "SENDING": "Sending",
+    "SUCCESS": "Thank you for contributing! You received {{value}} points.",
+    "FAIL": "Something went wrong, please try again",
+    "RECORDING": "Recording route...",
+    "START": "Start",
+    "CHANGE": "Change",
+
+    "REGISTER": "Create an account",
+    "LOGIN": "Login",
+    "RESET_PASSWORD": "Forgot your password?",
+    "ALREADY_HAVE_ACCOUNT": "I already have an account",
+    "NAME": "name",
+    "PASSWORD": "password",
+
+    "PLEASE_WAIT": "Please wait...",
+    "CONTRIBUTORS": "contributors",
+    "POSTED_IN": "Posted in",
+    "CHANGE_PASSWORD": "Change password",
+    "TOTAL_SCORE": "Total score",
+    "TYPE_NEW_PASSWORD": "Type new password",
+    "CONFIRM_NEW_PASSWORD": "Confirm new password",
+
+    "ABOUT": "About",
+    "ABOUT_TXT": "City-R-US is an application that allows the citizens of Athens to participate in missions. Choose the mission you are interested in and help your town! The missions data are collected in a public map.",
+    "PRIVACY": "Privacy",
+    "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+
+    "HAVING_FUN": "Having fun?",
+    "INVITE_FRIENDS": "Invite your friends...",
+    "EMAIL_NOT_VALID": "Enter a valid email address",
+    "MESSAGE": "Message",
+    "EDIT_MSG_BELOW": "Click to edit the message below",
+    "INVITE_MSG_PLACEHOLDER": "I'd like to invite you to the City-R-US app.",
+    "INVITE_EMAIL_PLACEHOLDER": "Type your friend's email"
+}
