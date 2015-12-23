@@ -47,10 +47,10 @@ module.run(function ($translate) {
 
     function onDeviceReady() {
         /*if (typeof navigator.globalization !== "undefined") {
-            navigator.globalization.getPreferredLanguage(function (language) {
-                $translate.use(language.value);
-            }, null);
-        }*/
+         navigator.globalization.getPreferredLanguage(function (language) {
+         $translate.use(language.value);
+         }, null);
+         }*/
 
         document.addEventListener("showkeyboard", function () {
             alert("Keyboard is ON");
@@ -85,8 +85,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
             validateLogin(username, password);
         } else {
             ons.notification.alert({
-                message: 'Check your connection in order to procced with Login.',
-                title: 'Connection error',
+                title: $filter('translate')('CONNECTION_ERROR'),
+                message: $filter('translate')('CONNECTION_ERROR_MSG'),
                 buttonLabel: 'OK',
                 animation: 'default',
                 callback: function () {
@@ -104,8 +104,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
             registration(username, email, password);
         } else {
             ons.notification.alert({
-                message: 'Check your connection in order to procced with Register.',
-                title: 'Connection error',
+                title: $filter('translate')('CONNECTION_ERROR'),
+                message: $filter('translate')('CONNECTION_ERROR_MSG'),
                 buttonLabel: 'OK',
                 animation: 'default',
                 callback: function () {
@@ -122,8 +122,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
             }).success(function (data) {
                 if (data.status == 'success')
                     ons.notification.alert({
-                        message: 'Έχει αποσταλεί προσωρινός κωδικός πρόσβασης στο email που δηλώσατε.',
-                        title: 'Προσωρινός κωδικός',
+                        title: $filter('translate')('TMP_PWD'),
+                        message: $filter('translate')('TMP_PWD_MSG'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -131,8 +131,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
                     });
                 else
                     ons.notification.alert({
-                        message: 'Δεν υπάρχει χρήστης με το email που δηλώσατε.',
-                        title: 'Λανθασμένο email',
+                        title: $filter('translate')('USER_NOT_FOUND'),
+                        message: $filter('translate')('USER_NOT_FOUND_MSG'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -144,8 +144,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
         }
         else {
             ons.notification.alert({
-                message: 'Συμπληρώστε το πεδίο email',
-                title: 'Email κενό',
+                title: $filter('translate')('FILL_EMAIL'),
+                message: $filter('translate')('FILL_EMAIL_MSG'),
                 buttonLabel: 'OK',
                 animation: 'default',
                 callback: function () {
@@ -193,8 +193,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
     $scope.invite = function (email) {
         console.log($translate('LOGIN'));
         ons.notification.alert({
-            message: 'Λειτουργία υπό ανάπτυξη',
-            title:  $filter('translate')('UNDER_CONSTRUCTION'),
+            title: $filter('translate')('UNDER_CONSTRUCTION'),
+            message: $filter('translate')('UNDER_CONSTRUCTION'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -202,46 +202,46 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
         });
         /*
 
-        var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        if (checkConnection()) {
-            if (email) {
-                if (email_validation.test(email)) {
-                    document.getElementById("email").style.display = "none";
-                    document.getElementById("p").style.display = "none";
-                    ons.notification.alert({
-                        message: 'Η λειτουργία αυτή δεν έχει υλοποιηθεί ακόμα.',
-                        title: 'Invite',
-                        buttonLabel: 'OK',
-                        animation: 'default',
-                        callback: function () {
-                        }
-                    });
-                }
-                else {
-                    document.getElementById("email").style.display = "inline";
-                    document.getElementById("p").style.display = "inline";
-                }
-            }
-            else {
-                ons.notification.alert({
-                    message: 'Check your email.',
-                    title: 'Invitation Failed',
-                    buttonLabel: 'OK',
-                    animation: 'default',
-                    callback: function () {
-                    }
-                });
-            }
-        } else {
-            ons.notification.alert({
-                message: 'Check your connection in order to procced with Login.',
-                title: 'Connection error',
-                buttonLabel: 'OK',
-                animation: 'default',
-                callback: function () {
-                }
-            });
-        }*/
+         var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+         if (checkConnection()) {
+         if (email) {
+         if (email_validation.test(email)) {
+         document.getElementById("email").style.display = "none";
+         document.getElementById("p").style.display = "none";
+         ons.notification.alert({
+         message: 'Η λειτουργία αυτή δεν έχει υλοποιηθεί ακόμα.',
+         title: 'Invite',
+         buttonLabel: 'OK',
+         animation: 'default',
+         callback: function () {
+         }
+         });
+         }
+         else {
+         document.getElementById("email").style.display = "inline";
+         document.getElementById("p").style.display = "inline";
+         }
+         }
+         else {
+         ons.notification.alert({
+         message: 'Check your email.',
+         title: 'Invitation Failed',
+         buttonLabel: 'OK',
+         animation: 'default',
+         callback: function () {
+         }
+         });
+         }
+         } else {
+         ons.notification.alert({
+         message: 'Check your connection in order to procced with Login.',
+         title: 'Connection error',
+         buttonLabel: 'OK',
+         animation: 'default',
+         callback: function () {
+         }
+         });
+         }*/
     };
 });
 
@@ -354,69 +354,69 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 });
 
 /*
-module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
-    $translate("RECORDING").then(function (label) {
-        $scope.currentMessage = label;
-    });
-    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-    var options = {enableHighAccuracy: true};
-    navigator.geolocation.getCurrentPosition(function (position) {
-        $scope.position = position;
-        $scope.map = new Map();
-        $scope.map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
-        backgroundGeoLocation.configure($scope.map.addMarkerToMap, function (error) {
-            console.log(error);
-        }, $scope.geoConfig);
-        backgroundGeoLocation.start();
-    }, null, options);
+ module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
+ $translate("RECORDING").then(function (label) {
+ $scope.currentMessage = label;
+ });
+ $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+ var options = {enableHighAccuracy: true};
+ navigator.geolocation.getCurrentPosition(function (position) {
+ $scope.position = position;
+ $scope.map = new Map();
+ $scope.map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
+ backgroundGeoLocation.configure($scope.map.addMarkerToMap, function (error) {
+ console.log(error);
+ }, $scope.geoConfig);
+ backgroundGeoLocation.start();
+ }, null, options);
 
-    $scope.tagRoute = function () {
-        backgroundGeoLocation.stop();
-        confirmation.show();
-    };
+ $scope.tagRoute = function () {
+ backgroundGeoLocation.stop();
+ confirmation.show();
+ };
 
-    $scope.sendRoute = function () {
-        loading.show();
-        var markers = $scope.map.getMarkers();
-        var deviceUUID = "test";
-        var data = {
-            "device_uuid": deviceUUID,
-            "mission_id": $scope.mission.id,
-            "measurements": []
-        };
-        markers.forEach(function (entry) {
-            data.measurements.push({
-                latitude: entry.marker.getPosition.lat(),
-                longitude: entry.marker.getPosition.lng(),
-                observation_date: $filter('date')(new Date(entry.time), "yyyy-MM-dd hh:mm:ss")
-            });
-        });
-        data.latitude = data.measurements[data.measurements.length - 1].latitude;
-        data.longitude = data.measurements[data.measurements.length - 1].longitude;
-        data.observation_date = data.measurements[data.measurements.length - 1].observation_date;
-        $http.post(apiUrl + '/observations/store', data, null)
-            .then(
-            function (data) {
-                loading.hide();
-                $scope.translationData = {
-                    value: data.data.message.points
-                };
-                success.show();
-                setTimeout(function () {
-                    success.hide();
-                }, 2000);
-            },
-            function (error) {
-                loading.hide();
-                fail.show();
-                setTimeout(function () {
-                    fail.hide();
-                }, 2000);
-            }
-        );
-    };
-});
-*/
+ $scope.sendRoute = function () {
+ loading.show();
+ var markers = $scope.map.getMarkers();
+ var deviceUUID = "test";
+ var data = {
+ "device_uuid": deviceUUID,
+ "mission_id": $scope.mission.id,
+ "measurements": []
+ };
+ markers.forEach(function (entry) {
+ data.measurements.push({
+ latitude: entry.marker.getPosition.lat(),
+ longitude: entry.marker.getPosition.lng(),
+ observation_date: $filter('date')(new Date(entry.time), "yyyy-MM-dd hh:mm:ss")
+ });
+ });
+ data.latitude = data.measurements[data.measurements.length - 1].latitude;
+ data.longitude = data.measurements[data.measurements.length - 1].longitude;
+ data.observation_date = data.measurements[data.measurements.length - 1].observation_date;
+ $http.post(apiUrl + '/observations/store', data, null)
+ .then(
+ function (data) {
+ loading.hide();
+ $scope.translationData = {
+ value: data.data.message.points
+ };
+ success.show();
+ setTimeout(function () {
+ success.hide();
+ }, 2000);
+ },
+ function (error) {
+ loading.hide();
+ fail.show();
+ setTimeout(function () {
+ fail.hide();
+ }, 2000);
+ }
+ );
+ };
+ });
+ */
 
 module.controller('InviteController', function ($scope, $translate) {
 });
@@ -425,8 +425,8 @@ function validateLogin(username, password) {
     if (isEmpty(username) && isEmpty(password)) {
         modal.hide();
         ons.notification.alert({
-            message: 'Enter your email address and password.',
-            title: 'Login Failed',
+            title: $filter('translate')('FILL_EMAIL_PASSWORD'),
+            message: $filter('translate')('FILL_EMAIL_PASSWORD_MSG'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -435,8 +435,8 @@ function validateLogin(username, password) {
     } else if (isEmpty(username)) {
         modal.hide();
         ons.notification.alert({
-            message: 'Please check your email address.',
-            title: 'Login Failed',
+            title: $filter('translate')('FILL_EMAIL'),
+            message: $filter('translate')('FILL_EMAIL_MSG'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -445,8 +445,8 @@ function validateLogin(username, password) {
     } else if (isEmpty(password)) {
         modal.hide();
         ons.notification.alert({
-            message: 'Please check your password.',
-            title: 'Login Failed',
+            title: $filter('translate')('FILL_PASSWORD'),
+            message: $filter('translate')('FILL_PASSWORD_MSG'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -467,8 +467,8 @@ function validateLogin(username, password) {
                     myNavigator.pushPage('tabs.html', {params: {tab: 0}});
                 } else {
                     ons.notification.alert({
+                        title: $filter('translate')('LOGIN_FAILED'),
                         message: "" + response.message.description,
-                        title: 'Login Failed',
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -478,8 +478,8 @@ function validateLogin(username, password) {
             } else if (xhttp.readyState == 4 && xhttp.status == 400) {
                 modal.hide();
                 ons.notification.alert({
-                    message: "" + response.message.description,
                     title: 'Unauthorized action',
+                    message: "" + response.message.description,
                     buttonLabel: 'OK',
                     animation: 'default',
                     callback: function () {
@@ -488,8 +488,8 @@ function validateLogin(username, password) {
             } else if (xhttp.readyState == 4 && xhttp.status == 404) {
                 modal.hide();
                 ons.notification.alert({
+                    title: $filter('translate')('USER_NOT_FOUND'),
                     message: "" + response.message.description,
-                    title: 'User not found',
                     buttonLabel: 'OK',
                     animation: 'default',
                     callback: function () {
@@ -529,8 +529,8 @@ function registration(username, email, password) {
             document.getElementById("email").style.display = "inline";
         }
         ons.notification.alert({
-            message: 'Check your username, email or password.',
-            title: 'Registration Failed',
+            title: $filter('translate')('REGISTRATION_FAILED'),
+            message: "" + response.message.description,
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -563,8 +563,8 @@ function sendRegisterRequest(username, email, password) {
                 }, 2000)
             } else {
                 ons.notification.alert({
+                    title: $filter('translate')('REGISTRATION_FAILED'),
                     message: "" + response.message.description,
-                    title: 'register Failed',
                     buttonLabel: 'OK',
                     animation: 'default',
                     callback: function () {
@@ -575,8 +575,8 @@ function sendRegisterRequest(username, email, password) {
             modal.hide();
             var response = JSON.parse(xhttp.responseText)
             ons.notification.alert({
-                message: "" + response.message.description,
                 title: 'Bad Request',
+                message: "" + response.message.description,
                 buttonLabel: 'OK',
                 animation: 'default',
                 callback: function () {
@@ -586,8 +586,8 @@ function sendRegisterRequest(username, email, password) {
             modal.hide();
             var response = JSON.parse(xhttp.responseText)
             ons.notification.alert({
+                title: $filter('translate')('EMAIL_EXISTS'),
                 message: "" + response.message.description,
-                title: 'Email already exists',
                 buttonLabel: 'OK',
                 animation: 'default',
                 callback: function () {

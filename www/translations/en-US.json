@@ -41,5 +41,30 @@
     "MESSAGE": "Message",
     "EDIT_MSG_BELOW": "Click to edit the message below",
     "INVITE_MSG_PLACEHOLDER": "I'd like to invite you to the City-R-US app.",
-    "INVITE_EMAIL_PLACEHOLDER": "Type your friend's email"
+    "INVITE_EMAIL_PLACEHOLDER": "Type your friend's email",
+
+    "UNDER_CONSTRUCTION" : "Under construction",
+
+    "CONNECTION_ERROR": "Connection error",
+    "CONNECTION_ERROR_MSG": "Please check your connection.",
+
+    "TMP_PWD": "Temporary password",
+    "TMP_PWD_MSG": "A temporary password has been sent to your email.",
+
+    "USER_NOT_FOUND": "User not found",
+    "USER_NOT_FOUND_MSG": "No user was found",
+
+    "FILL_EMAIL": "Empty email",
+    "FILL_EMAIL_MSG": "Field 'email' should not be empty",
+    "FILL_PASSWORD": "Empty password",
+    "FILL_PASSWORD__MSG": "Field 'password' should not be empty",
+    "FILL_EMAIL_PASSWORD": "Empty email and password",
+    "FILL_EMAIL_PASSWORD_MSG": "Enter your email address and password",
+
+    "LOGIN_FAILED": "Login failed",
+    "REGISTRATION_FAILED": "Registration failed",
+    "REGISTRATION_FAILED_MSG": "Check your username, email or password",
+
+    "EMAIL_EXISTS": "A user with this email already exists"
+
 }
