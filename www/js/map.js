@@ -23,7 +23,6 @@ function Map() {
 
     this.initialize = function (lat, lon) {
         this.map = this.show(lat, lon);
-        this.addMarkerToMap(lat, lon);
     }
 
     this.show = function (lat, lon) {
@@ -41,12 +40,13 @@ function Map() {
             });
     };
 
-    this.addMarkerToMap = function (lat, lon) {
+    this.addMarkerToMap = function (lat, lon, draggable) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
-            draggable: true,
+            draggable: draggable,
             animation: google.maps.Animation.DROP,
-            map: this.map
+            map: this.map,
+            icon: 'img/marker.png'
         });
         this.markers.push(marker);
     };

@@ -110,9 +110,9 @@
 }
 
 body {
-    -webkit-touch-callout: none;    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-touch-callout: none; /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;      /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-user-select: none; /* prevent copy paste, to allow, change 'none' to 'text' */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'Roboto', sans-serif !important;
@@ -127,7 +127,7 @@ body {
     -webkit-animation: fade 3000ms infinite;
 }
 
-.splashScreen{
+.splashScreen {
     height: 100%;
 }
 
@@ -141,6 +141,11 @@ body {
     margin-top: 5%;
     margin-bottom: 3%;
     font-weight: 600;
+}
+
+hr {
+    border: none;
+    border-bottom: solid 1px #D8D8D8;
 }
 
 h1 {
@@ -196,11 +201,11 @@ h7 {
     font-style: normal;
 }
 
-.gradient, .gradientPage .page__background{
+.gradient, .gradientPage .page__background {
     background: #2e5a85;
     background: -moz-linear-gradient(-45deg, #62d7c0 0%, #2e5a85 100%);
-    background: -webkit-linear-gradient(-45deg, #62d7c0 0%,#2e5a85 100%);
-    background: linear-gradient(135deg, #62d7c0 0%,#2e5a85 100%);
+    background: -webkit-linear-gradient(-45deg, #62d7c0 0%, #2e5a85 100%);
+    background: linear-gradient(135deg, #62d7c0 0%, #2e5a85 100%);
 }
 
 /* LOGIN - REGISTER */
@@ -279,6 +284,7 @@ h7 {
 
 #loginForm .inputText {
     height: 22%;
+    min-height: 30px;
 }
 
 #loginForm h4 {
@@ -369,8 +375,7 @@ h7 {
 
 #mission .missionContainer {
     background: white;
-    height: 100%;
-    padding: 2em;
+    padding: 1em;
     padding-top: 4em;
     box-sizing: border-box;
 }
@@ -404,15 +409,32 @@ h7 {
 }
 
 #mission .cruButton {
-    position: absolute;
-    bottom: 2%;
     width: 80%;
-    margin-left: 10%;
+    margin: 0 auto;
 }
 
 #mission .cruButton span span {
     font-size: 2em;
     line-height: 1.6em;
+}
+
+#recording {
+    height: 65px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 0.7em;
+}
+
+#recording ons-back-button span i{
+    margin-left: 0 !important;
+    padding-top: 0 !important;
+}
+
+#recording .msg{
+    color: #000;
+    font-size: 1em;
+    position: relative;
+    top: 0.7em;
 }
 
 /* MISSION MAP */
@@ -480,7 +502,7 @@ h7 {
     text-overflow: ellipsis;
     overflow: hidden;
     margin-bottom: 1.6em;
-    font-size:1em;
+    font-size: 1em;
 }
 
 .confirmationDiv .cruButton {
@@ -576,17 +598,17 @@ div.tab-bar ons-tab.active {
     box-sizing: border-box;
 }
 
-#account .name{
+#account .name {
     font-size: 2.5em;
 }
 
 #account .score {
-    margin-top:2%;
+    margin-top: 2%;
     font-size: 1.2em;
 }
 
-#account .scoreNumber{
-    font-weight:600;
+#account .scoreNumber {
+    font-weight: 600;
     font-size: 1.2em;
 }
 
@@ -621,7 +643,7 @@ div.tab-bar ons-tab.active {
     box-sizing: border-box;
 }
 
-#invite .title1{
+#invite .title1 {
     font-size: 2.5em;
 }
 
@@ -648,7 +670,7 @@ div.tab-bar ons-tab.active {
     font-style: italic;
 }
 
-#invite .content .textarea{
+#invite .content .textarea {
     width: 84%;
     margin-top: 1em;
     font-size: 0.9em;
@@ -670,6 +692,7 @@ div.tab-bar ons-tab.active {
     margin-top: 1em;
     width: 42%;
     margin-left: 60%;
+    margin-bottom: 5%;
 }
 
 #invite .cruButton span span, #account .cruButton span span {
@@ -678,13 +701,13 @@ div.tab-bar ons-tab.active {
 }
 
 #invite .content #email {
-    display:none;
+    display: none;
     color: red;
     text-decoration: underline;
-    float:left;
+    float: left;
 }
 
-#invite input::-webkit-input-placeholder, #invite textarea::-webkit-input-placeholder, #account input::-webkit-input-placeholder{
+#invite input::-webkit-input-placeholder, #invite textarea::-webkit-input-placeholder, #account input::-webkit-input-placeholder {
     color: #999999;
     text-align: left;
     font-size: 0.9em;

@@ -1,13 +1,21 @@
-<ons-page id="point_tagging_mission" ng-controller="RouteTaggingMissionController">
-    <ons-toolbar fixed-style class="hidden-toolbar">
-        <div class="left">
+<ons-page id="route_tagging_mission" ng-controller="RouteTaggingMissionController">
+    <ons-toolbar fixed-style class="hidden-toolbar" id="recording">
+        <div class="left ">
             <ons-back-button></ons-back-button>
+                <span class="msg"><ons-icon
+                        icon="fa-circle"
+                        size="20px"
+                        fixed-width="false"
+                        style="color: #F15A59">
+                </ons-icon>
+                {{"RECORDING" | translate}}
+                </span>
         </div>
     </ons-toolbar>
 
     <div id="map-container">
     </div>
-    <ons-button modifier="material" class="cruButton map-button" ng-click="tagLocation()">
+    <ons-button modifier="material" class="cruButton map-button" ng-click="tagRoute()">
         <ons-ripple></ons-ripple>
         {{"TAG_ROUTE" | translate}}
     </ons-button>
@@ -18,9 +26,10 @@
 
             <h1>{{mission.name}}</h1>
             <hr/>
-            <h2>{{"SUBMIT_POINT_TEXT" | translate}}</h2>
+            <h2>{{"SUBMIT_ROUTE_TEXT" | translate}}</h2>
+
             <div class="senButton">
-                <ons-button modifier="material" class="cruButton" ng-click="sendLocation()">
+                <ons-button modifier="material" class="cruButton" ng-click="sendRoute()">
                     <ons-ripple></ons-ripple>
                     {{"CONFIRM" | translate}}
                 </ons-button>

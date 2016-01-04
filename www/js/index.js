@@ -301,9 +301,11 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
     var options = {enableHighAccuracy: true};
     var map = new Map();
     var position;
+
     navigator.geolocation.getCurrentPosition(function (pos) {
         position = pos;
         map.initialize(position.coords.latitude, position.coords.longitude);
+        map.addMarkerToMap(position.coords.latitude, position.coords.longitude, true);
     }, null, options);
 
     $scope.tagLocation = function () {
@@ -353,70 +355,119 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
     };
 });
 
-/*
- module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
- $translate("RECORDING").then(function (label) {
- $scope.currentMessage = label;
- });
- $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
- var options = {enableHighAccuracy: true};
- navigator.geolocation.getCurrentPosition(function (position) {
- $scope.position = position;
- $scope.map = new Map();
- $scope.map.initialize($scope.position.coords.latitude, $scope.position.coords.longitude);
- backgroundGeoLocation.configure($scope.map.addMarkerToMap, function (error) {
- console.log(error);
- }, $scope.geoConfig);
- backgroundGeoLocation.start();
- }, null, options);
 
- $scope.tagRoute = function () {
- backgroundGeoLocation.stop();
- confirmation.show();
- };
+module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
+    $translate("RECORDING").then(function (label) {
+        $scope.currentMessage = label;
+    });
 
- $scope.sendRoute = function () {
- loading.show();
- var markers = $scope.map.getMarkers();
- var deviceUUID = "test";
- var data = {
- "device_uuid": deviceUUID,
- "mission_id": $scope.mission.id,
- "measurements": []
- };
- markers.forEach(function (entry) {
- data.measurements.push({
- latitude: entry.marker.getPosition.lat(),
- longitude: entry.marker.getPosition.lng(),
- observation_date: $filter('date')(new Date(entry.time), "yyyy-MM-dd hh:mm:ss")
- });
- });
- data.latitude = data.measurements[data.measurements.length - 1].latitude;
- data.longitude = data.measurements[data.measurements.length - 1].longitude;
- data.observation_date = data.measurements[data.measurements.length - 1].observation_date;
- $http.post(apiUrl + '/observations/store', data, null)
- .then(
- function (data) {
- loading.hide();
- $scope.translationData = {
- value: data.data.message.points
- };
- success.show();
- setTimeout(function () {
- success.hide();
- }, 2000);
- },
- function (error) {
- loading.hide();
- fail.show();
- setTimeout(function () {
- fail.hide();
- }, 2000);
- }
- );
- };
- });
- */
+    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+    var options = {enableHighAccuracy: true};
+
+    var map = new Map();
+    var position, precision = 4, positions = [];
+    var lastPosition = {
+        lat: 0,
+        lon: 0,
+        date: 0
+    };
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+        position = pos;
+        map.initialize(position.coords.latitude, position.coords.longitude);
+        map.addMarkerToMap(position.coords.latitude, position.coords.longitude, false);
+        lastPosition.lat = parseFloat(position.coords.latitude.toFixed(precision));
+        lastPosition.lon = parseFloat(position.coords.longitude.toFixed(precision));
+        lastPosition.date = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
+        positions.push(lastPosition);
+    }, null, options);
+
+
+    var watchId = navigator.geolocation.watchPosition(
+        function (position) {
+            var xPos = parseFloat(position.coords.longitude.toFixed(precision));
+            var yPos = parseFloat(position.coords.latitude.toFixed(precision));
+            if ((lastPosition.lat != yPos) && (lastPosition.lon != xPos)) {
+                // TODO: Check whether we need to use the rounded coordinates or not
+                map.addMarkerToMap(yPos, xPos, false);
+                var sLog = 'adding marker @ ' + lastPosition.lat + ' (' + yPos + '), ' + lastPosition.lon + ' (' + xPos + ')';
+                console.log(sLog);
+                alert(sLog);
+                lastPosition.lat = yPos;
+                lastPosition.lon = xPos;
+                lastPosition.date = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
+                positions.push(lastPosition);
+            }
+        },
+        function (error) {
+            console.log(error);
+        },
+        {frequency: 5000, enableHighAccuracy: true});
+
+    console.log(positions)
+
+    $scope.tagRoute = function () {
+        navigator.geolocation.clearWatch(watchId);
+        backgroundGeoLocation.stop();
+        confirmation.show();
+    };
+
+    $scope.sendRoute = function () {
+        loading.show();
+        var markers = map.getMarkers();
+        var deviceUUID = "test";
+        var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
+        console.log(positions)
+
+        var data = {
+            "device_uuid": deviceUUID,
+            "mission_id": $scope.mission.id,
+            "measurements": []
+        };
+        /*
+         markers.forEach(function (entry) {
+         data.measurements.push({
+         latitude: entry.getPosition().lat(),
+         longitude: entry.getPosition().lng(),
+         observation_date: now
+         });
+         });*/
+
+        positions.forEach(function (entry) {
+            data.measurements.push({
+                latitude: entry.lat,
+                longitude: entry.lon,
+                observation_date: entry.date
+            });
+        });
+
+        data.latitude = data.measurements[data.measurements.length - 1].latitude;
+        data.longitude = data.measurements[data.measurements.length - 1].longitude;
+        data.observation_date = now;
+
+        $http.post(apiUrl + '/observations/store', data, null)
+            .then(
+            function (data) {
+                loading.hide();
+                $scope.translationData = {
+                    value: data.data.message.points
+                };
+                success.show();
+                setTimeout(function () {
+                    success.hide();
+                }, 2000);
+            },
+            function (error) {
+                loading.hide();
+                fail.show();
+                setTimeout(function () {
+                    fail.hide();
+                }, 2000);
+            }
+        );
+    };
+});
+
 
 module.controller('InviteController', function ($scope, $translate) {
 });
