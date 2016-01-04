@@ -5,7 +5,13 @@
         </div>
     </ons-toolbar>
     <div class="missionContainer">
-        <p class="contributors">12 {{"CONTRIBUTORS"| translate}}</p>
+        <p class="contributors">{{mission.users.length}}
+            <ng-pluralize class="contributors" count="mission.users.length"
+                          when="{'0': '{{&quot;CONTRIBUTORS&quot; | translate}}',
+            'one': '{{&quot;CONTRIBUTOR&quot; | translate}}',
+            'other': '{{&quot;CONTRIBUTORS&quot; | translate:{count:1} }}'}">
+            </ng-pluralize>
+        </p>
         <p class="name">{{ mission.name}}</p>
         <p class="description">{{ mission.description}}</p>
         <p class="created">{{"POSTED_IN"| translate}} {{mission.created| date:'dd-MM-yyyy'}}</p>
