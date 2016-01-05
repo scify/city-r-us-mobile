@@ -69,5 +69,7 @@
     "REGISTRATION_FAILED": "Η εγγραφή απέτυχε",
     "REGISTRATION_FAILED_MSG": "Βεβαιωθείτε οι τα πεδία όνομα, email, κωδικός είναι σωστά.",
 
-    "EMAIL_EXISTS": "Υπάρχει χρήστης με το email που δηλώσατε."
+    "EMAIL_EXISTS": "Υπάρχει χρήστης με το email που δηλώσατε.",
+    
+    "SUGGEST": "Πρόταση αποστολής"
 }

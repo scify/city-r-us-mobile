@@ -66,6 +66,7 @@
     "REGISTRATION_FAILED": "Registration failed",
     "REGISTRATION_FAILED_MSG": "Check your username, email or password",
 
-    "EMAIL_EXISTS": "A user with this email already exists"
-
+    "EMAIL_EXISTS": "A user with this email already exists",
+    
+    "SUGGEST": "Suggest a mission"
 }

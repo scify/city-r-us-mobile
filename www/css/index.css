@@ -326,6 +326,17 @@ h7 {
 
 /* MISSIONS LIST */
 
+#missions .cruButton {
+    height: 6%;
+    width: 46%;
+    margin-top: 1.5%;
+    margin-left: 51%;
+}
+
+#missions .cruButton span span {
+    font-size: 1.2em;
+}
+
 #missions ons-list {
     background: none;
     padding: 1.5% 0;

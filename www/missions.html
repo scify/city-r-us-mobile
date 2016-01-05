@@ -1,13 +1,19 @@
 <ons-page id="missions" class="gradientPage" ng-controller="MissionsController">
+    <ons-button modifier="material" class="cruButton" ng-click="suggestMission()">
+        <ons-ripple></ons-ripple>
+        {{"SUGGEST"| translate}}
+    </ons-button>
     <ons-list>
         <ons-list-item class="mission" ng-repeat='mission in missions' ng-click="showMission($index)">
             <p class="name">{{mission.name}}</p>
-            <p class="created">{{"POSTED_IN"| translate}} {{mission.created | date:'dd-MM-yyyy'}}</p>
+            <p class="created">{{"POSTED_IN"| translate}} {{mission.created| date:'dd-MM-yyyy'}}</p>
             <p class="contributors">{{mission.users.length}}
-                <ng-pluralize class="contributors" count="mission.users.length"
-                          when="{'0': '{{&quot;CONTRIBUTORS&quot; | translate}}',
-            'one': '{{&quot;CONTRIBUTOR&quot; | translate}}',
-            'other': '{{&quot;CONTRIBUTORS&quot; | translate:{count:1} }}'}">
+            <ng-pluralize class="contributors" count="mission.users.length"
+                          when="{
+                          '0': {{'CONTRIBUTORS'| translate}},
+                          'one': {{'CONTRIBUTOR'| translate}},
+                          'other': {{'CONTRIBUTORS'| translate:{count:1} }}
+                          }">
             </ng-pluralize>
             </p>
         </ons-list-item>
