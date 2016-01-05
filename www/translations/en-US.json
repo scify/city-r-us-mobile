@@ -68,5 +68,11 @@
 
     "EMAIL_EXISTS": "A user with this email already exists",
     
-    "SUGGEST": "Suggest a mission"
+    "SUGGEST": "Suggest a mission",
+    "SOMETHING_MISSING": "Is there something missing?",
+    "SUGGEST_YOUR_OWN": "Suggest your own missions",
+    "SUGGEST_TITLE": "Describe the mission",
+    "EDIT_SUG_BELOW": "Click to edit suggestion bellow",
+    "SUG_PLACEHOLDER": "Describe in detail the aim of the mission and who will benefit from it",
+    "SUG_EMAIL_PLACEHOLDER": "Your email"
 }

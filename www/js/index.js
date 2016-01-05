@@ -173,6 +173,9 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
             console.log(error);
         });
     };
+    $scope.suggestMission = function () {
+        myNavigator.pushPage('suggest.html');
+    };
     $scope.showMission = function (index) {
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
@@ -189,6 +192,16 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
                 break;
         }
     };
+    $scope.suggest = function (email) {
+        ons.notification.alert({
+            title: $filter('translate')('UNDER_CONSTRUCTION'),
+            message: $filter('translate')('UNDER_CONSTRUCTION'),
+            buttonLabel: 'OK',
+            animation: 'default',
+            callback: function () {
+            }
+        });
+    };
     $scope.invite = function (email) {
         console.log($translate('LOGIN'));
         ons.notification.alert({
@@ -200,7 +213,7 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
             }
         });
         /*
-
+         
          var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
          if (checkConnection()) {
          if (email) {
@@ -319,38 +332,38 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
         $http.post(
-            apiUrl + '/observations/store',
-            {
-                "device_uuid": deviceUUID,
-                "mission_id": $scope.mission.id,
-                "latitude": marker.getPosition().lat(),
-                "longitude": marker.getPosition().lng(),
-                "observation_date": now,
-                "measurements": [{
+                apiUrl + '/observations/store',
+                {
+                    "device_uuid": deviceUUID,
+                    "mission_id": $scope.mission.id,
                     "latitude": marker.getPosition().lat(),
                     "longitude": marker.getPosition().lng(),
-                    "observation_date": now
-                }]
-            }, null)
-            .then(
-            function (data) {
-                loading.hide();
-                $scope.translationData = {
-                    value: data.data.message.points
-                };
-                success.show();
-                setTimeout(function () {
-                    success.hide();
-                }, 2000);
-            },
-            function (error) {
-                loading.hide();
-                fail.show();
-                setTimeout(function () {
-                    fail.hide();
-                }, 2000);
-            }
-        );
+                    "observation_date": now,
+                    "measurements": [{
+                            "latitude": marker.getPosition().lat(),
+                            "longitude": marker.getPosition().lng(),
+                            "observation_date": now
+                        }]
+                }, null)
+                .then(
+                        function (data) {
+                            loading.hide();
+                            $scope.translationData = {
+                                value: data.data.message.points
+                            };
+                            success.show();
+                            setTimeout(function () {
+                                success.hide();
+                            }, 2000);
+                        },
+                        function (error) {
+                            loading.hide();
+                            fail.show();
+                            setTimeout(function () {
+                                fail.hide();
+                            }, 2000);
+                        }
+                );
     };
 });
 
@@ -383,25 +396,25 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
 
     var watchId = navigator.geolocation.watchPosition(
-        function (position) {
-            var xPos = parseFloat(position.coords.longitude.toFixed(precision));
-            var yPos = parseFloat(position.coords.latitude.toFixed(precision));
-            if ((lastPosition.lat != yPos) && (lastPosition.lon != xPos)) {
-                // TODO: Check whether we need to use the rounded coordinates or not
-                map.addMarkerToMap(yPos, xPos, false);
-                var sLog = 'adding marker @ ' + lastPosition.lat + ' (' + yPos + '), ' + lastPosition.lon + ' (' + xPos + ')';
-                console.log(sLog);
-                alert(sLog);
-                lastPosition.lat = yPos;
-                lastPosition.lon = xPos;
-                lastPosition.date = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
-                positions.push(lastPosition);
-            }
-        },
-        function (error) {
-            console.log(error);
-        },
-        {frequency: 5000, enableHighAccuracy: true});
+            function (position) {
+                var xPos = parseFloat(position.coords.longitude.toFixed(precision));
+                var yPos = parseFloat(position.coords.latitude.toFixed(precision));
+                if ((lastPosition.lat != yPos) && (lastPosition.lon != xPos)) {
+                    // TODO: Check whether we need to use the rounded coordinates or not
+                    map.addMarkerToMap(yPos, xPos, false);
+                    var sLog = 'adding marker @ ' + lastPosition.lat + ' (' + yPos + '), ' + lastPosition.lon + ' (' + xPos + ')';
+                    console.log(sLog);
+                    alert(sLog);
+                    lastPosition.lat = yPos;
+                    lastPosition.lon = xPos;
+                    lastPosition.date = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
+                    positions.push(lastPosition);
+                }
+            },
+            function (error) {
+                console.log(error);
+            },
+            {frequency: 5000, enableHighAccuracy: true});
 
     console.log(positions)
 
@@ -445,25 +458,25 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         data.observation_date = now;
 
         $http.post(apiUrl + '/observations/store', data, null)
-            .then(
-            function (data) {
-                loading.hide();
-                $scope.translationData = {
-                    value: data.data.message.points
-                };
-                success.show();
-                setTimeout(function () {
-                    success.hide();
-                }, 2000);
-            },
-            function (error) {
-                loading.hide();
-                fail.show();
-                setTimeout(function () {
-                    fail.hide();
-                }, 2000);
-            }
-        );
+                .then(
+                        function (data) {
+                            loading.hide();
+                            $scope.translationData = {
+                                value: data.data.message.points
+                            };
+                            success.show();
+                            setTimeout(function () {
+                                success.hide();
+                            }, 2000);
+                        },
+                        function (error) {
+                            loading.hide();
+                            fail.show();
+                            setTimeout(function () {
+                                fail.hide();
+                            }, 2000);
+                        }
+                );
     };
 });
 
@@ -592,11 +605,11 @@ function registration(username, email, password) {
 function sendRegisterRequest(username, email, password) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", apiUrl + "/users/register?name=" + username
-    + "&email=" + email
-    + "&password=" + password
-    + "&deviceUUID=" + device.uuid
-    + "&model=" + device.model
-    + "&manufacturer=" + device.platform, true);
+            + "&email=" + email
+            + "&password=" + password
+            + "&deviceUUID=" + device.uuid
+            + "&model=" + device.model
+            + "&manufacturer=" + device.platform, true);
     xhttp.send();
 
     xhttp.onreadystatechange = function () {
