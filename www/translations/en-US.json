@@ -71,4 +71,12 @@
 
     "CONFIRM_CLOSE_LOCATION": "Are you sure you want to go back? The point will be lost.",
     "CONFIRM_CLOSE_ROUTE": "Are you sure you want to go back? The route will be lost."
+
+    "SUGGEST": "Suggest a mission",
+    "SOMETHING_MISSING": "Is there something missing?",
+    "SUGGEST_YOUR_OWN": "Suggest your own missions",
+    "SUGGEST_TITLE": "Describe the mission",
+    "EDIT_SUG_BELOW": "Click to edit suggestion bellow",
+    "SUG_PLACEHOLDER": "Describe in detail the aim of the mission and who will benefit from it",
+    "SUG_EMAIL_PLACEHOLDER": "Your email"
 }
