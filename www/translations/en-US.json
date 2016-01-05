@@ -70,7 +70,7 @@
     "EMAIL_EXISTS": "A user with this email already exists",
 
     "CONFIRM_CLOSE_LOCATION": "Are you sure you want to go back? The point will be lost.",
-    "CONFIRM_CLOSE_ROUTE": "Are you sure you want to go back? The route will be lost."
+    "CONFIRM_CLOSE_ROUTE": "Are you sure you want to go back? The route will be lost.",
 
     "SUGGEST": "Suggest a mission",
     "SOMETHING_MISSING": "Is there something missing?",

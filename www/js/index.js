@@ -18,7 +18,9 @@
  */
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
-var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+//var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+var apiUrl = 'http://192.168.1.15/city-r-us-service/public/api/v1';
+
 
 
 module.config(function ($translateProvider) {
@@ -204,57 +206,58 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
         });
     };
     $scope.invite = function (email) {
-        console.log($translate('LOGIN'));
-        ons.notification.alert({
-            title: $filter('translate')('UNDER_CONSTRUCTION'),
-            message: $filter('translate')('UNDER_CONSTRUCTION'),
-            buttonLabel: 'OK',
-            animation: 'default',
-            callback: function () {
+
+        var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if (checkConnection()) {
+            if (email) {
+                if (email_validation.test(email)) {
+                    document.getElementById("email").style.display = "none";
+                    document.getElementById("p").style.display = "none";
+
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+                    $http({
+                        method: 'GET',
+                        url: apiUrl + '/users/invite'
+                    }).success(function (data) {
+                        ons.notification.alert({
+                            message: 'Check your email.',
+                            title: 'Invitation Failed',
+                            buttonLabel: 'OK',
+                            animation: 'default',
+                            callback: function () {
+                            }
+                        });
+
+                    }).error(function (error) {
+                        loading.hide();
+                        console.log(error);
+                    });
+                }
+                else {
+                    document.getElementById("email").style.display = "inline";
+                    document.getElementById("p").style.display = "inline";
+                }
             }
-        });
-        /*
-         
-         var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-         if (checkConnection()) {
-         if (email) {
-         if (email_validation.test(email)) {
-         document.getElementById("email").style.display = "none";
-         document.getElementById("p").style.display = "none";
-         ons.notification.alert({
-         message: 'Η λειτουργία αυτή δεν έχει υλοποιηθεί ακόμα.',
-         title: 'Invite',
-         buttonLabel: 'OK',
-         animation: 'default',
-         callback: function () {
-         }
-         });
-         }
-         else {
-         document.getElementById("email").style.display = "inline";
-         document.getElementById("p").style.display = "inline";
-         }
-         }
-         else {
-         ons.notification.alert({
-         message: 'Check your email.',
-         title: 'Invitation Failed',
-         buttonLabel: 'OK',
-         animation: 'default',
-         callback: function () {
-         }
-         });
-         }
-         } else {
-         ons.notification.alert({
-         message: 'Check your connection in order to procced with Login.',
-         title: 'Connection error',
-         buttonLabel: 'OK',
-         animation: 'default',
-         callback: function () {
-         }
-         });
-         }*/
+            else {
+                ons.notification.alert({
+                    message: 'Check your email.',
+                    title: 'Invitation Failed',
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
+        } else {
+            ons.notification.alert({
+                message: 'Check your connection in order to procced with Login.',
+                title: 'Connection error',
+                buttonLabel: 'OK',
+                animation: 'default',
+                callback: function () {
+                }
+            });
+        }
     };
 });
 
@@ -329,42 +332,46 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         loading.show();
         var marker = map.getMarkers()[0];
         var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
-        var deviceUUID = "test";
+        var deviceUUID = "";
 
+        if (device.uuid != null)
+            deviceUUID = device.uuid;
+        else
+            deviceUUID = "test";
 
         $http.post(
-                apiUrl + '/observations/store',
-                {
-                    "device_uuid": deviceUUID,
-                    "mission_id": $scope.mission.id,
+            apiUrl + '/observations/store',
+            {
+                "device_uuid": deviceUUID,
+                "mission_id": $scope.mission.id,
+                "latitude": marker.getPosition().lat(),
+                "longitude": marker.getPosition().lng(),
+                "observation_date": now,
+                "measurements": [{
                     "latitude": marker.getPosition().lat(),
                     "longitude": marker.getPosition().lng(),
-                    "observation_date": now,
-                    "measurements": [{
-                            "latitude": marker.getPosition().lat(),
-                            "longitude": marker.getPosition().lng(),
-                            "observation_date": now
-                        }]
-                }, null)
-                .then(
-                        function (data) {
-                            loading.hide();
-                            $scope.translationData = {
-                                value: data.data.message.points
-                            };
-                            success.show();
-                            setTimeout(function () {
-                                success.hide();
-                            }, 2000);
-                        },
-                        function (error) {
-                            loading.hide();
-                            fail.show();
-                            setTimeout(function () {
-                                fail.hide();
-                            }, 2000);
-                        }
-                );
+                    "observation_date": now
+                }]
+            }, null)
+            .then(
+            function (data) {
+                loading.hide();
+                $scope.translationData = {
+                    value: data.data.message.points
+                };
+                success.show();
+                setTimeout(function () {
+                    success.hide();
+                }, 2000);
+            },
+            function (error) {
+                loading.hide();
+                fail.show();
+                setTimeout(function () {
+                    fail.hide();
+                }, 2000);
+            }
+        );
     };
 });
 
@@ -414,7 +421,6 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     };
 
 
-
     //send the route to the server
     $scope.sendRoute = function () {
         loading.show();
@@ -447,25 +453,25 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
         $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
         $http.post(apiUrl + '/observations/store', data, null)
-                .then(
-                        function (data) {
-                            loading.hide();
-                            $scope.translationData = {
-                                value: data.data.message.points
-                            };
-                            success.show();
-                            setTimeout(function () {
-                                success.hide();
-                            }, 2000);
-                        },
-                        function (error) {
-                            loading.hide();
-                            fail.show();
-                            setTimeout(function () {
-                                fail.hide();
-                            }, 2000);
-                        }
-                );
+            .then(
+            function (data) {
+                loading.hide();
+                $scope.translationData = {
+                    value: data.data.message.points
+                };
+                success.show();
+                setTimeout(function () {
+                    success.hide();
+                }, 2000);
+            },
+            function (error) {
+                loading.hide();
+                fail.show();
+                setTimeout(function () {
+                    fail.hide();
+                }, 2000);
+            }
+        );
     };
 })
 ;
@@ -595,11 +601,11 @@ function registration(username, email, password) {
 function sendRegisterRequest(username, email, password) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", apiUrl + "/users/register?name=" + username
-            + "&email=" + email
-            + "&password=" + password
-            + "&deviceUUID=" + device.uuid
-            + "&model=" + device.model
-            + "&manufacturer=" + device.platform, true);
+    + "&email=" + email
+    + "&password=" + password
+    + "&deviceUUID=" + device.uuid
+    + "&model=" + device.model
+    + "&manufacturer=" + device.platform, true);
     xhttp.send();
 
     xhttp.onreadystatechange = function () {
