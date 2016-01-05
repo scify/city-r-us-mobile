@@ -6,6 +6,7 @@
     "TAG_LOCATION": "Tag Location",
     "TAG_ROUTE": "Tag Route",
     "CONFIRM": "Send",
+    "BACK": "Back",
     "SUBMIT_POINT_TEXT": "Click to send the point you recorded and contribute to this mission.",
     "SUBMIT_ROUTE_TEXT": "Click to send the route you recorded and contribute to this mission.",
     "SENDING": "Sending",
@@ -66,6 +67,8 @@
     "REGISTRATION_FAILED": "Registration failed",
     "REGISTRATION_FAILED_MSG": "Check your username, email or password",
 
-    "EMAIL_EXISTS": "A user with this email already exists"
+    "EMAIL_EXISTS": "A user with this email already exists",
 
+    "CONFIRM_CLOSE_LOCATION": "Are you sure you want to go back? The point will be lost.",
+    "CONFIRM_CLOSE_ROUTE": "Are you sure you want to go back? The route will be lost."
 }

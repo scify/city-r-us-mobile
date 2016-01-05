@@ -434,7 +434,8 @@ h7 {
     color: #000;
     font-size: 1em;
     position: relative;
-    top: 0.7em;
+    top: 0.7
+    em;
 }
 
 /* MISSION MAP */
@@ -533,7 +534,8 @@ ons-toolbar ~ .page__content {
     background: none;
 }
 
-ons-back-button span i {
+
+ons-back-button span i, .back ons-icon {
     line-height: 0 !important;
     font-size: 3em !important;
     margin-left: 0.4em !important;

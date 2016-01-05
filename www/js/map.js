@@ -40,15 +40,38 @@ function Map() {
             });
     };
 
-    this.addMarkerToMap = function (lat, lon, draggable) {
+    this.addMarkerToMap = function (lat, lon) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lon),
-            draggable: draggable,
+            draggable: true,
             animation: google.maps.Animation.DROP,
             map: this.map,
             icon: 'img/marker.png'
         });
         this.markers.push(marker);
+    };
+
+    this.addRouteMarkerToMap = function (lat, lon, date) {
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lon),
+            draggable: false,
+            animation: google.maps.Animation.DROP,
+            map: this.map,
+            icon: 'img/marker.png',
+            observation_date: date
+        });
+        this.markers.push(marker);
+        console.log('added marker')
+    };
+
+    this.drawLine = function (path) {
+        new google.maps.Polyline({
+            path: path,
+            map: this.map,
+            strokeColor: '#3366cc',
+            fillOpacity: 0.4
+        });
+        console.log('drew line')
     };
 
     this.getMarkers = function() {

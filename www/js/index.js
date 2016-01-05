@@ -71,6 +71,7 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
     var missions;
 
     $scope.geoConfig = {
+        distanceFilter: 5,
         desiredAccuracy: 10,
         stationaryRadius: 20,
         distanceFilter: 10,
@@ -305,7 +306,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
     navigator.geolocation.getCurrentPosition(function (pos) {
         position = pos;
         map.initialize(position.coords.latitude, position.coords.longitude);
-        map.addMarkerToMap(position.coords.latitude, position.coords.longitude, true);
+        map.addMarkerToMap(position.coords.latitude, position.coords.longitude);
     }, null, options);
 
     $scope.tagLocation = function () {
@@ -357,94 +358,82 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
-    $translate("RECORDING").then(function (label) {
-        $scope.currentMessage = label;
-    });
-
-    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
     var options = {enableHighAccuracy: true};
 
     var map = new Map();
-    var position, precision = 4, positions = [];
-    var lastPosition = {
-        lat: 0,
-        lon: 0,
-        date: 0
-    };
 
-    navigator.geolocation.getCurrentPosition(function (pos) {
-        position = pos;
+    navigator.geolocation.getCurrentPosition(function (position) {
         map.initialize(position.coords.latitude, position.coords.longitude);
-        map.addMarkerToMap(position.coords.latitude, position.coords.longitude, false);
-        lastPosition.lat = parseFloat(position.coords.latitude.toFixed(precision));
-        lastPosition.lon = parseFloat(position.coords.longitude.toFixed(precision));
-        lastPosition.date = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
-        positions.push(lastPosition);
+        map.addRouteMarkerToMap(position.coords.latitude, position.coords.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
     }, null, options);
 
 
-    var watchId = navigator.geolocation.watchPosition(
-        function (position) {
-            var xPos = parseFloat(position.coords.longitude.toFixed(precision));
-            var yPos = parseFloat(position.coords.latitude.toFixed(precision));
-            if ((lastPosition.lat != yPos) && (lastPosition.lon != xPos)) {
-                // TODO: Check whether we need to use the rounded coordinates or not
-                map.addMarkerToMap(yPos, xPos, false);
-                var sLog = 'adding marker @ ' + lastPosition.lat + ' (' + yPos + '), ' + lastPosition.lon + ' (' + xPos + ')';
-                console.log(sLog);
-                alert(sLog);
-                lastPosition.lat = yPos;
-                lastPosition.lon = xPos;
-                lastPosition.date = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
-                positions.push(lastPosition);
-            }
-        },
-        function (error) {
-            console.log(error);
-        },
-        {frequency: 5000, enableHighAccuracy: true});
+    //track the user location
+    backgroundGeoLocation.configure(function (location) {
+        map.addRouteMarkerToMap(location.latitude, location.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
 
-    console.log(positions)
+        var markers = map.getMarkers().length;
 
+        //if there are more than one markers, draw a line that connects the last two markers
+        if (markers > 1) {
+            var path = [
+                {
+                    lat: map.getMarkers()[markers - 2].getPosition().lat(),
+                    lng: map.getMarkers()[markers - 2].getPosition().lng()
+                },
+                {
+                    lat: map.getMarkers()[markers - 1].getPosition().lat(),
+                    lng: map.getMarkers()[markers - 1].getPosition().lng()
+                }
+            ];
+            map.drawLine(path);
+        }
+    }, function (error) {
+        console.log(error);
+    }, $scope.geoConfig);
+
+    backgroundGeoLocation.start();
+
+
+    //stop tracking the user location
     $scope.tagRoute = function () {
-        navigator.geolocation.clearWatch(watchId);
         backgroundGeoLocation.stop();
         confirmation.show();
     };
 
+
+
+    //send the route to the server
     $scope.sendRoute = function () {
         loading.show();
         var markers = map.getMarkers();
-        var deviceUUID = "test";
+        var deviceUUID = "";
         var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
-        console.log(positions)
+
+        if (device.uuid != null)
+            deviceUUID = device.uuid;
+        else
+            deviceUUID = "test";
 
         var data = {
             "device_uuid": deviceUUID,
             "mission_id": $scope.mission.id,
             "measurements": []
         };
-        /*
-         markers.forEach(function (entry) {
-         data.measurements.push({
-         latitude: entry.getPosition().lat(),
-         longitude: entry.getPosition().lng(),
-         observation_date: now
-         });
-         });*/
 
-        positions.forEach(function (entry) {
+        markers.forEach(function (entry) {
             data.measurements.push({
-                latitude: entry.lat,
-                longitude: entry.lon,
-                observation_date: entry.date
+                latitude: entry.getPosition().lat(),
+                longitude: entry.getPosition().lng(),
+                observation_date: entry.observation_date
             });
-        });
+        })
 
         data.latitude = data.measurements[data.measurements.length - 1].latitude;
         data.longitude = data.measurements[data.measurements.length - 1].longitude;
         data.observation_date = now;
 
+        $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
         $http.post(apiUrl + '/observations/store', data, null)
             .then(
             function (data) {
@@ -466,7 +455,8 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
             }
         );
     };
-});
+})
+;
 
 
 module.controller('InviteController', function ($scope, $translate) {
