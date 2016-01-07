@@ -60,11 +60,13 @@
     "REGISTRATION_FAILED": "Check your username, email or password",
     "EMAIL_EXISTS": "A user with this email already exists",
     "PASSWORDS_NOT_THE_SAME": "The passwords are not the same",
+    "FILL_DESCRIPTION": "Field description should not be null",
 
     "EMAIL_SENT": "Your email was sent",
     "TMP_PWD": "A temporary password has been sent to your email.",
     "FRIEND_INVITED": "Your friend has been invited!",
     "PASSWORD_CHANGED": "Your password is changed.",
+    "MISSION_SUGGESTED": "Your idea was sent!",
 
     "CONFIRM_CLOSE_LOCATION": "Are you sure you want to go back? The point will be lost.",
     "CONFIRM_CLOSE_ROUTE": "Are you sure you want to go back? The route will be lost.",

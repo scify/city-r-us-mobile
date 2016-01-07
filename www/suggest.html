@@ -1,4 +1,4 @@
-<ons-page id="invite" modifier="invite">
+<ons-page id="invite" modifier="invite" ng-controller="SuggestMissionController">
     <ons-toolbar fixed-style class="hidden-toolbar">
         <div class="left">
             <ons-back-button></ons-back-button>
@@ -12,24 +12,11 @@
         <div class="message">
             <h2>{{"SUGGEST_TITLE"| translate}}</h2>
             <div class="textAreaDescr">{{"EDIT_SUG_BELOW"| translate}}:</div>
-            <textarea class="textarea" rows="5" ng-model="data" placeholder="{{'SUG_PLACEHOLDER'| translate}}"></textarea>
+            <textarea class="textarea" rows="5" ng-model="description" placeholder="{{'SUG_PLACEHOLDER'| translate}}"></textarea>
         </div>
-        <div class="message">
-            <h2>Email</h2>
-            <input type="text" class="text-input text-input--underbar" ng-model="email" placeholder="{{'SUG_EMAIL_PLACEHOLDER'| translate}}" value="" name="input" required>
-            <div id="email">
-                <ons-icon id="icon"
-                          icon="ion-information-circled"
-                          size="15px"
-                          fixed-width="false"
-                          style="color: red">
-                </ons-icon>
-                <p id="p" style="font-size: 0.8em"> {{"EMAIL_NOT_VALID"| translate} </p>
-            </div>
-        </div>
-        <ons-button modifier="material" class="cruButton" ng-click="suggest(email)">
+        <ons-button modifier="material" class="cruButton" ng-click="suggest(description)">
             <ons-ripple></ons-ripple>
-            {{"SUGGGEST"| translate}}
+            {{"SUGGEST"| translate}}
         </ons-button>
     </div>
 </ons-page>

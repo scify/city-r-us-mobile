@@ -194,16 +194,6 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
                 break;
         }
     };
-    $scope.suggest = function (email) {
-        ons.notification.alert({
-            title: $filter('translate')('UNDER_CONSTRUCTION'),
-            message: $filter('translate')('UNDER_CONSTRUCTION'),
-            buttonLabel: 'OK',
-            animation: 'default',
-            callback: function () {
-            }
-        });
-    };
 });
 
 
@@ -532,6 +522,47 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
                 }
             });
         }
+    };
+});
+
+module.controller('SuggestMissionController', function ($scope, $translate, $filter, $http) {
+
+    $scope.suggest = function (description) {
+
+        if (description) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+            $http({
+                method: 'POST',
+                url: apiUrl + '/missions/suggest',
+                data: {
+                    description: description
+                }
+            }).success(function (data) {
+                ons.notification.alert({
+                    title: "",
+                    message: $filter('translate')('MISSION_SUGGESTED'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }).error(function (error) {
+                loading.hide();
+                console.log(error);
+            });
+        }
+        else {
+            ons.notification.alert({
+                title: $filter('translate')('ERROR'),
+                message: $filter('translate')('FILL_DESCRIPTION'),
+                buttonLabel: 'OK',
+                animation: 'default',
+                callback: function () {
+                }
+            });
+        }
+
+
     };
 });
 

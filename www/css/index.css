@@ -328,9 +328,9 @@ h7 {
 
 #missions .cruButton {
     height: 6%;
-    width: 46%;
-    margin-top: 1.5%;
-    margin-left: 51%;
+    margin-top: 3%;
+    margin-left: 45%;
+    margin-right: 5%;
 }
 
 #missions .cruButton span span {
