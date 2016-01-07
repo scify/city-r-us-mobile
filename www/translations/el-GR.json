@@ -43,7 +43,7 @@
     "MESSAGE": "Μήνυμα",
     "EDIT_MSG_BELOW": "Γράψτε το μήνυμά σας",
     "INVITE_MSG_PLACEHOLDER": "Θα ήθελα να σε προσκαλέσω στην εφαρμογή City-R-US.",
-    "INVITE_EMAIL_PLACEHOLDER": "Email φίλου",
+    "INVITE_EMAIL_PLACEHOLDER": "Email φίλου/ων",
 
     "UNDER_CONSTRUCTION" : "Λειτουργία υπό ανάπτυξη",
 
@@ -58,12 +58,15 @@
 
     "FILL_EMAIL": "Email κενό",
     "FILL_EMAIL_MSG": "Συμπληρώστε το πεδίο email",
+    "CHECK_EMAIL": "Λανθασμένο email",
+    "CHECK_EMAIL_MSG": "Βεβαιωθείτε ότι το email είναι στη σωστή μορφή",
 
     "FILL_PASSWORD": "Κωδικός κενός",
     "FILL_PASSWORD__MSG": "Συμπληρώστε το πεδίο κωδικός",
 
     "FILL_EMAIL_PASSWORD": "Email και κωδικός κενά",
     "FILL_EMAIL_PASSWORD_MSG": "Συμπληρώστε τα πεδία email και κωδικός",
+
 
     "LOGIN_FAILED": "Η σύνδεση απέτυχε",
 
@@ -81,5 +84,8 @@
     "SUGGEST_TITLE": "Περιγράψτε την αποστολή",
     "EDIT_SUG_BELOW": "Συμπληρώστε εδώ την ιδέα σας",
     "SUG_PLACEHOLDER": "Περιγράψτε με λεπτομέρεια την αποστολή και το ποιούς θα επωφελήσει",
-    "SUG_EMAIL_PLACEHOLDER": "Το email σας"
+    "SUG_EMAIL_PLACEHOLDER": "Το email σας",
+
+    "EMAIL_SENT": "Το email στάλθηκε",
+    "EMAIL_SENT_MSG": "Το email στάλθηκε!"
 }

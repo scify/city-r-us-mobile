@@ -1,4 +1,4 @@
-<ons-page id="invite" modifier="invite">
+<ons-page id="invite" modifier="invite" ng-controller="InviteController">
     <div class="header gradient">
         <p class="title1">{{"HAVING_FUN"| translate}}</p>
         <p class="title2">{{"INVITE_FRIENDS"| translate}}</p>
@@ -7,7 +7,7 @@
         <div class="message">
             <h2>{{"MESSAGE"| translate}}</h2>
             <div class="textAreaDescr">{{"EDIT_MSG_BELOW"| translate}}:</div>
-            <textarea class="textarea" rows="5" ng-model="data" placeholder="{{'INVITE_MSG_PLACEHOLDER'| translate}}"></textarea>
+            <textarea class="textarea" rows="5" ng-model="msg"></textarea>
         </div>
         <div class="message">
             <h2>Email</h2>
@@ -19,10 +19,10 @@
                           fixed-width="false"
                           style="color: red">
                 </ons-icon>
-                <p id="p" style="font-size: 0.8em"> {{"EMAIL_NOT_VALID"| translate} </p>
+                <p id="p" style="font-size: 0.8em"> {{'CHECK_EMAIL_MSG'| translate}} </p>
             </div>
         </div>
-        <ons-button modifier="material" class="cruButton" ng-click="invite(email)">
+        <ons-button modifier="material" class="cruButton" ng-click="invite(email, msg)">
             <ons-ripple></ons-ripple>
             {{"INVITE"| translate}}
         </ons-button>

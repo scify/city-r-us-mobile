@@ -43,7 +43,7 @@
     "MESSAGE": "Message",
     "EDIT_MSG_BELOW": "Click to edit the message below",
     "INVITE_MSG_PLACEHOLDER": "I'd like to invite you to the City-R-US app.",
-    "INVITE_EMAIL_PLACEHOLDER": "Type your friend's email",
+    "INVITE_EMAIL_PLACEHOLDER": "Type your friends' email",
 
     "UNDER_CONSTRUCTION" : "Under construction",
 
@@ -63,6 +63,9 @@
     "FILL_EMAIL_PASSWORD": "Empty email and password",
     "FILL_EMAIL_PASSWORD_MSG": "Enter your email address and password",
 
+    "CHECK_EMAIL": "Wrong email format",
+    "CHECK_EMAIL_MSG": "Make sure that the email is in the correct format",
+
     "LOGIN_FAILED": "Login failed",
     "REGISTRATION_FAILED": "Registration failed",
     "REGISTRATION_FAILED_MSG": "Check your username, email or password",
@@ -78,5 +81,8 @@
     "SUGGEST_TITLE": "Describe the mission",
     "EDIT_SUG_BELOW": "Click to edit suggestion bellow",
     "SUG_PLACEHOLDER": "Describe in detail the aim of the mission and who will benefit from it",
-    "SUG_EMAIL_PLACEHOLDER": "Your email"
+    "SUG_EMAIL_PLACEHOLDER": "Your email",
+
+    "EMAIL_SENT": "Email sent",
+    "EMAIL_SENT_MSG": "Your email was sent!"
 }

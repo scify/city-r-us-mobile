@@ -22,7 +22,6 @@ var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
 var apiUrl = 'http://192.168.1.15/city-r-us-service/public/api/v1';
 
 
-
 module.config(function ($translateProvider) {
 
     $translateProvider.useStaticFilesLoader({
@@ -204,60 +203,6 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
             callback: function () {
             }
         });
-    };
-    $scope.invite = function (email) {
-
-        var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        if (checkConnection()) {
-            if (email) {
-                if (email_validation.test(email)) {
-                    document.getElementById("email").style.display = "none";
-                    document.getElementById("p").style.display = "none";
-
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-                    $http({
-                        method: 'GET',
-                        url: apiUrl + '/users/invite'
-                    }).success(function (data) {
-                        ons.notification.alert({
-                            message: 'Check your email.',
-                            title: 'Invitation Failed',
-                            buttonLabel: 'OK',
-                            animation: 'default',
-                            callback: function () {
-                            }
-                        });
-
-                    }).error(function (error) {
-                        loading.hide();
-                        console.log(error);
-                    });
-                }
-                else {
-                    document.getElementById("email").style.display = "inline";
-                    document.getElementById("p").style.display = "inline";
-                }
-            }
-            else {
-                ons.notification.alert({
-                    message: 'Check your email.',
-                    title: 'Invitation Failed',
-                    buttonLabel: 'OK',
-                    animation: 'default',
-                    callback: function () {
-                    }
-                });
-            }
-        } else {
-            ons.notification.alert({
-                message: 'Check your connection in order to procced with Login.',
-                title: 'Connection error',
-                buttonLabel: 'OK',
-                animation: 'default',
-                callback: function () {
-                }
-            });
-        }
     };
 });
 
@@ -477,7 +422,69 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 ;
 
 
-module.controller('InviteController', function ($scope, $translate) {
+module.controller('InviteController', function ($scope, $translate, $filter, $http) {
+
+    $scope.msg = $filter('translate')('INVITE_MSG_PLACEHOLDER');
+
+    $scope.invite = function (email, msg) {
+        console.log(msg);
+
+        var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if (checkConnection()) {
+            if (email) {
+                if (email_validation.test(email)) {
+                    document.getElementById("email").style.display = "none";
+                    document.getElementById("p").style.display = "none";
+
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+                    $http({
+                        method: 'POST',
+                        url: apiUrl + '/users/invite',
+                        data: {
+                            email: email,
+                            msg: msg
+                        }
+                    }).success(function (data) {
+
+                        ons.notification.alert({
+                            title: $filter('translate')('EMAIL_SENT'),
+                            message: $filter('translate')('EMAIL_SENT_MSG'),
+                            buttonLabel: 'OK',
+                            animation: 'default',
+                            callback: function () {
+                            }
+                        });
+                    }).error(function (error) {
+                        loading.hide();
+                        console.log(error);
+                    });
+                }
+                else {
+                    document.getElementById("email").style.display = "inline";
+                    document.getElementById("p").style.display = "inline";
+                }
+            }
+            else {
+                ons.notification.alert({
+                    title: $filter('translate')('FILL_EMAIL'),
+                    message: $filter('translate')('FILL_EMAIL_MSG'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
+        } else {
+            ons.notification.alert({
+                title: $filter('translate')('CONNECTION_ERROR'),
+                message: $filter('translate')('CONNECTION_ERROR_MSG'),
+                buttonLabel: 'OK',
+                animation: 'default',
+                callback: function () {
+                }
+            });
+        }
+    };
 });
 
 function validateLogin(username, password) {
