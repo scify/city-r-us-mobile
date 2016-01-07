@@ -83,7 +83,7 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
     $scope.logIn = function (username, password) {
         if (checkConnection()) {
             modal.show();
-            validateLogin(username, password);
+            validateLogin(username, password, $filter);
         } else {
             ons.notification.alert({
                 title: $filter('translate')('CONNECTION_ERROR'),
@@ -123,8 +123,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
             }).success(function (data) {
                 if (data.status == 'success')
                     ons.notification.alert({
-                        title: $filter('translate')('TMP_PWD'),
-                        message: $filter('translate')('TMP_PWD_MSG'),
+                        title: $filter('translate')('EMAIL_SENT'),
+                        message: $filter('translate')('TMP_PWD'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -132,8 +132,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
                     });
                 else
                     ons.notification.alert({
-                        title: $filter('translate')('USER_NOT_FOUND'),
-                        message: $filter('translate')('USER_NOT_FOUND_MSG'),
+                        title: $filter('translate')('ERROR'),
+                        message: $filter('translate')('USER_NOT_FOUND'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -145,8 +145,8 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
         }
         else {
             ons.notification.alert({
-                title: $filter('translate')('FILL_EMAIL'),
-                message: $filter('translate')('FILL_EMAIL_MSG'),
+                title: $filter('translate')('ERROR'),
+                message: $filter('translate')('FILL_EMAIL'),
                 buttonLabel: 'OK',
                 animation: 'default',
                 callback: function () {
@@ -242,7 +242,8 @@ module.controller('TabsController', function ($scope, $translate) {
 });
 
 
-module.controller('AccountController', function ($scope, $http, $translate) {
+module.controller('AccountController', function ($scope, $http, $translate, $filter) {
+
     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
     $http({
         method: 'GET',
@@ -254,6 +255,54 @@ module.controller('AccountController', function ($scope, $http, $translate) {
     }).error(function (error) {
         console.log(error);
     });
+
+    $scope.changePassword = function (password) {
+        if ($scope.password && $scope.passwordConfirmation) {
+
+            if ($scope.password == $scope.passwordConfirmation) {
+                $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+                $http({
+                    method: 'POST',
+                    url: apiUrl + '/users/changePassword',
+                    data: {
+                        password: password
+                    }
+                }).success(function (data) {
+                    ons.notification.alert({
+                        title: $filter('translate')(''),
+                        message: $filter('translate')('PASSWORD_CHANGED'),
+                        buttonLabel: 'OK',
+                        animation: 'default',
+                        callback: function () {
+                        }
+                    });
+                }).error(function (error) {
+                    loading.hide();
+                    console.log(error);
+                });
+            }
+            else {
+                ons.notification.alert({
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('PASSWORDS_NOT_THE_SAME'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
+        }
+        else {
+            ons.notification.alert({
+                title: $filter('translate')('ERROR'),
+                message: $filter('translate')('FILL_PASSWORD'),
+                buttonLabel: 'OK',
+                animation: 'default',
+                callback: function () {
+                }
+            });
+        }
+    };
 });
 
 
@@ -418,8 +467,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
             }
         );
     };
-})
-;
+});
 
 
 module.controller('InviteController', function ($scope, $translate, $filter, $http) {
@@ -448,7 +496,7 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
 
                         ons.notification.alert({
                             title: $filter('translate')('EMAIL_SENT'),
-                            message: $filter('translate')('EMAIL_SENT_MSG'),
+                            message: $filter('translate')('FRIEND_INVITED'),
                             buttonLabel: 'OK',
                             animation: 'default',
                             callback: function () {
@@ -466,8 +514,8 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
             }
             else {
                 ons.notification.alert({
-                    title: $filter('translate')('FILL_EMAIL'),
-                    message: $filter('translate')('FILL_EMAIL_MSG'),
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('FILL_EMAIL'),
                     buttonLabel: 'OK',
                     animation: 'default',
                     callback: function () {
@@ -487,12 +535,13 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
     };
 });
 
-function validateLogin(username, password) {
+
+function validateLogin(username, password, $filter) {
     if (isEmpty(username) && isEmpty(password)) {
         modal.hide();
         ons.notification.alert({
-            title: $filter('translate')('FILL_EMAIL_PASSWORD'),
-            message: $filter('translate')('FILL_EMAIL_PASSWORD_MSG'),
+            title: $filter('translate')('ERROR'),
+            message: $filter('translate')('FILL_EMAIL_PASSWORD'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -501,8 +550,8 @@ function validateLogin(username, password) {
     } else if (isEmpty(username)) {
         modal.hide();
         ons.notification.alert({
-            title: $filter('translate')('FILL_EMAIL'),
-            message: $filter('translate')('FILL_EMAIL_MSG'),
+            title: $filter('translate')('ERROR'),
+            message: $filter('translate')('FILL_EMAIL'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -511,8 +560,8 @@ function validateLogin(username, password) {
     } else if (isEmpty(password)) {
         modal.hide();
         ons.notification.alert({
-            title: $filter('translate')('FILL_PASSWORD'),
-            message: $filter('translate')('FILL_PASSWORD_MSG'),
+            title: $filter('translate')('ERROR'),
+            message: $filter('translate')('FILL_PASSWORD'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -524,6 +573,8 @@ function validateLogin(username, password) {
         xhttp.send();
 
         xhttp.onreadystatechange = function () {
+            console.log(xhttp.responseText)
+            console.log(JSON.parse(xhttp.responseText))
             var response = JSON.parse(xhttp.responseText)
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 modal.hide();
@@ -533,8 +584,8 @@ function validateLogin(username, password) {
                     myNavigator.pushPage('tabs.html', {params: {tab: 0}});
                 } else {
                     ons.notification.alert({
-                        title: $filter('translate')('LOGIN_FAILED'),
-                        message: "" + response.message.description,
+                        title: $filter('translate')('ERROR'),
+                        message: $filter('translate')('USER_NOT_FOUND'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -554,8 +605,8 @@ function validateLogin(username, password) {
             } else if (xhttp.readyState == 4 && xhttp.status == 404) {
                 modal.hide();
                 ons.notification.alert({
-                    title: $filter('translate')('USER_NOT_FOUND'),
-                    message: "" + response.message.description,
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('USER_NOT_FOUND'),
                     buttonLabel: 'OK',
                     animation: 'default',
                     callback: function () {
@@ -563,7 +614,6 @@ function validateLogin(username, password) {
                 });
             }
         }
-
     }
 }
 

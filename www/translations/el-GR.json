@@ -46,34 +46,25 @@
     "INVITE_EMAIL_PLACEHOLDER": "Email φίλου/ων",
 
     "UNDER_CONSTRUCTION" : "Λειτουργία υπό ανάπτυξη",
+    "ERROR": "Σφάλμα",
 
     "CONNECTION_ERROR": "Πρόβλημα σύνδεσης",
     "CONNECTION_ERROR_MSG": "Παρακαλώ βεβαιωθείτε ότι είστε συνδεδεμένοι στο δίκτυο.",
 
-    "TMP_PWD": "Προσωρινός κωδικός",
-    "TMP_PWD_MSG": "Έχει αποσταλεί προσωρινός κωδικός πρόσβασης στο email που δηλώσατε.",
-
-    "USER_NOT_FOUND": "Δεν βρέθηκε χρήστης",
-    "USER_NOT_FOUND_MSG": "Δεν υπάρχει χρήστης με το email που δηλώσατε.",
-
-    "FILL_EMAIL": "Email κενό",
-    "FILL_EMAIL_MSG": "Συμπληρώστε το πεδίο email",
-    "CHECK_EMAIL": "Λανθασμένο email",
-    "CHECK_EMAIL_MSG": "Βεβαιωθείτε ότι το email είναι στη σωστή μορφή",
-
-    "FILL_PASSWORD": "Κωδικός κενός",
-    "FILL_PASSWORD__MSG": "Συμπληρώστε το πεδίο κωδικός",
-
-    "FILL_EMAIL_PASSWORD": "Email και κωδικός κενά",
-    "FILL_EMAIL_PASSWORD_MSG": "Συμπληρώστε τα πεδία email και κωδικός",
-
-
+    "USER_NOT_FOUND": "Δεν υπάρχει χρήστης με το email που δηλώσατε.",
+    "FILL_EMAIL": "Συμπληρώστε το πεδίο email",
+    "CHECK_EMAIL": "Βεβαιωθείτε ότι το email είναι στη σωστή μορφή",
+    "FILL_PASSWORD": "Συμπληρώστε το πεδίο κωδικός",
+    "FILL_EMAIL_PASSWORD": "Συμπληρώστε τα πεδία email και κωδικός",
     "LOGIN_FAILED": "Η σύνδεση απέτυχε",
-
-    "REGISTRATION_FAILED": "Η εγγραφή απέτυχε",
-    "REGISTRATION_FAILED_MSG": "Βεβαιωθείτε οι τα πεδία όνομα, email, κωδικός είναι σωστά.",
-
+    "REGISTRATION_FAILED": "Βεβαιωθείτε οι τα πεδία όνομα, email, κωδικός είναι σωστά.",
     "EMAIL_EXISTS": "Υπάρχει χρήστης με το email που δηλώσατε.",
+    "PASSWORDS_NOT_THE_SAME": "Οι κωδικοί δεν είναι ίδιοι",
+
+    "EMAIL_SENT": "Το email στάλθηκε",
+    "TMP_PWD": "Έχει αποσταλεί προσωρινός κωδικός πρόσβασης στο email που δηλώσατε.",
+    "FRIEND_INVITED": "Έχει αποσταλλεί πρόσκληση στο φίλο σας!",
+    "PASSWORD_CHANGED": "Ο κωδικός σας άλλαξε.",
 
     "CONFIRM_CLOSE_LOCATION": "Είστε σίγουροι ότι θέλετε να γυρίσετε πίσω; Θα χάσετε το καταγεγραμμένο σημείο.",
     "CONFIRM_CLOSE_ROUTE": "Είστε σίγουροι ότι θέλετε να γυρίσετε πίσω; Θα χάσετε την καταγεγραμμένη διαδρομή.",
@@ -84,8 +75,5 @@
     "SUGGEST_TITLE": "Περιγράψτε την αποστολή",
     "EDIT_SUG_BELOW": "Συμπληρώστε εδώ την ιδέα σας",
     "SUG_PLACEHOLDER": "Περιγράψτε με λεπτομέρεια την αποστολή και το ποιούς θα επωφελήσει",
-    "SUG_EMAIL_PLACEHOLDER": "Το email σας",
-
-    "EMAIL_SENT": "Το email στάλθηκε",
-    "EMAIL_SENT_MSG": "Το email στάλθηκε!"
+    "SUG_EMAIL_PLACEHOLDER": "Το email σας"
 }

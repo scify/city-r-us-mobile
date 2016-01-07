@@ -46,31 +46,25 @@
     "INVITE_EMAIL_PLACEHOLDER": "Type your friends' email",
 
     "UNDER_CONSTRUCTION" : "Under construction",
+    "ERROR": "Error",
 
     "CONNECTION_ERROR": "Connection error",
     "CONNECTION_ERROR_MSG": "Please check your connection.",
 
-    "TMP_PWD": "Temporary password",
-    "TMP_PWD_MSG": "A temporary password has been sent to your email.",
-
-    "USER_NOT_FOUND": "User not found",
-    "USER_NOT_FOUND_MSG": "No user was found",
-
-    "FILL_EMAIL": "Empty email",
-    "FILL_EMAIL_MSG": "Field 'email' should not be empty",
-    "FILL_PASSWORD": "Empty password",
-    "FILL_PASSWORD__MSG": "Field 'password' should not be empty",
-    "FILL_EMAIL_PASSWORD": "Empty email and password",
-    "FILL_EMAIL_PASSWORD_MSG": "Enter your email address and password",
-
-    "CHECK_EMAIL": "Wrong email format",
-    "CHECK_EMAIL_MSG": "Make sure that the email is in the correct format",
-
-    "LOGIN_FAILED": "Login failed",
-    "REGISTRATION_FAILED": "Registration failed",
-    "REGISTRATION_FAILED_MSG": "Check your username, email or password",
-
+    "USER_NOT_FOUND": "No user was found",
+    "FILL_EMAIL": "Field 'email' should not be empty",
+    "CHECK_EMAIL": "The email should be in the correct format",
+    "FILL_PASSWORD": "Field 'password' should not be empty",
+    "FILL_EMAIL_PASSWORD": "Enter your email address and password",
+    "CHECK_EMAIL": "Make sure that the email is in the correct format",
+    "REGISTRATION_FAILED": "Check your username, email or password",
     "EMAIL_EXISTS": "A user with this email already exists",
+    "PASSWORDS_NOT_THE_SAME": "The passwords are not the same",
+
+    "EMAIL_SENT": "Your email was sent",
+    "TMP_PWD": "A temporary password has been sent to your email.",
+    "FRIEND_INVITED": "Your friend has been invited!",
+    "PASSWORD_CHANGED": "Your password is changed.",
 
     "CONFIRM_CLOSE_LOCATION": "Are you sure you want to go back? The point will be lost.",
     "CONFIRM_CLOSE_ROUTE": "Are you sure you want to go back? The route will be lost.",
@@ -81,8 +75,5 @@
     "SUGGEST_TITLE": "Describe the mission",
     "EDIT_SUG_BELOW": "Click to edit suggestion bellow",
     "SUG_PLACEHOLDER": "Describe in detail the aim of the mission and who will benefit from it",
-    "SUG_EMAIL_PLACEHOLDER": "Your email",
-
-    "EMAIL_SENT": "Email sent",
-    "EMAIL_SENT_MSG": "Your email was sent!"
+    "SUG_EMAIL_PLACEHOLDER": "Your email"
 }

@@ -6,9 +6,9 @@
     <div class="content">
         <div class="message">
             <h2>{{"CHANGE_PASSWORD"| translate}}</h2>
-            <input type="text" class="text-input text-input--underbar" placeholder="{{'TYPE_NEW_PASSWORD'| translate}}" value="" name="password" required>
-            <input type="text" class="text-input text-input--underbar" placeholder="{{'CONFIRM_NEW_PASSWORD'| translate}}" value="" name="password_confirmation" required>
-            <ons-button modifier="material" class="cruButton" ng-click="invite(email)">
+            <input type="password" class="text-input text-input--underbar" placeholder="{{'TYPE_NEW_PASSWORD'| translate}}" value="" name="password" ng-model="password" required>
+            <input type="password" class="text-input text-input--underbar" placeholder="{{'CONFIRM_NEW_PASSWORD'| translate}}" value="" name="passwordConfirmation" ng-model="passwordConfirmation" required>
+            <ons-button modifier="material" class="cruButton" ng-click="changePassword(password)">
                 <ons-ripple></ons-ripple>
                 {{"CHANGE"| translate}}
             </ons-button>
