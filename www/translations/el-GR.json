@@ -34,7 +34,7 @@
 
     "ABOUT": "Σχετικά με την εφαρμογή",
     "ABOUT_TXT": "Το City-R-US ειναι μια εφαρμογή που επιτρέπει στους κατοίκους της Αθήνας να συμμετέχουν σε αποστολές. Επιλέξτε την αποστολή που σας ενδιαφέρει και βοηθήστε τη πόλη σας! Τα δεδομένα των αποστολών συλλέγονται σε δημόσιο χάρτη.",
-    "PRIVACY": "Privacy",
+    "PRIVACY": "Πολιτική Απορρήτου",
     "PRIVACY_TXT": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
 
     "HAVING_FUN": "Διασκεδάζετε;",
@@ -71,7 +71,7 @@
     "CONFIRM_CLOSE_LOCATION": "Είστε σίγουροι ότι θέλετε να γυρίσετε πίσω; Θα χάσετε το καταγεγραμμένο σημείο.",
     "CONFIRM_CLOSE_ROUTE": "Είστε σίγουροι ότι θέλετε να γυρίσετε πίσω; Θα χάσετε την καταγεγραμμένη διαδρομή.",
 
-    "SUGGEST": "Αποστολή",
+    "SUGGEST": "Προτείνετε Αποστολή",
     "SOMETHING_MISSING": "Λείπει κάτι;",
     "SUGGEST_YOUR_OWN": "Προτείνετε τις δικές σας αποστολές",
     "SUGGEST_TITLE": "Περιγράψτε την αποστολή",

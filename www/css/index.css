@@ -127,6 +127,10 @@ body {
     -webkit-animation: fade 3000ms infinite;
 }
 
+.clear {
+    clear: both;
+}
+
 .splashScreen {
     height: 100%;
 }
@@ -436,17 +440,16 @@ h7 {
     padding: 0.7em;
 }
 
-#recording ons-back-button span i{
+#recording ons-back-button span i {
     margin-left: 0 !important;
     padding-top: 0 !important;
 }
 
-#recording .msg{
+#recording .msg {
     color: #000;
     font-size: 1em;
     position: relative;
-    top: 0.7
-    em;
+    top: 0.7em;
 }
 
 /* MISSION MAP */
@@ -528,8 +531,8 @@ h7 {
 
 .modalBackButton {
     line-height: 0;
-    font-size: 3.1em;
-    margin-left: calc(0.4em - 2%);
+    font-size: 2em;
+    margin-left: 2%;
     padding-top: 0.15em;
     text-shadow: -1px 2px 5px black;
     display: inline-block;
@@ -544,7 +547,6 @@ ons-toolbar ~ .page__content {
 .hidden-toolbar {
     background: none;
 }
-
 
 ons-back-button span i, .back ons-icon {
     line-height: 0 !important;
@@ -633,8 +635,19 @@ div.tab-bar ons-tab.active {
     color: #41454C;
 }
 
+#account .content .message h2 {
+    margin-bottom: 1%;
+}
+
 #account .content .message p {
     line-height: 1.4em;
+    text-align: justify;
+}
+
+#account .content .message.privacy p {
+    font-size: 0.8em;
+    text-align: justify;
+    margin-bottom: 3%;
 }
 
 /* INVITE */
@@ -684,7 +697,7 @@ div.tab-bar ons-tab.active {
 }
 
 #invite .content .textarea {
-    width: 84%;
+    width: 100%;
     margin-top: 1em;
     font-size: 0.9em;
     border-radius: 0;
@@ -703,9 +716,9 @@ div.tab-bar ons-tab.active {
 
 #invite .cruButton, #account .cruButton {
     margin-top: 1em;
-    width: 42%;
-    margin-left: 60%;
-    margin-bottom: 5%;
+    margin-bottom: 1em;
+    display: inline-block;
+    float: right;
 }
 
 #invite .cruButton span span, #account .cruButton span span {
@@ -725,4 +738,8 @@ div.tab-bar ons-tab.active {
     text-align: left;
     font-size: 0.9em;
     font-style: italic;
+}
+
+.loader .modal__content {
+    text-align: center !important;
 }

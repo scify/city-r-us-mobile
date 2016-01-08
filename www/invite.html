@@ -19,7 +19,7 @@
                           fixed-width="false"
                           style="color: red">
                 </ons-icon>
-                <p id="p" style="font-size: 0.8em"> {{'CHECK_EMAIL_MSG'| translate}} </p>
+                <p id="p" style="font-size: 0.8em"> {{'CHECK_EMAIL'| translate}} </p>
             </div>
         </div>
         <ons-button modifier="material" class="cruButton" ng-click="invite(email, msg)">
@@ -27,4 +27,8 @@
             {{"INVITE"| translate}}
         </ons-button>
     </div>
+
+    <ons-modal var="loading" class="loader">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+    </ons-modal>
 </ons-page>

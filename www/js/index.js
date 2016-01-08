@@ -67,6 +67,7 @@ module.run(function ($translate) {
     }
 });
 
+
 module.controller('AppController', function ($scope, $http, $filter, $translate) {
     var missions;
 
@@ -250,6 +251,8 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
         if ($scope.password && $scope.passwordConfirmation) {
 
             if ($scope.password == $scope.passwordConfirmation) {
+                loading.show();
+
                 $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
                 $http({
                     method: 'POST',
@@ -258,6 +261,8 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
                         password: password
                     }
                 }).success(function (data) {
+                    loading.hide();
+
                     ons.notification.alert({
                         title: $filter('translate')(''),
                         message: $filter('translate')('PASSWORD_CHANGED'),
@@ -471,6 +476,7 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
         if (checkConnection()) {
             if (email) {
                 if (email_validation.test(email)) {
+                    loading.show();
                     document.getElementById("email").style.display = "none";
                     document.getElementById("p").style.display = "none";
 
@@ -483,7 +489,7 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
                             msg: msg
                         }
                     }).success(function (data) {
-
+                        loading.hide();
                         ons.notification.alert({
                             title: $filter('translate')('EMAIL_SENT'),
                             message: $filter('translate')('FRIEND_INVITED'),
@@ -530,6 +536,8 @@ module.controller('SuggestMissionController', function ($scope, $translate, $fil
     $scope.suggest = function (description) {
 
         if (description) {
+            loading.show();
+
             $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
             $http({
                 method: 'POST',
@@ -538,6 +546,8 @@ module.controller('SuggestMissionController', function ($scope, $translate, $fil
                     description: description
                 }
             }).success(function (data) {
+                loading.hide();
+
                 ons.notification.alert({
                     title: "",
                     message: $filter('translate')('MISSION_SUGGESTED'),
