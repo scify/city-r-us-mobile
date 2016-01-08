@@ -85,15 +85,6 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
         if (checkConnection()) {
             modal.show();
             validateLogin(username, password, $filter);
-        } else {
-            ons.notification.alert({
-                title: $filter('translate')('CONNECTION_ERROR'),
-                message: $filter('translate')('CONNECTION_ERROR_MSG'),
-                buttonLabel: 'OK',
-                animation: 'default',
-                callback: function () {
-                }
-            });
         }
     };
     $scope.logOut = function () {
@@ -104,15 +95,6 @@ module.controller('AppController', function ($scope, $http, $filter, $translate)
         if (checkConnection()) {
             modal.show();
             registration(username, email, password);
-        } else {
-            ons.notification.alert({
-                title: $filter('translate')('CONNECTION_ERROR'),
-                message: $filter('translate')('CONNECTION_ERROR_MSG'),
-                buttonLabel: 'OK',
-                animation: 'default',
-                callback: function () {
-                }
-            });
         }
     };
     $scope.resetPassword = function (email) {
@@ -518,15 +500,6 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
                     }
                 });
             }
-        } else {
-            ons.notification.alert({
-                title: $filter('translate')('CONNECTION_ERROR'),
-                message: $filter('translate')('CONNECTION_ERROR_MSG'),
-                buttonLabel: 'OK',
-                animation: 'default',
-                callback: function () {
-                }
-            });
         }
     };
 });
@@ -778,6 +751,15 @@ function checkConnection() {
     //alert('Connection type: ' + states[networkState]);
 
     if (networkState == "none") {
+        ons.notification.alert({
+            title: $filter('translate')('CONNECTION_ERROR'),
+            message: $filter('translate')('CONNECTION_ERROR_MSG'),
+            buttonLabel: 'OK',
+            animation: 'default',
+            callback: function () {
+            }
+        });
+
         return false;
     } else {
         return true;

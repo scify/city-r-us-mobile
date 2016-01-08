@@ -650,6 +650,10 @@ div.tab-bar ons-tab.active {
     margin-bottom: 3%;
 }
 
+#account .last_modified{
+    font-style: italic;
+}
+
 /* INVITE */
 
 #invite * {
