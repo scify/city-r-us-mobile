@@ -12,6 +12,7 @@
     "SENDING": "Sending",
     "SUCCESS": "Thank you for contributing! You received {{value}} points.",
     "FAIL": "Something went wrong, please try again",
+    "GPS_ERROR": "Failed to find locations, please make sure that gps is enabled",
     "RECORDING": "Recording route...",
     "START": "Start",
     "CHANGE": "Change",

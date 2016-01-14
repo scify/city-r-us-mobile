@@ -18,8 +18,8 @@
  */
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
-//var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
-var apiUrl = 'http://192.168.1.15/city-r-us-service/public/api/v1';
+var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
+//var apiUrl = 'http://192.168.1.15/city-r-us-service/public/api/v1';
 
 
 module.config(function ($translateProvider) {
@@ -293,7 +293,13 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         position = pos;
         map.initialize(position.coords.latitude, position.coords.longitude);
         map.addMarkerToMap(position.coords.latitude, position.coords.longitude);
-    }, null, options);
+    }, function () {
+        gpsError.show();
+        setTimeout(function() {
+            gpsError.hide();
+            myNavigator.popPage();
+        }, 2000);
+    }, options);
 
     $scope.tagLocation = function () {
         confirmation.show();
@@ -355,7 +361,13 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     navigator.geolocation.getCurrentPosition(function (position) {
         map.initialize(position.coords.latitude, position.coords.longitude);
         map.addRouteMarkerToMap(position.coords.latitude, position.coords.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
-    }, null, options);
+    }, function () {
+        gpsError.show();
+        setTimeout(function() {
+            gpsError.hide();
+            myNavigator.popPage();
+        }, 2000);
+    }, options);
 
 
     //track the user location
