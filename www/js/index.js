@@ -465,7 +465,6 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
     $scope.msg = $filter('translate')('INVITE_MSG_PLACEHOLDER');
 
     $scope.invite = function (email, msg) {
-        console.log(msg);
 
         var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         if (checkConnection()) {
@@ -600,8 +599,6 @@ function validateLogin(username, password, $filter) {
         xhttp.send();
 
         xhttp.onreadystatechange = function () {
-            console.log(xhttp.responseText)
-            console.log(JSON.parse(xhttp.responseText))
             var response = JSON.parse(xhttp.responseText)
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 modal.hide();
