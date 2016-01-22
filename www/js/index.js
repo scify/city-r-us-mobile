@@ -68,8 +68,9 @@ module.run(function ($translate) {
 });
 
 
-module.controller('AppController', function ($scope, $http, $filter, $translate) {
+module.controller('AppController', function ($scope, $http, $window, $filter, $translate) {
     var missions;
+    $scope.min_height =  $window.innerHeight + 'px !important';
 
     $scope.geoConfig = {
         distanceFilter: 5,
