@@ -161,6 +161,7 @@ h7 {
     -webkit-border-radius: 5.5%/40%;
     background-color: #59CAB5;
     margin: auto;
+    display: block;
 }
 
 .cruButton > .label {
@@ -308,8 +309,9 @@ h7 {
 #missions .cruButton {
     height: 6%;
     margin-top: 3%;
-    margin-left: 45%;
-    margin-right: 5%;
+    margin-right: 3%;
+    min-width: 45.3%;
+    float: right;
 }
 
 #missions .cruButton span span {
@@ -320,6 +322,7 @@ h7 {
     background: none;
     padding: 1.5% 0;
     box-sizing: border-box;
+    clear: both;
 }
 
 #missions ons-list-item {
