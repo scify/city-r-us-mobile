@@ -70,14 +70,14 @@ module.run(function ($translate) {
 
 module.controller('AppController', function ($scope, $http, $window, $filter, $translate) {
     var missions;
-    $scope.min_height =  $window.innerHeight + 'px !important';
+    $scope.min_height = $window.innerHeight + 'px !important';
 
     $scope.geoConfig = {
         distanceFilter: 5,
         desiredAccuracy: 10,
         stationaryRadius: 20,
         distanceFilter: 10,
-        debug: true,
+                debug: true,
         locationTimeout: 10,
         stopOnTerminate: true
     };
@@ -286,7 +286,7 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-    var options = {enableHighAccuracy: true};
+    var options = {enableHighAccuracy: true, timeout: 10000};
     var map = new Map();
     var position;
 
@@ -296,7 +296,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
         map.addMarkerToMap(position.coords.latitude, position.coords.longitude);
     }, function () {
         gpsError.show();
-        setTimeout(function() {
+        setTimeout(function () {
             gpsError.hide();
             myNavigator.popPage();
         }, 2000);
@@ -318,38 +318,38 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
             deviceUUID = "test";
 
         $http.post(
-            apiUrl + '/observations/store',
-            {
-                "device_uuid": deviceUUID,
-                "mission_id": $scope.mission.id,
-                "latitude": marker.getPosition().lat(),
-                "longitude": marker.getPosition().lng(),
-                "observation_date": now,
-                "measurements": [{
+                apiUrl + '/observations/store',
+                {
+                    "device_uuid": deviceUUID,
+                    "mission_id": $scope.mission.id,
                     "latitude": marker.getPosition().lat(),
                     "longitude": marker.getPosition().lng(),
-                    "observation_date": now
-                }]
-            }, null)
-            .then(
-            function (data) {
-                loading.hide();
-                $scope.translationData = {
-                    value: data.data.message.points
-                };
-                success.show();
-                setTimeout(function () {
-                    success.hide();
-                }, 2000);
-            },
-            function (error) {
-                loading.hide();
-                fail.show();
-                setTimeout(function () {
-                    fail.hide();
-                }, 2000);
-            }
-        );
+                    "observation_date": now,
+                    "measurements": [{
+                            "latitude": marker.getPosition().lat(),
+                            "longitude": marker.getPosition().lng(),
+                            "observation_date": now
+                        }]
+                }, null)
+                .then(
+                        function (data) {
+                            loading.hide();
+                            $scope.translationData = {
+                                value: data.data.message.points
+                            };
+                            success.show();
+                            setTimeout(function () {
+                                success.hide();
+                            }, 2000);
+                        },
+                        function (error) {
+                            loading.hide();
+                            fail.show();
+                            setTimeout(function () {
+                                fail.hide();
+                            }, 2000);
+                        }
+                );
     };
 });
 
@@ -364,7 +364,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         map.addRouteMarkerToMap(position.coords.latitude, position.coords.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
     }, function () {
         gpsError.show();
-        setTimeout(function() {
+        setTimeout(function () {
             gpsError.hide();
             myNavigator.popPage();
         }, 2000);
@@ -437,25 +437,25 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
         $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
         $http.post(apiUrl + '/observations/store', data, null)
-            .then(
-            function (data) {
-                loading.hide();
-                $scope.translationData = {
-                    value: data.data.message.points
-                };
-                success.show();
-                setTimeout(function () {
-                    success.hide();
-                }, 2000);
-            },
-            function (error) {
-                loading.hide();
-                fail.show();
-                setTimeout(function () {
-                    fail.hide();
-                }, 2000);
-            }
-        );
+                .then(
+                        function (data) {
+                            loading.hide();
+                            $scope.translationData = {
+                                value: data.data.message.points
+                            };
+                            success.show();
+                            setTimeout(function () {
+                                success.hide();
+                            }, 2000);
+                        },
+                        function (error) {
+                            loading.hide();
+                            fail.show();
+                            setTimeout(function () {
+                                fail.hide();
+                            }, 2000);
+                        }
+                );
     };
 });
 
@@ -682,11 +682,11 @@ function registration(username, email, password) {
 function sendRegisterRequest(username, email, password) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", apiUrl + "/users/register?name=" + username
-    + "&email=" + email
-    + "&password=" + password
-    + "&deviceUUID=" + device.uuid
-    + "&model=" + device.model
-    + "&manufacturer=" + device.platform, true);
+            + "&email=" + email
+            + "&password=" + password
+            + "&deviceUUID=" + device.uuid
+            + "&model=" + device.model
+            + "&manufacturer=" + device.platform, true);
     xhttp.send();
 
     xhttp.onreadystatechange = function () {
