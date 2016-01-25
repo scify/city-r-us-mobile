@@ -286,7 +286,7 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-    var options = {enableHighAccuracy: true, timeout: 10000};
+    var options = {enableHighAccuracy: true, timeout: 4000};
     var map = new Map();
     var position;
 
@@ -355,7 +355,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
-    var options = {enableHighAccuracy: true};
+    var options = {enableHighAccuracy: true, timeout: 4000};
 
     var map = new Map();
 
