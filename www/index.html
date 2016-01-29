@@ -67,8 +67,8 @@
             <ons-tabbar var="app.tabbar">
                 <ons-tab ng-repeat="tab in tabs" ng-if="tab.page != ''" page="{{tab.page}}" ng-attr-active="{{tab.active|| undefined}}">
                     <div class="tab-content">
-                        <img src="{{tab.icon}}" alt="{{tab.label}}">
-                        <span>{{tab.label}}</span>
+                        <img ng-attr-src="{{tab.icon}}" ng-attr-alt="{{tab.label}}">
+                        <span ng-bind="tab.label"></span>
                     </div>
                 </ons-tab>
             </ons-tabbar>
