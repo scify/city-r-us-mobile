@@ -19,7 +19,6 @@
 
 var module = ons.bootstrap('app', ['onsen', 'pascalprecht.translate']);
 var apiUrl = 'http://cityrus.projects.development1.scify.org/www/city-r-us-service/public/api/v1';
-//var apiUrl = 'http://192.168.1.15/city-r-us-service/public/api/v1';
 
 
 module.config(function ($translateProvider) {
@@ -34,7 +33,6 @@ module.config(function ($translateProvider) {
     $translateProvider.useSanitizeValueStrategy("escape");
 });
 
-
 module.run(function ($translate) {
     document.addEventListener('deviceready', onDeviceReady, false);
     document.addEventListener("backbutton", onBackKeyDown, false);
@@ -46,16 +44,6 @@ module.run(function ($translate) {
     }
 
     function onDeviceReady() {
-        /*if (typeof navigator.globalization !== "undefined") {
-         navigator.globalization.getPreferredLanguage(function (language) {
-         $translate.use(language.value);
-         }, null);
-         }*/
-
-        document.addEventListener("showkeyboard", function () {
-            alert("Keyboard is ON");
-        }, false);
-
         var login = checkLogin();
         if (login) {
             myNavigator.replacePage('tabs.html', {params: {tab: 0}});
@@ -66,7 +54,6 @@ module.run(function ($translate) {
         }
     }
 });
-
 
 module.controller('AppController', function ($scope, $http, $window, $filter, $translate) {
     var missions;
@@ -88,16 +75,19 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
             validateLogin(username, password, $filter);
         }
     };
+
     $scope.logOut = function () {
         localStorage.removeItem("logintoken");
-        myNavigator.pushPage('login.html', {animation: "fade", pagevalue: "loginPage"});
+        myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
     };
+
     $scope.register = function (username, email, password) {
         if (checkConnection()) {
             modal.show();
             registration(username, email, password);
         }
     };
+
     $scope.resetPassword = function (email) {
         if (!isEmpty(email)) {
             $http({
@@ -138,20 +128,19 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
             });
         }
     };
+
     $scope.callMissions = function () {
-        // loading.show();
+        loading.show();
         $http({
             method: 'GET',
             url: apiUrl + '/missions'
         }).success(function (data) {
-            //  loading.hide();
+            loading.hide();
             missions = data.message.missions;
 
-            //formatting date
             angular.forEach(missions, function (value, key) {
                 value.created = Date.parse(value.created_at);
             });
-
             $scope.missions = data.message.missions;
         }).error(function (error) {
             loading.hide();
@@ -159,13 +148,16 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
             console.log(error);
         });
     };
+
     $scope.suggestMission = function () {
         myNavigator.pushPage('suggest.html');
     };
+
     $scope.showMission = function (index) {
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
     };
+
     $scope.startMission = function (missionType) {
         switch (missionType) {
             case "1":
@@ -604,8 +596,7 @@ function validateLogin(username, password, $filter) {
                 modal.hide();
                 if (response.status == "success") {
                     saveLocalStorage(response.message.token);
-                    //myNavigator.pushPage('account.html', {animation: "fade"});
-                    myNavigator.pushPage('tabs.html', {params: {tab: 0}});
+                    myNavigator.replacePage('tabs.html', {params: {tab: 0}});
                 } else {
                     ons.notification.alert({
                         title: $filter('translate')('ERROR'),
@@ -698,8 +689,7 @@ function sendRegisterRequest(username, email, password) {
                 setTimeout(function () {
                     modal.hide();
                     saveLocalStorage(response.message.token);
-                    //myNavigator.pushPage('account.html', {animation: "fade"});
-                    myNavigator.pushPage('tabs.html', {params: {tab: 0}});
+                    myNavigator.replacePage('tabs.html', {params: {tab: 0}});
                 }, 2000)
             } else {
                 ons.notification.alert({
