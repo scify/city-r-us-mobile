@@ -277,16 +277,19 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
 
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
+    loading.show();
     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-    var options = {enableHighAccuracy: true, timeout: 4000};
+    var options = {enableHighAccuracy: true, timeout: 8000};
     var map = new Map();
     var position;
 
     navigator.geolocation.getCurrentPosition(function (pos) {
+        loading.hide();
         position = pos;
         map.initialize(position.coords.latitude, position.coords.longitude);
         map.addMarkerToMap(position.coords.latitude, position.coords.longitude);
     }, function () {
+        loading.hide();
         gpsError.show();
         setTimeout(function () {
             gpsError.hide();
@@ -347,14 +350,17 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
-    var options = {enableHighAccuracy: true, timeout: 4000};
+    loading.show();
+    var options = {enableHighAccuracy: true, timeout: 8000};
 
     var map = new Map();
 
     navigator.geolocation.getCurrentPosition(function (position) {
+        loading.hide();
         map.initialize(position.coords.latitude, position.coords.longitude);
         map.addRouteMarkerToMap(position.coords.latitude, position.coords.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
     }, function () {
+        loading.hide();
         gpsError.show();
         setTimeout(function () {
             gpsError.hide();
