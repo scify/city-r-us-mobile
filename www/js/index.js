@@ -172,13 +172,15 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     };
 });
 
-
 module.controller('MissionsController', function ($scope) {
     if (typeof $scope.missions === "undefined") {
         $scope.callMissions();
     }
 });
 
+module.controller('MissionController', function ($scope) {
+    backgroundGeoLocation.stop();
+});
 
 module.controller('TabsController', function ($scope, $translate) {
 
