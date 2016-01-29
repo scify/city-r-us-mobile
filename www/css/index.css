@@ -323,6 +323,7 @@ h7 {
     padding: 1.5% 0;
     box-sizing: border-box;
     clear: both;
+    border: 0;
 }
 
 #missions ons-list-item {
@@ -522,7 +523,8 @@ ons-toolbar ~ .page__content {
     top: 0;
 }
 
-.hidden-toolbar {
+ons-toolbar.hidden-toolbar {
+    border: 0;
     background: none;
 }
 
