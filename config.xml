@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="gr.scify.cityrus" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="gr.scify.cityrus" version="0.8.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>City-R-Us Athens</name>
     <description>
         To City-R-US Athens ειναι μια εφαρμογή που επιτρέπει στους κατοίκους και επισκέπτες της Αθήνας να συμμετάσχουν σε αποστολές με σκοπό τη βελτίωση της ζωής στην πόλη.
@@ -35,4 +35,6 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <preference name="orientation" value="portrait"/>
+    <preference name="exit-on-suspend" value="false"/>
+    <preference name="AndroidLaunchMode" value="singleInstance"/>
 </widget>
