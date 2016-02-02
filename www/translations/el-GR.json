@@ -44,7 +44,7 @@
     "MESSAGE": "Μήνυμα",
     "EDIT_MSG_BELOW": "Γράψτε το μήνυμά σας",
     "INVITE_MSG_PLACEHOLDER": "Θα ήθελα να σε προσκαλέσω στην εφαρμογή City-R-US.",
-    "INVITE_EMAIL_PLACEHOLDER": "Email φίλου/ων",
+    "INVITE_EMAIL_PLACEHOLDER": "Email φίλου/ων. Για να προσκαλέσετε παραπάνω από ένα φίλο, χωρίστε τα email με κόμμα",
 
     "UNDER_CONSTRUCTION" : "Λειτουργία υπό ανάπτυξη",
     "ERROR": "Σφάλμα",

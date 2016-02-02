@@ -44,7 +44,7 @@
     "MESSAGE": "Message",
     "EDIT_MSG_BELOW": "Click to edit the message below",
     "INVITE_MSG_PLACEHOLDER": "I'd like to invite you to the City-R-US app.",
-    "INVITE_EMAIL_PLACEHOLDER": "Type your friends' email",
+    "INVITE_EMAIL_PLACEHOLDER": "Type your friends' email. To send an email to more than one friend, separate the emails using a comma.",
 
     "UNDER_CONSTRUCTION" : "Under construction",
     "ERROR": "Error",
