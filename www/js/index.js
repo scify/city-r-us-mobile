@@ -179,10 +179,6 @@ module.controller('MissionsController', function ($scope) {
     }
 });
 
-module.controller('MissionController', function ($scope) {
-    backgroundGeoLocation.stop();
-});
-
 module.controller('TabsController', function ($scope, $translate) {
 
     $scope.tabs = [];
@@ -353,6 +349,21 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
+    $scope.backButtonPressed = function () {
+        backPrevention.show();
+    };
+    
+    $scope.cancelRoute = function () {
+        alert(2);
+        backPrevention.hide();
+    }
+    
+    $scope.continueRoute = function () {
+        alert(1);
+        backPrevention.hide();
+    }
+    
+    document.addEventListener("backbutton", $scope.backButtonPressed, false);
     loading.show();
     var options = {enableHighAccuracy: true, timeout: 8000};
 

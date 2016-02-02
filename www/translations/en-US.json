@@ -78,5 +78,9 @@
     "SUGGEST_TITLE": "Describe the mission",
     "EDIT_SUG_BELOW": "Click to edit suggestion bellow",
     "SUG_PLACEHOLDER": "Describe in detail the aim of the mission and who will benefit from it",
-    "SUG_EMAIL_PLACEHOLDER": "Your email"
+    "SUG_EMAIL_PLACEHOLDER": "Your email",
+    
+    "ROUTE_CANCEL_MESSAGE": "Are you sure you want to cancel recording? Any data will be lost.",
+    "CANCEL": "Yes, cansel",
+    "CONTINUE": "No, continue"
 }

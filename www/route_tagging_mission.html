@@ -1,7 +1,7 @@
 <ons-page id="route_tagging_mission" ng-controller="RouteTaggingMissionController">
     <ons-toolbar fixed-style class="hidden-toolbar" id="recording">
         <div class="left ">
-            <ons-back-button></ons-back-button>
+            <ons-back-button ng-click="backButtonPressed"></ons-back-button>
                 <span class="msg"><ons-icon
                         icon="fa-circle"
                         size="20px"
@@ -49,8 +49,21 @@
     <ons-modal var="gpsError">
         <br> {{"GPS_ERROR" | translate}}
     </ons-modal>
+    
+    <ons-modal var="backPrevention">
+        <h2>{{"ROUTE_CANCEL_MESSAGE" | translate}}</h2>
+        
+        <ons-button modifier="material" class="cruButton" ng-click="cancelRoute()">
+            <ons-ripple></ons-ripple>
+            {{"CANCEL" | translate}}
+        </ons-button>
+        <ons-button modifier="material" class="cruButton" ng-click="continueRoute()">
+            <ons-ripple></ons-ripple>
+            {{"CONTINUE" | translate}}
+        </ons-button>
+    </ons-modal>
 
     <ons-modal var="results">
-
+        
     </ons-modal>
 </ons-page>
