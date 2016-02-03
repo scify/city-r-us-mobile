@@ -64,10 +64,11 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
         distanceFilter: 5,
         desiredAccuracy: 10,
         stationaryRadius: 20,
-        distanceFilter: 10,
-                debug: true,
-        locationTimeout: 10,
-        stopOnTerminate: true
+        debug: false,
+        locationTimeout: 5,
+        stopOnTerminate: true,
+        interval: 5000,
+        fastestInterval: 5000
     };
 
     $scope.logIn = function (username, password) {
@@ -336,6 +337,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
                             success.show();
                             setTimeout(function () {
                                 success.hide();
+                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
                             }, 2000);
                         },
                         function (error) {
@@ -343,6 +345,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
                             fail.show();
                             setTimeout(function () {
                                 fail.hide();
+                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
                             }, 2000);
                         }
                 );
@@ -351,20 +354,27 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
+    myNavigator.on('prepop', function (event) {
+        event.cancel();
+        backPrevention.show();
+    });
+
     $scope.backButtonPressed = function () {
         backPrevention.show();
     };
-    
+
     $scope.cancelRoute = function () {
-        alert(2);
+        document.removeEventListener("backbutton", $scope.backButtonPressed);
+        myNavigator.off('prepop');
+        backgroundGeoLocation.stop();
         backPrevention.hide();
-    }
-    
+        myNavigator.popPage()();
+    };
+
     $scope.continueRoute = function () {
-        alert(1);
         backPrevention.hide();
-    }
-    
+    };
+
     document.addEventListener("backbutton", $scope.backButtonPressed, false);
     loading.show();
     var options = {enableHighAccuracy: true, timeout: 8000};
@@ -411,16 +421,13 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
     backgroundGeoLocation.start();
 
-
-    //stop tracking the user location
     $scope.tagRoute = function () {
-        backgroundGeoLocation.stop();
         confirmation.show();
     };
 
-
-    //send the route to the server
+    //send the route to the server and stop tracking the user location
     $scope.sendRoute = function () {
+        backgroundGeoLocation.stop();
         loading.show();
         var markers = map.getMarkers();
         var deviceUUID = "";
@@ -443,7 +450,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
                 longitude: entry.getPosition().lng(),
                 observation_date: entry.observation_date
             });
-        })
+        });
 
         data.latitude = data.measurements[data.measurements.length - 1].latitude;
         data.longitude = data.measurements[data.measurements.length - 1].longitude;
@@ -459,14 +466,18 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
                             };
                             success.show();
                             setTimeout(function () {
-                                success.hide();
+                                document.removeEventListener("backbutton", $scope.backButtonPressed);
+                                myNavigator.off('prepop');
+                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
                             }, 2000);
                         },
                         function (error) {
                             loading.hide();
                             fail.show();
                             setTimeout(function () {
-                                fail.hide();
+                                document.removeEventListener("backbutton", $scope.backButtonPressed);
+                                myNavigator.off('prepop');
+                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
                             }, 2000);
                         }
                 );
