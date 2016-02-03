@@ -506,6 +506,7 @@ h7 {
 .confirmationDiv .cruButton span span {
     color: white;
     font-size: 1.5em;
+    line-height: 1.6em;
 }
 
 .modalBackButton {
