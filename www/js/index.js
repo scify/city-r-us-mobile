@@ -64,10 +64,11 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
         distanceFilter: 5,
         desiredAccuracy: 10,
         stationaryRadius: 20,
-        distanceFilter: 10,
-                debug: true,
-        locationTimeout: 10,
-        stopOnTerminate: true
+        debug: false,
+        locationTimeout: 5,
+        stopOnTerminate: true,
+        interval: 5000,
+        fastestInterval: 5000
     };
 
     $scope.logIn = function (username, password) {
