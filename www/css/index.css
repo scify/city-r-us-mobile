@@ -634,6 +634,15 @@ div.tab-bar ons-tab.active {
     font-style: italic;
 }
 
+#account .logout{
+    text-align: right;
+}
+
+#account .logout a{
+    color:#59CAB5;
+    font-size:0.8em;
+}
+
 /* INVITE */
 
 #invite * {

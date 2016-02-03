@@ -77,11 +77,6 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
         }
     };
 
-    $scope.logOut = function () {
-        localStorage.removeItem("logintoken");
-        myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
-    };
-
     $scope.register = function (username, email, password) {
         if (checkConnection()) {
             modal.show();
@@ -132,22 +127,24 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
 
     $scope.callMissions = function () {
         loading.show();
-        $http({
-            method: 'GET',
-            url: apiUrl + '/missions'
-        }).success(function (data) {
-            loading.hide();
-            missions = data.message.missions;
+        if (checkConnection()) {
+            $http({
+                method: 'GET',
+                url: apiUrl + '/missions'
+            }).success(function (data) {
+                loading.hide();
+                missions = data.message.missions;
 
-            angular.forEach(missions, function (value, key) {
-                value.created = Date.parse(value.created_at);
+                angular.forEach(missions, function (value, key) {
+                    value.created = Date.parse(value.created_at);
+                });
+                $scope.missions = data.message.missions;
+            }).error(function (error) {
+                loading.hide();
+                alert("error");
+                console.log(error);
             });
-            $scope.missions = data.message.missions;
-        }).error(function (error) {
-            loading.hide();
-            alert("error");
-            console.log(error);
-        });
+        }
     };
 
     $scope.suggestMission = function () {
@@ -219,6 +216,12 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
     }).error(function (error) {
         console.log(error);
     });
+
+    $scope.logout = function () {
+        console.log('clicky')
+        localStorage.removeItem("logintoken");
+        myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
+    };
 
     $scope.changePassword = function (password) {
         if ($scope.password && $scope.passwordConfirmation) {
