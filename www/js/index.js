@@ -108,7 +108,7 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
                 else
                     ons.notification.alert({
                         title: $filter('translate')('ERROR'),
-                        message: $filter('translate')('USER_NOT_FOUND'),
+                        message: $filter('translate')('CREDENTIALS_NOT_VALID'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -203,7 +203,6 @@ module.controller('TabsController', function ($scope, $translate) {
             "page": "account.html"
         });
     });
-
 });
 
 
@@ -620,7 +619,7 @@ function validateLogin(username, password, $filter) {
                 } else {
                     ons.notification.alert({
                         title: $filter('translate')('ERROR'),
-                        message: $filter('translate')('USER_NOT_FOUND'),
+                        message: $filter('translate')('CREDENTIALS_NOT_VALID'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -641,7 +640,7 @@ function validateLogin(username, password, $filter) {
                 modal.hide();
                 ons.notification.alert({
                     title: $filter('translate')('ERROR'),
-                    message: $filter('translate')('USER_NOT_FOUND'),
+                    message: $filter('translate')('CREDENTIALS_NOT_VALID'),
                     buttonLabel: 'OK',
                     animation: 'default',
                     callback: function () {

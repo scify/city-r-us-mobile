@@ -44,7 +44,7 @@
     "MESSAGE": "Message",
     "EDIT_MSG_BELOW": "Click to edit the message below",
     "INVITE_MSG_PLACEHOLDER": "I'd like to invite you to the City-R-US app.",
-    "INVITE_EMAIL_PLACEHOLDER": "Type your friends' email. To send an email to more than one friend, separate the emails using a comma.",
+    "INVITE_EMAIL_PLACEHOLDER": "Type your friend's email",
 
     "UNDER_CONSTRUCTION" : "Under construction",
     "ERROR": "Error",
@@ -52,7 +52,7 @@
     "CONNECTION_ERROR": "Connection error",
     "CONNECTION_ERROR_MSG": "Please check your connection.",
 
-    "USER_NOT_FOUND": "No user was found",
+    "CREDENTIALS_NOT_VALID": "The credentials do not match any user",
     "FILL_EMAIL": "Field 'email' should not be empty",
     "CHECK_EMAIL": "The email should be in the correct format",
     "FILL_PASSWORD": "Field 'password' should not be empty",

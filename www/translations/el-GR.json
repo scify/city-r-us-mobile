@@ -44,7 +44,7 @@
     "MESSAGE": "Μήνυμα",
     "EDIT_MSG_BELOW": "Γράψτε το μήνυμά σας",
     "INVITE_MSG_PLACEHOLDER": "Θα ήθελα να σε προσκαλέσω στην εφαρμογή City-R-US.",
-    "INVITE_EMAIL_PLACEHOLDER": "Email φίλου/ων. Για να προσκαλέσετε παραπάνω από ένα φίλο, χωρίστε τα email με κόμμα",
+    "INVITE_EMAIL_PLACEHOLDER": "Email φίλου",
 
     "UNDER_CONSTRUCTION" : "Λειτουργία υπό ανάπτυξη",
     "ERROR": "Σφάλμα",
@@ -52,7 +52,7 @@
     "CONNECTION_ERROR": "Πρόβλημα σύνδεσης",
     "CONNECTION_ERROR_MSG": "Παρακαλώ βεβαιωθείτε ότι είστε συνδεδεμένοι στο δίκτυο.",
 
-    "USER_NOT_FOUND": "Δεν υπάρχει χρήστης με το email που δηλώσατε.",
+    "CREDENTIALS_NOT_VALID": "Δεν υπάρχει χρήστης με τα στοιχεία που δηλώσατε.",
     "FILL_EMAIL": "Συμπληρώστε το πεδίο email",
     "CHECK_EMAIL": "Βεβαιωθείτε ότι το email είναι στη σωστή μορφή",
     "FILL_PASSWORD": "Συμπληρώστε το πεδίο κωδικός",
