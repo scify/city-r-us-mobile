@@ -698,16 +698,21 @@ div.tab-bar ons-tab.active {
     margin-bottom: 5%;
 }
 
-#invite .cruButton, #account .cruButton {
+#invite .cruButton, #account .cruButton, #backPrevention .cruButton {
     margin-top: 1em;
     margin-bottom: 1em;
     display: inline-block;
     float: right;
 }
 
-#invite .cruButton span span, #account .cruButton span span {
+#invite .cruButton span span, #account .cruButton span span, #backPrevention .cruButton span span {
     font-size: 1.4em;
     line-height: 1.6em;
+}
+
+#backPrevention .cruButton {
+    float: none;
+    margin: 6% 4%;
 }
 
 #invite .content #email {

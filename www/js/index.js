@@ -348,19 +348,26 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
+    myNavigator.on('prepop', function (event) {
+        event.cancel();
+        backPrevention.show();
+    });
+    
     $scope.backButtonPressed = function () {
         backPrevention.show();
     };
     
     $scope.cancelRoute = function () {
-        alert(2);
+        document.removeEventListener("backbutton", $scope.backButtonPressed);
+        myNavigator.off('prepop');
+        backgroundGeoLocation.stop();
         backPrevention.hide();
-    }
+        myNavigator.popPage()();
+    };
     
     $scope.continueRoute = function () {
-        alert(1);
         backPrevention.hide();
-    }
+    };
     
     document.addEventListener("backbutton", $scope.backButtonPressed, false);
     loading.show();
