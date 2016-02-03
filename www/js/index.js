@@ -35,6 +35,11 @@ module.config(function ($translateProvider) {
 });
 
 module.run(function ($translate) {
+    var mission = window.localStorage.getItem('recording_mission');
+    if (mission !== null) {
+        navigator.app.loadUrl("file:///android_asset/www/index.html", {wait:2000, loadingDialog:"Wait,Loading App", loadUrlTimeoutValue: 60000})
+    }
+    
     document.addEventListener('deviceready', onDeviceReady, false);
     document.addEventListener("backbutton", onBackKeyDown, false);
 
@@ -337,7 +342,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
                             success.show();
                             setTimeout(function () {
                                 success.hide();
-                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
+                                myNavigator.resetToPage('tabs.html', {animation: 'fade'});
                             }, 2000);
                         },
                         function (error) {
@@ -345,7 +350,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
                             fail.show();
                             setTimeout(function () {
                                 fail.hide();
-                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
+                                myNavigator.resetToPage('tabs.html', {animation: 'fade'});
                             }, 2000);
                         }
                 );
@@ -354,17 +359,10 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
-    myNavigator.on('prepop', function (event) {
-        event.cancel();
-        backPrevention.show();
-    });
-
-    $scope.backButtonPressed = function () {
-        backPrevention.show();
-    };
 
     $scope.cancelRoute = function () {
         document.removeEventListener("backbutton", $scope.backButtonPressed);
+        window.localStorage.removeItem('recording_mission');
         myNavigator.off('prepop');
         backgroundGeoLocation.stop();
         backPrevention.hide();
@@ -375,7 +373,6 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         backPrevention.hide();
     };
 
-    document.addEventListener("backbutton", $scope.backButtonPressed, false);
     loading.show();
     var options = {enableHighAccuracy: true, timeout: 8000};
 
@@ -383,6 +380,20 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
     navigator.geolocation.getCurrentPosition(function (position) {
         loading.hide();
+
+        window.localStorage.setItem('recording_mission', $scope.mission);
+
+        myNavigator.on('prepop', function (event) {
+            event.cancel();
+            backPrevention.show();
+        });
+
+        $scope.backButtonPressed = function () {
+            backPrevention.show();
+        };
+
+        document.addEventListener("backbutton", $scope.backButtonPressed, false);
+
         map.initialize(position.coords.latitude, position.coords.longitude);
         map.addRouteMarkerToMap(position.coords.latitude, position.coords.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
     }, function () {
@@ -468,7 +479,8 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
                             setTimeout(function () {
                                 document.removeEventListener("backbutton", $scope.backButtonPressed);
                                 myNavigator.off('prepop');
-                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
+                                window.localStorage.removeItem('recording_mission');
+                                myNavigator.resetToPage('tabs.html', {animation: 'fade'});
                             }, 2000);
                         },
                         function (error) {
@@ -477,7 +489,8 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
                             setTimeout(function () {
                                 document.removeEventListener("backbutton", $scope.backButtonPressed);
                                 myNavigator.off('prepop');
-                                myNavigator.resetToPage('missions.html', {animation: 'fade'});
+                                window.localStorage.removeItem('recording_mission');
+                                myNavigator.resetToPage('tabs.html', {animation: 'fade'});
                             }, 2000);
                         }
                 );
