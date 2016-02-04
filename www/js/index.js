@@ -252,7 +252,7 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
 
         $scope.changePassword = function (password) {
             if (checkConnection($filter, true)) {
-                if ($scope.password && $scope.passwordConfirmation ) {
+                if ($scope.password && $scope.passwordConfirmation && ($scope.password).trim().length > 0) {
                     if($scope.password.length>5) {
 
                         if ($scope.password == $scope.passwordConfirmation) {
@@ -791,7 +791,7 @@ function saveLocalStorage(logintoken) {
 function registration(username, email, password, $filter) {
 
     var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    if (username && email && password && password.length > 5) {
+    if (username && email && password && password.trim().length > 0 && password.length > 5) {
         if (email_validation.test(email)) {
             sendRegisterRequest(username, email, password, $filter);
         } else {
