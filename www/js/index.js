@@ -34,7 +34,7 @@ module.config(function ($translateProvider) {
 });
 
 module.run(function ($translate) {
-    var mission = window.localStorage.getItem('recording_mission');
+    var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
     if (mission !== null) {
         navigator.app.loadUrl("file:///android_asset/www/index.html", {
             wait: 2000,
@@ -222,15 +222,14 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
             }).success(function (data) {
                 user = data.message.user;
                 $scope.user = data.message.user;
-                localStorage['user'] = data.message.user;
-                console.log(user);
+                localStorage.setItem('user', JSON.stringify(data.message.user));
             }).error(function (error) {
                 console.log(error);
             });
         }
         else {
-            if (localStorage['user'] != null && localStorage['user'] != '')
-                $scope.user = localStorage['user'];
+            if (localStorage.getItem('user')!= null && localStorage.getItem('user') != '')
+                $scope.user = JSON.parse(localStorage.getItem('user'));
         }
 
         $scope.logout = function () {
@@ -322,57 +321,80 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
     $scope.tagLocation = function () {
         if (checkConnection($filter, true)) {
-            confirmation.show();
+            if (map.getMarkers().length>0)
+                confirmation.show();
+            else{
+                ons.notification.alert({
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('NO_LOCATION'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
         }
     };
 
     $scope.sendLocation = function () {
         if (checkConnection($filter, true)) {
-            loading.show();
-            var marker = map.getMarkers()[0];
-            var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
-            var deviceUUID = "";
+            if (map.getMarkers().length>0) {
+                loading.show();
+                var marker = map.getMarkers()[0];
+                var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
+                var deviceUUID = "";
 
-            if (device.uuid != null)
-                deviceUUID = device.uuid;
-            else
-                deviceUUID = "test";
+                if (device.uuid != null)
+                    deviceUUID = device.uuid;
+                else
+                    deviceUUID = "test";
 
-            $http.post(
-                apiUrl + '/observations/store',
-                {
-                    "device_uuid": deviceUUID,
-                    "mission_id": $scope.mission.id,
-                    "latitude": marker.getPosition().lat(),
-                    "longitude": marker.getPosition().lng(),
-                    "observation_date": now,
-                    "measurements": [{
+                $http.post(
+                    apiUrl + '/observations/store',
+                    {
+                        "device_uuid": deviceUUID,
+                        "mission_id": $scope.mission.id,
                         "latitude": marker.getPosition().lat(),
                         "longitude": marker.getPosition().lng(),
-                        "observation_date": now
-                    }]
-                }, null)
-                .then(
-                function (data) {
-                    loading.hide();
-                    $scope.translationData = {
-                        value: data.data.message.points
-                    };
-                    success.show();
-                    setTimeout(function () {
-                        success.hide();
-                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                    }, 2000);
-                },
-                function (error) {
-                    loading.hide();
-                    fail.show();
-                    setTimeout(function () {
-                        fail.hide();
-                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                    }, 2000);
-                }
-            );
+                        "observation_date": now,
+                        "measurements": [{
+                            "latitude": marker.getPosition().lat(),
+                            "longitude": marker.getPosition().lng(),
+                            "observation_date": now
+                        }]
+                    }, null)
+                    .then(
+                    function (data) {
+                        loading.hide();
+                        $scope.translationData = {
+                            value: data.data.message.points
+                        };
+                        success.show();
+                        setTimeout(function () {
+                            success.hide();
+                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                        }, 2000);
+                    },
+                    function (error) {
+                        loading.hide();
+                        fail.show();
+                        setTimeout(function () {
+                            fail.hide();
+                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                        }, 2000);
+                    }
+                );
+            }
+            else{
+                ons.notification.alert({
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('NO_LOCATION'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
         }
     };
 
@@ -404,13 +426,12 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         navigator.geolocation.getCurrentPosition(function (position) {
             loading.hide();
 
-            window.localStorage.setItem('recording_mission', $scope.mission);
+            window.localStorage.setItem('recording_mission', JSON.stringify($scope.mission));
 
             myNavigator.on('prepop', function (event) {
                 event.cancel();
                 backPrevention.show();
             });
-
 
             $scope.backButtonPressed = function () {
                 backPrevention.show();
@@ -457,69 +478,96 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         backgroundGeoLocation.start();
     }
 
+
     $scope.tagRoute = function () {
-        confirmation.show();
+        if (checkConnection($filter, true)) {
+            console.log(map.getMarkers().length)
+            if (map.getMarkers().length>1)
+                confirmation.show();
+            else{
+                ons.notification.alert({
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('NO_ROUTE'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
+        }
     };
 
     //send the route to the server and stop tracking the user location
     $scope.sendRoute = function () {
         if (checkConnection($filter, true)) {
-            backgroundGeoLocation.stop();
-            loading.show();
-            var markers = map.getMarkers();
-            var deviceUUID = "";
-            var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
+            if (map.getMarkers().length > 1) {
+                backgroundGeoLocation.stop();
+                loading.show();
+                var markers = map.getMarkers();
+                var deviceUUID = "";
+                var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
 
-            if (device.uuid != null)
-                deviceUUID = device.uuid;
-            else
-                deviceUUID = "test";
+                if (device.uuid != null)
+                    deviceUUID = device.uuid;
+                else
+                    deviceUUID = "test";
 
-            var data = {
-                "device_uuid": deviceUUID,
-                "mission_id": $scope.mission.id,
-                "measurements": []
-            };
+                var data = {
+                    "device_uuid": deviceUUID,
+                    "mission_id": $scope.mission.id,
+                    "measurements": []
+                };
 
-            markers.forEach(function (entry) {
-                data.measurements.push({
-                    latitude: entry.getPosition().lat(),
-                    longitude: entry.getPosition().lng(),
-                    observation_date: entry.observation_date
+                markers.forEach(function (entry) {
+                    data.measurements.push({
+                        latitude: entry.getPosition().lat(),
+                        longitude: entry.getPosition().lng(),
+                        observation_date: entry.observation_date
+                    });
                 });
-            });
 
-            data.latitude = data.measurements[data.measurements.length - 1].latitude;
-            data.longitude = data.measurements[data.measurements.length - 1].longitude;
-            data.observation_date = now;
+                data.latitude = data.measurements[data.measurements.length - 1].latitude;
+                data.longitude = data.measurements[data.measurements.length - 1].longitude;
+                data.observation_date = now;
 
-            $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-            $http.post(apiUrl + '/observations/store', data, null)
-                .then(
-                function (data) {
-                    loading.hide();
-                    $scope.translationData = {
-                        value: data.data.message.points
-                    };
-                    success.show();
-                    setTimeout(function () {
-                        document.removeEventListener("backbutton", $scope.backButtonPressed);
-                        myNavigator.off('prepop');
-                        window.localStorage.removeItem('recording_mission');
-                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                    }, 2000);
-                },
-                function (error) {
-                    loading.hide();
-                    fail.show();
-                    setTimeout(function () {
-                        document.removeEventListener("backbutton", $scope.backButtonPressed);
-                        myNavigator.off('prepop');
-                        window.localStorage.removeItem('recording_mission');
-                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                    }, 2000);
-                }
-            );
+                $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+                $http.post(apiUrl + '/observations/store', data, null)
+                    .then(
+                    function (data) {
+                        loading.hide();
+                        $scope.translationData = {
+                            value: data.data.message.points
+                        };
+                        success.show();
+                        setTimeout(function () {
+                            document.removeEventListener("backbutton", $scope.backButtonPressed);
+                            myNavigator.off('prepop');
+                            window.localStorage.removeItem('recording_mission');
+                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                        }, 2000);
+                    },
+                    function (error) {
+                        loading.hide();
+                        fail.show();
+                        setTimeout(function () {
+                            document.removeEventListener("backbutton", $scope.backButtonPressed);
+                            myNavigator.off('prepop');
+                            window.localStorage.removeItem('recording_mission');
+                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                        }, 2000);
+                    }
+                );
+            }
+            else{
+                ons.notification.alert({
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('NO_ROUTE'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
         }
     };
 });

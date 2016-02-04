@@ -74,6 +74,8 @@
 
     "CONFIRM_CLOSE_LOCATION": "Are you sure you want to go back? The point will be lost.",
     "CONFIRM_CLOSE_ROUTE": "Are you sure you want to go back? The route will be lost.",
+    "NO_ROUTE": "No route was recorded",
+    "NO_LOCATION": "No location was recorded",
 
     "SUGGEST": "Suggest a mission",
     "SOMETHING_MISSING": "Is there something missing?",
