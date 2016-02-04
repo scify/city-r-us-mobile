@@ -23,6 +23,8 @@
     "ALREADY_HAVE_ACCOUNT": "I already have an account",
     "NAME": "name",
     "PASSWORD": "password",
+    "ACCEPT_TERMS": "I agree to the terms of use",
+    "PLEASE_ACCEPT_TERMS": "Please accept the terms of use",
 
     "PLEASE_WAIT": "Please wait...",
     "CONTRIBUTOR": "contributor",
@@ -64,6 +66,7 @@
     "REGISTRATION_FAILED": "Check your username, email or password",
     "EMAIL_EXISTS": "A user with this email already exists",
     "PASSWORDS_NOT_THE_SAME": "The passwords are not the same",
+    "PASSWORD_NOT_OK": "The password must be at least 6 characters long",
     "FILL_DESCRIPTION": "Field description should not be null",
 
     "EMAIL_SENT": "Your email was sent",

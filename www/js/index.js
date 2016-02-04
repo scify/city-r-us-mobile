@@ -33,6 +33,7 @@ module.config(function ($translateProvider) {
     $translateProvider.useSanitizeValueStrategy("escape");
 });
 
+
 module.run(function ($translate) {
     var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
     if (mission !== null) {
@@ -86,10 +87,22 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
         }
     };
 
-    $scope.register = function (username, email, password) {
+    $scope.register = function (username, email, password, terms) {
         if (checkConnection($filter, true)) {
-            modal.show();
-            registration(username, email, password);
+            console.log(terms)
+            if (terms === 'undefined' || !terms) {
+                ons.notification.alert({
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('PLEASE_ACCEPT_TERMS'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            } else {
+                modal.show();
+                registration(username, email, password, $filter);
+            }
         }
     };
 
@@ -228,7 +241,7 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
             });
         }
         else {
-            if (localStorage.getItem('user')!= null && localStorage.getItem('user') != '')
+            if (localStorage.getItem('user') != null && localStorage.getItem('user') != '')
                 $scope.user = JSON.parse(localStorage.getItem('user'));
         }
 
@@ -239,38 +252,51 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
 
         $scope.changePassword = function (password) {
             if (checkConnection($filter, true)) {
-                if ($scope.password && $scope.passwordConfirmation) {
+                if ($scope.password && $scope.passwordConfirmation ) {
+                    if($scope.password.length>5) {
 
-                    if ($scope.password == $scope.passwordConfirmation) {
-                        loading.show();
+                        if ($scope.password == $scope.passwordConfirmation) {
+                            loading.show();
 
-                        $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-                        $http({
-                            method: 'POST',
-                            url: apiUrl + '/users/changePassword',
-                            data: {
-                                password: password
-                            }
-                        }).success(function (data) {
-                            loading.hide();
+                            $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+                            $http({
+                                method: 'POST',
+                                url: apiUrl + '/users/changePassword',
+                                data: {
+                                    password: password
+                                }
+                            }).success(function (data) {
+                                loading.hide();
 
+                                ons.notification.alert({
+                                    title: $filter('translate')(''),
+                                    message: $filter('translate')('PASSWORD_CHANGED'),
+                                    buttonLabel: 'OK',
+                                    animation: 'default',
+                                    callback: function () {
+                                    }
+                                });
+                            }).error(function (error) {
+                                loading.hide();
+                                console.log(error);
+                            });
+                        }
+
+                        else {
                             ons.notification.alert({
-                                title: $filter('translate')(''),
-                                message: $filter('translate')('PASSWORD_CHANGED'),
+                                title: $filter('translate')('ERROR'),
+                                message: $filter('translate')('PASSWORDS_NOT_THE_SAME'),
                                 buttonLabel: 'OK',
                                 animation: 'default',
                                 callback: function () {
                                 }
                             });
-                        }).error(function (error) {
-                            loading.hide();
-                            console.log(error);
-                        });
+                        }
                     }
-                    else {
+                    else{
                         ons.notification.alert({
                             title: $filter('translate')('ERROR'),
-                            message: $filter('translate')('PASSWORDS_NOT_THE_SAME'),
+                            message: $filter('translate')('PASSWORD_NOT_OK'),
                             buttonLabel: 'OK',
                             animation: 'default',
                             callback: function () {
@@ -321,9 +347,9 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
     $scope.tagLocation = function () {
         if (checkConnection($filter, true)) {
-            if (map.getMarkers().length>0)
+            if (map.getMarkers().length > 0)
                 confirmation.show();
-            else{
+            else {
                 ons.notification.alert({
                     title: $filter('translate')('ERROR'),
                     message: $filter('translate')('NO_LOCATION'),
@@ -338,7 +364,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
     $scope.sendLocation = function () {
         if (checkConnection($filter, true)) {
-            if (map.getMarkers().length>0) {
+            if (map.getMarkers().length > 0) {
                 loading.show();
                 var marker = map.getMarkers()[0];
                 var now = $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss");
@@ -385,7 +411,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
                     }
                 );
             }
-            else{
+            else {
                 ons.notification.alert({
                     title: $filter('translate')('ERROR'),
                     message: $filter('translate')('NO_LOCATION'),
@@ -482,9 +508,9 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     $scope.tagRoute = function () {
         if (checkConnection($filter, true)) {
             console.log(map.getMarkers().length)
-            if (map.getMarkers().length>1)
+            if (map.getMarkers().length > 1)
                 confirmation.show();
-            else{
+            else {
                 ons.notification.alert({
                     title: $filter('translate')('ERROR'),
                     message: $filter('translate')('NO_ROUTE'),
@@ -558,7 +584,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
                     }
                 );
             }
-            else{
+            else {
                 ons.notification.alert({
                     title: $filter('translate')('ERROR'),
                     message: $filter('translate')('NO_ROUTE'),
@@ -762,26 +788,20 @@ function saveLocalStorage(logintoken) {
     }
 }
 
-function registration(username, email, password) {
+function registration(username, email, password, $filter) {
+
     var email_validation = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    if (username && email && password) {
+    if (username && email && password && password.length > 5) {
         if (email_validation.test(email)) {
-            document.getElementById("email").style.display = "none";
-            sendRegisterRequest(username, email, password);
+            sendRegisterRequest(username, email, password, $filter);
         } else {
             modal.hide();
-            document.getElementById("email").style.display = "block";
         }
     } else {
         modal.hide();
-        if (email_validation.test(email)) {
-            document.getElementById("email").style.display = "none";
-        } else {
-            document.getElementById("email").style.display = "inline";
-        }
         ons.notification.alert({
-            title: $filter('translate')('REGISTRATION_FAILED'),
-            message: "" + response.message.description,
+            title: $filter('translate')('ERROR'),
+            message: $filter('translate')('REGISTRATION_FAILED'),
             buttonLabel: 'OK',
             animation: 'default',
             callback: function () {
@@ -790,7 +810,7 @@ function registration(username, email, password) {
     }
 }
 
-function sendRegisterRequest(username, email, password) {
+function sendRegisterRequest(username, email, password, $filter) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", apiUrl + "/users/register?name=" + username
         + "&email=" + email
@@ -812,14 +832,15 @@ function sendRegisterRequest(username, email, password) {
                     myNavigator.replacePage('tabs.html', {params: {tab: 0}});
                 }, 2000)
             } else {
-                ons.notification.alert({
-                    title: $filter('translate')('REGISTRATION_FAILED'),
-                    message: "" + response.message.description,
-                    buttonLabel: 'OK',
-                    animation: 'default',
-                    callback: function () {
-                    }
-                });
+                if (response.message.code == "email_exists")
+                    ons.notification.alert({
+                        title: $filter('translate')('ERROR'),
+                        message: $filter('translate')('EMAIL_EXISTS'),
+                        buttonLabel: 'OK',
+                        animation: 'default',
+                        callback: function () {
+                        }
+                    });
             }
         } else if (xhttp.readyState == 4 && xhttp.status == 400) {
             modal.hide();

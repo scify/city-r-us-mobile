@@ -13,12 +13,14 @@
         <input type="text" class="inputText" ng-model="username_r" placeholder="{{'NAME'| translate}}">
         <input type="text" class="inputText" ng-model="email" placeholder="email">
         <input type="password" class="inputText" ng-model="password_r" placeholder="{{'PASSWORD'| translate}}">
-        <div id="email">
-            <ons-icon icon="ion-information-circled"> {{"EMAIL_NOT_VALID"| translate}}</ons-icon>
-        </div>
+        <label class="checkbox">
+            <input type="checkbox" name="terms" ng-model="terms" value="false">
+            <div class="checkbox__checkmark"></div>
+            <a href="http://city-r-us.scify.org/web/public/termsAndConditions" target="_blank">{{ "ACCEPT_TERMS" | translate }}</a>
+        </label>
         <section class="loginButtonContainer">
             <ons-button modifier="large" class="cruButton"
-                        ng-click="register(username_r, email, password_r)">
+                        ng-click="register(username_r, email, password_r, terms)">
                 {{"REGISTER"| translate}}
             </ons-button>
         </section>
