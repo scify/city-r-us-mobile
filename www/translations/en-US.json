@@ -52,6 +52,8 @@
 
     "CONNECTION_ERROR": "Connection error",
     "CONNECTION_ERROR_MSG": "Please check your connection.",
+    "NO_CONNECTION": "No internet connection.",
+    "RETRY": "Retry",
 
     "CREDENTIALS_NOT_VALID": "The credentials do not match any user",
     "FILL_EMAIL": "Field 'email' should not be empty",

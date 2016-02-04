@@ -742,3 +742,7 @@ div.tab-bar ons-tab.active {
 .loader .modal__content {
     text-align: center !important;
 }
+
+.no-connection{
+    margin-top:30%;
+}
