@@ -1,4 +1,5 @@
 <ons-page id="invite" modifier="invite" ng-controller="InviteController">
+
     <div class="header gradient">
         <p class="title1">{{"HAVING_FUN"| translate}}</p>
         <p class="title2">{{"INVITE_FRIENDS"| translate}}</p>
@@ -27,4 +28,10 @@
             {{"INVITE"| translate}}
         </ons-button>
     </div>
+    <ons-modal var="modal" class="loader">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+        <br>
+        <br> {{"PLEASE_WAIT"| translate}}
+        <br>
+    </ons-modal>
 </ons-page>

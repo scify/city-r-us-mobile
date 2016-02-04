@@ -608,9 +608,7 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
         if (checkConnection($filter, true)) {
             if (email) {
                 if (email_validation.test(email)) {
-                    loading.show();
-                    document.getElementById("email").style.display = "none";
-                    document.getElementById("p").style.display = "none";
+                    modal.show();
 
                     $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
                     $http({
@@ -621,7 +619,7 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
                             msg: msg
                         }
                     }).success(function (data) {
-                        loading.hide();
+                        modal.hide();
                         ons.notification.alert({
                             title: $filter('translate')('EMAIL_SENT'),
                             message: $filter('translate')('FRIEND_INVITED'),
@@ -631,16 +629,13 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
                             }
                         });
                     }).error(function (error) {
-                        loading.hide();
+                        modal.hide();
                         console.log(error);
                     });
                 }
-                else {
-                    document.getElementById("email").style.display = "inline";
-                    document.getElementById("p").style.display = "inline";
-                }
             }
             else {
+                modal.hide();
                 ons.notification.alert({
                     title: $filter('translate')('ERROR'),
                     message: $filter('translate')('FILL_EMAIL'),
@@ -660,7 +655,7 @@ module.controller('SuggestMissionController', function ($scope, $translate, $fil
         if (checkConnection($filter, true)) {
 
             if (description) {
-                loading.show();
+                modal.show();
 
                 $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
                 $http({
@@ -670,7 +665,7 @@ module.controller('SuggestMissionController', function ($scope, $translate, $fil
                         description: description
                     }
                 }).success(function (data) {
-                    loading.hide();
+                    modal.hide();
 
                     ons.notification.alert({
                         title: "",
@@ -681,7 +676,7 @@ module.controller('SuggestMissionController', function ($scope, $translate, $fil
                         }
                     });
                 }).error(function (error) {
-                    loading.hide();
+                    modal.hide();
                     console.log(error);
                 });
             }
