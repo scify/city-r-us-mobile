@@ -4,12 +4,6 @@
         <h1>City-R-US</h1>
     </div>
     <div align="center">
-        <ons-modal var="modal">
-            <ons-icon icon="ion-load-c" spin="true"></ons-icon>
-            <br>
-            <br> {{"PLEASE_WAIT"| translate}}
-            <br>
-        </ons-modal>
         <form name="myForm" id="loginForm">
             <input type="text" class="inputText" name="user" ng-model="username_v"
                    placeholder="email" required>
@@ -29,4 +23,10 @@
             </ons-button>
         </section>
     </div>
+    <ons-modal var="modal">
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+        <br>
+        <br> {{"PLEASE_WAIT"| translate}}
+        <br>
+    </ons-modal>
 </ons-page>

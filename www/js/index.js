@@ -69,16 +69,6 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     var missions;
     $scope.min_height = $window.innerHeight + 'px !important';
 
-    $scope.geoConfig = {
-        distanceFilter: 8,
-        desiredAccuracy: 0,
-        stationaryRadius: 8,
-        debug: false,
-        locationTimeout: 10,
-        stopOnTerminate: true,
-        locationService: backgroundGeoLocation.service.ANDROID_DISTANCE_FILTER
-    };
-
     $scope.logIn = function (username, password) {
         if (checkConnection($filter, true)) {
             modal.show();
@@ -436,6 +426,17 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         backPrevention.hide();
         myNavigator.popPage()();
     };
+
+    $scope.geoConfig = {
+        distanceFilter: 8,
+        desiredAccuracy: 0,
+        stationaryRadius: 8,
+        debug: false,
+        locationTimeout: 10,
+        stopOnTerminate: true,
+        locationService: backgroundGeoLocation.service.ANDROID_DISTANCE_FILTER
+    };
+
 
     $scope.continueRoute = function () {
         backPrevention.hide();
