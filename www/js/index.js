@@ -216,76 +216,65 @@ module.controller('TabsController', function ($scope, $translate) {
 
 module.controller('AccountController', function ($scope, $http, $translate, $filter) {
 
-        if (checkConnection($filter, false)) {
-            $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-            $http({
-                method: 'GET',
-                url: apiUrl + '/users/byJWT'
-            }).success(function (data) {
-                user = data.message.user;
-                $scope.user = data.message.user;
-                localStorage.setItem('user', JSON.stringify(data.message.user));
-            }).error(function (error) {
-                console.log(error);
-            });
-        }
-        else {
-            if (localStorage.getItem('user') != null && localStorage.getItem('user') != '')
-                $scope.user = JSON.parse(localStorage.getItem('user'));
-        }
+    if (checkConnection($filter, false)) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+        $http({
+            method: 'GET',
+            url: apiUrl + '/users/byJWT'
+        }).success(function (data) {
+            user = data.message.user;
+            $scope.user = data.message.user;
+            localStorage.setItem('user', JSON.stringify(data.message.user));
+        }).error(function (error) {
+            console.log(error);
+        });
+    }
+    else {
+        if (localStorage.getItem('user') != null && localStorage.getItem('user') != '')
+            $scope.user = JSON.parse(localStorage.getItem('user'));
+    }
 
-        $scope.logout = function () {
-            localStorage.removeItem("logintoken");
-            myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
-        };
+    $scope.logout = function () {
+        localStorage.removeItem("logintoken");
+        myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
+    };
 
-        $scope.changePassword = function (password) {
-            if (checkConnection($filter, true)) {
-                if ($scope.password && $scope.passwordConfirmation && ($scope.password).trim().length > 0) {
-                    if($scope.password.length>5) {
+    $scope.changePassword = function (password) {
+        if (checkConnection($filter, true)) {
+            if ($scope.password && $scope.passwordConfirmation && ($scope.password).trim().length > 0) {
+                if ($scope.password.length > 5) {
 
-                        if ($scope.password == $scope.passwordConfirmation) {
-                            loading.show();
+                    if ($scope.password == $scope.passwordConfirmation) {
+                        loading.show();
 
-                            $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
-                            $http({
-                                method: 'POST',
-                                url: apiUrl + '/users/changePassword',
-                                data: {
-                                    password: password
-                                }
-                            }).success(function (data) {
-                                loading.hide();
+                        $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
+                        $http({
+                            method: 'POST',
+                            url: apiUrl + '/users/changePassword',
+                            data: {
+                                password: password
+                            }
+                        }).success(function (data) {
+                            loading.hide();
 
-                                ons.notification.alert({
-                                    title: $filter('translate')(''),
-                                    message: $filter('translate')('PASSWORD_CHANGED'),
-                                    buttonLabel: 'OK',
-                                    animation: 'default',
-                                    callback: function () {
-                                    }
-                                });
-                            }).error(function (error) {
-                                loading.hide();
-                                console.log(error);
-                            });
-                        }
-
-                        else {
                             ons.notification.alert({
-                                title: $filter('translate')('ERROR'),
-                                message: $filter('translate')('PASSWORDS_NOT_THE_SAME'),
+                                title: $filter('translate')(''),
+                                message: $filter('translate')('PASSWORD_CHANGED'),
                                 buttonLabel: 'OK',
                                 animation: 'default',
                                 callback: function () {
                                 }
                             });
-                        }
+                        }).error(function (error) {
+                            loading.hide();
+                            console.log(error);
+                        });
                     }
-                    else{
+
+                    else {
                         ons.notification.alert({
                             title: $filter('translate')('ERROR'),
-                            message: $filter('translate')('PASSWORD_NOT_OK'),
+                            message: $filter('translate')('PASSWORDS_NOT_THE_SAME'),
                             buttonLabel: 'OK',
                             animation: 'default',
                             callback: function () {
@@ -296,7 +285,7 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
                 else {
                     ons.notification.alert({
                         title: $filter('translate')('ERROR'),
-                        message: $filter('translate')('FILL_PASSWORD'),
+                        message: $filter('translate')('PASSWORD_NOT_OK'),
                         buttonLabel: 'OK',
                         animation: 'default',
                         callback: function () {
@@ -304,10 +293,21 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
                     });
                 }
             }
-        };
-    }
+            else {
+                ons.notification.alert({
+                    title: $filter('translate')('ERROR'),
+                    message: $filter('translate')('FILL_PASSWORD'),
+                    buttonLabel: 'OK',
+                    animation: 'default',
+                    callback: function () {
+                    }
+                });
+            }
+        }
+    };
+}
 )
-;
+        ;
 
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
@@ -365,40 +365,40 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
                     deviceUUID = "test";
 
                 $http.post(
-                    apiUrl + '/observations/store',
-                    {
-                        "device_uuid": deviceUUID,
-                        "mission_id": $scope.mission.id,
-                        "latitude": marker.getPosition().lat(),
-                        "longitude": marker.getPosition().lng(),
-                        "observation_date": now,
-                        "measurements": [{
+                        apiUrl + '/observations/store',
+                        {
+                            "device_uuid": deviceUUID,
+                            "mission_id": $scope.mission.id,
                             "latitude": marker.getPosition().lat(),
                             "longitude": marker.getPosition().lng(),
-                            "observation_date": now
-                        }]
-                    }, null)
-                    .then(
-                    function (data) {
-                        loading.hide();
-                        $scope.translationData = {
-                            value: data.data.message.points
-                        };
-                        success.show();
-                        setTimeout(function () {
-                            success.hide();
-                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                        }, 2000);
-                    },
-                    function (error) {
-                        loading.hide();
-                        fail.show();
-                        setTimeout(function () {
-                            fail.hide();
-                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                        }, 2000);
-                    }
-                );
+                            "observation_date": now,
+                            "measurements": [{
+                                    "latitude": marker.getPosition().lat(),
+                                    "longitude": marker.getPosition().lng(),
+                                    "observation_date": now
+                                }]
+                        }, null)
+                        .then(
+                                function (data) {
+                                    loading.hide();
+                                    $scope.translationData = {
+                                        value: data.data.message.points
+                                    };
+                                    success.show();
+                                    setTimeout(function () {
+                                        success.hide();
+                                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                                    }, 2000);
+                                },
+                                function (error) {
+                                    loading.hide();
+                                    fail.show();
+                                    setTimeout(function () {
+                                        fail.hide();
+                                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                                    }, 2000);
+                                }
+                        );
             }
             else {
                 ons.notification.alert({
@@ -418,6 +418,16 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
 
+    $scope.geoConfig = {
+        distanceFilter: 8,
+        desiredAccuracy: 10,
+        stationaryRadius: 8,
+        debug: false,
+        locationTimeout: 8,
+        stopOnTerminate: true,
+        locationService: backgroundGeoLocation.service.ANDROID_DISTANCE_FILTER
+    };
+
     $scope.cancelRoute = function () {
         document.removeEventListener("backbutton", $scope.backButtonPressed);
         window.localStorage.removeItem('recording_mission');
@@ -426,17 +436,6 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         backPrevention.hide();
         myNavigator.popPage()();
     };
-
-    $scope.geoConfig = {
-        distanceFilter: 8,
-        desiredAccuracy: 0,
-        stationaryRadius: 8,
-        debug: false,
-        locationTimeout: 10,
-        stopOnTerminate: true,
-        locationService: backgroundGeoLocation.service.ANDROID_DISTANCE_FILTER
-    };
-
 
     $scope.continueRoute = function () {
         backPrevention.hide();
@@ -504,7 +503,6 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         backgroundGeoLocation.start();
     }
 
-
     $scope.tagRoute = function () {
         if (checkConnection($filter, true)) {
             console.log(map.getMarkers().length)
@@ -558,31 +556,31 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
                 $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
                 $http.post(apiUrl + '/observations/store', data, null)
-                    .then(
-                    function (data) {
-                        loading.hide();
-                        $scope.translationData = {
-                            value: data.data.message.points
-                        };
-                        success.show();
-                        setTimeout(function () {
-                            document.removeEventListener("backbutton", $scope.backButtonPressed);
-                            myNavigator.off('prepop');
-                            window.localStorage.removeItem('recording_mission');
-                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                        }, 2000);
-                    },
-                    function (error) {
-                        loading.hide();
-                        fail.show();
-                        setTimeout(function () {
-                            document.removeEventListener("backbutton", $scope.backButtonPressed);
-                            myNavigator.off('prepop');
-                            window.localStorage.removeItem('recording_mission');
-                            myNavigator.resetToPage('tabs.html', {animation: 'fade'});
-                        }, 2000);
-                    }
-                );
+                        .then(
+                                function (data) {
+                                    loading.hide();
+                                    $scope.translationData = {
+                                        value: data.data.message.points
+                                    };
+                                    success.show();
+                                    setTimeout(function () {
+                                        document.removeEventListener("backbutton", $scope.backButtonPressed);
+                                        myNavigator.off('prepop');
+                                        window.localStorage.removeItem('recording_mission');
+                                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                                    }, 2000);
+                                },
+                                function (error) {
+                                    loading.hide();
+                                    fail.show();
+                                    setTimeout(function () {
+                                        document.removeEventListener("backbutton", $scope.backButtonPressed);
+                                        myNavigator.off('prepop');
+                                        window.localStorage.removeItem('recording_mission');
+                                        myNavigator.resetToPage('tabs.html', {animation: 'fade'});
+                                    }, 2000);
+                                }
+                        );
             }
             else {
                 ons.notification.alert({
@@ -808,11 +806,11 @@ function registration(username, email, password, $filter) {
 function sendRegisterRequest(username, email, password, $filter) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", apiUrl + "/users/register?name=" + username
-        + "&email=" + email
-        + "&password=" + password
-        + "&deviceUUID=" + device.uuid
-        + "&model=" + device.model
-        + "&manufacturer=" + device.platform, true);
+            + "&email=" + email
+            + "&password=" + password
+            + "&deviceUUID=" + device.uuid
+            + "&model=" + device.model
+            + "&manufacturer=" + device.platform, true);
     xhttp.send();
 
     xhttp.onreadystatechange = function () {
