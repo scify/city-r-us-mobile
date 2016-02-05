@@ -70,14 +70,13 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     $scope.min_height = $window.innerHeight + 'px !important';
 
     $scope.geoConfig = {
-        distanceFilter: 5,
-        desiredAccuracy: 10,
-        stationaryRadius: 20,
+        distanceFilter: 8,
+        desiredAccuracy: 0,
+        stationaryRadius: 8,
         debug: false,
-        locationTimeout: 5,
+        locationTimeout: 10,
         stopOnTerminate: true,
-        interval: 5000,
-        fastestInterval: 5000
+        locationService: backgroundGeoLocation.service.ANDROID_DISTANCE_FILTER
     };
 
     $scope.logIn = function (username, password) {
