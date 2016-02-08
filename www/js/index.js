@@ -35,15 +35,6 @@ module.config(function ($translateProvider) {
 
 
 module.run(function ($translate) {
-    var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
-    if (mission !== null) {
-        navigator.app.loadUrl("file:///android_asset/www/index.html", {
-            wait: 2000,
-            loadingDialog: "Wait,Loading App",
-            loadUrlTimeoutValue: 60000
-        })
-    }
-
     document.addEventListener('deviceready', onDeviceReady, false);
     document.addEventListener("backbutton", onBackKeyDown, false);
 
@@ -66,6 +57,14 @@ module.run(function ($translate) {
 });
 
 module.controller('AppController', function ($scope, $http, $window, $filter, $translate) {
+    var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
+    if (mission !== null) {
+        window.localStorage.removeItem('recording_mission');
+        navigator.app.loadUrl("file:///android_asset/www/index.html", {
+            loadUrlTimeoutValue: 60000
+        });
+    }
+    
     var missions;
     $scope.min_height = $window.innerHeight + 'px !important';
 
