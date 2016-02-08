@@ -61,13 +61,8 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     if (mission !== null) {
         window.localStorage.removeItem('recording_mission');
         backgroundGeoLocation.stop();
-        navigator.app.loadUrl("file:///android_asset/www/index.html", {
-            delay: 1000,
-            loadUrlTimeoutValue: 60000
-        });
-        navigator.app.exitApp();
     }
-    
+
     var missions;
     $scope.min_height = $window.innerHeight + 'px !important';
 
@@ -420,14 +415,15 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
 
+    $scope.first = true;
+
     $scope.geoConfig = {
-        distanceFilter: 5,
+        distanceFilter: 0,
         desiredAccuracy: 0,
-        stationaryRadius: 5,
+        stationaryRadius: 0,
         debug: false,
-        locationTimeout: 4,
-        stopOnTerminate: true,
-        locationService: backgroundGeoLocation.service.ANDROID_DISTANCE_FILTER
+        locationTimeout: 5,
+        stopOnTerminate: true
     };
 
     $scope.cancelRoute = function () {
@@ -446,39 +442,30 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     if (checkConnection($filter, true)) {
 
         loading.show();
-        var options = {enableHighAccuracy: true, timeout: 8000};
-
         var map = new Map();
-
-        navigator.geolocation.getCurrentPosition(function (position) {
-            loading.hide();
-
-            window.localStorage.setItem('recording_mission', JSON.stringify($scope.mission));
-
-            myNavigator.on('prepop', function (event) {
-                event.cancel();
-                backPrevention.show();
-            });
-
-            $scope.backButtonPressed = function () {
-                backPrevention.show();
-            };
-
-            document.addEventListener("backbutton", $scope.backButtonPressed, false);
-
-            map.initialize(position.coords.latitude, position.coords.longitude);
-        }, function () {
-            loading.hide();
-            gpsError.show();
-            setTimeout(function () {
-                gpsError.hide();
-                myNavigator.popPage();
-            }, 2000);
-        }, options);
-
 
         //track the user location
         backgroundGeoLocation.configure(function (location) {
+            console.log(location);
+            if ($scope.first) {
+                console.log('first');
+                $scope.first = false;
+                loading.hide();
+
+                myNavigator.on('prepop', function (event) {
+                    event.cancel();
+                    backPrevention.show();
+                });
+
+                $scope.backButtonPressed = function () {
+                    backPrevention.show();
+                };
+
+                document.addEventListener("backbutton", $scope.backButtonPressed, false);
+
+                map.initialize(location.latitude, location.longitude);
+            }
+
             map.addRouteMarkerToMap(location.latitude, location.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
 
             var markers = map.getMarkers().length;
@@ -499,9 +486,19 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
             }
         }, function (error) {
             console.log(error);
+            window.localStorage.removeItem('recording_mission');
+            loading.hide();
+            gpsError.show();
+            setTimeout(function () {
+                gpsError.hide();
+                myNavigator.popPage();
+            }, 2000);
         }, $scope.geoConfig);
-
+        
+        window.localStorage.setItem('recording_mission', JSON.stringify($scope.mission));
         backgroundGeoLocation.start();
+    } else {
+        myNavigator.popPage();
     }
 
     $scope.tagRoute = function () {
