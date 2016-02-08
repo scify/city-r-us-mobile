@@ -23,7 +23,7 @@ function Map() {
 
     this.initialize = function (lat, lon) {
         this.map = this.show(lat, lon);
-    }
+    };
 
     this.show = function (lat, lon) {
         return new google.maps.Map(
@@ -60,18 +60,21 @@ function Map() {
             icon: 'img/marker.png',
             observation_date: date
         });
+        if (this.markers.length >= 1) {
+            this.markers[this.markers.length - 1].setMap(null);
+        }
         this.markers.push(marker);
-        console.log('added marker')
     };
 
     this.drawLine = function (path) {
-        new google.maps.Polyline({
+        var line = new google.maps.Polyline({
             path: path,
-            map: this.map,
             strokeColor: '#3366cc',
-            fillOpacity: 0.4
+            fillOpacity: 0.4,
+            strokeWeight: 1
         });
-        console.log('drew line')
+        
+        line.setMap(this.map);
     };
 
     this.getMarkers = function() {

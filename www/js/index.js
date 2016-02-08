@@ -60,9 +60,12 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
     if (mission !== null) {
         window.localStorage.removeItem('recording_mission');
+        backgroundGeoLocation.stop();
         navigator.app.loadUrl("file:///android_asset/www/index.html", {
+            delay: 1000,
             loadUrlTimeoutValue: 60000
         });
+        navigator.app.exitApp();
     }
     
     var missions;
@@ -418,11 +421,11 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
 
     $scope.geoConfig = {
-        distanceFilter: 8,
-        desiredAccuracy: 10,
-        stationaryRadius: 8,
+        distanceFilter: 5,
+        desiredAccuracy: 0,
+        stationaryRadius: 5,
         debug: false,
-        locationTimeout: 8,
+        locationTimeout: 4,
         stopOnTerminate: true,
         locationService: backgroundGeoLocation.service.ANDROID_DISTANCE_FILTER
     };
@@ -464,7 +467,6 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
             document.addEventListener("backbutton", $scope.backButtonPressed, false);
 
             map.initialize(position.coords.latitude, position.coords.longitude);
-            map.addRouteMarkerToMap(position.coords.latitude, position.coords.longitude, $filter('date')(new Date(), "yyyy-MM-dd hh:mm:ss"));
         }, function () {
             loading.hide();
             gpsError.show();
@@ -504,7 +506,6 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
     $scope.tagRoute = function () {
         if (checkConnection($filter, true)) {
-            console.log(map.getMarkers().length)
             if (map.getMarkers().length > 1)
                 confirmation.show();
             else {
