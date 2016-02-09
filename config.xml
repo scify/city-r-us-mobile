@@ -37,4 +37,5 @@
     <preference name="orientation" value="portrait"/>
     <preference name="exit-on-suspend" value="false"/>
     <preference name="AndroidLaunchMode" value="singleInstance"/>
+    <preference name="keepRunning" value="true"/>
 </widget>

@@ -418,12 +418,17 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     $scope.first = true;
 
     $scope.geoConfig = {
-        distanceFilter: 0,
         desiredAccuracy: 0,
-        stationaryRadius: 0,
+        stationaryRadius: 1,
         debug: false,
-        locationTimeout: 5,
-        stopOnTerminate: true
+        distanceFilter: 1,
+        stopOnTerminate: true,
+        locationTimeout: 2,
+        locationService: backgroundGeoLocation.service.ANDROID_FUSED_LOCATION,
+        activityType: 'Other',
+        interval: 2000,
+        fastestInterval: 1000,
+        ativitiesInterval: 60000
     };
 
     $scope.cancelRoute = function () {
@@ -447,6 +452,11 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         //track the user location
         backgroundGeoLocation.configure(function (location) {
             console.log(location);
+            
+            if (location.accuracy > 30) {
+                return;
+            }
+            
             if ($scope.first) {
                 console.log('first');
                 $scope.first = false;
