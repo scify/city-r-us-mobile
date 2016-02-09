@@ -90,5 +90,7 @@
     
     "ROUTE_CANCEL_MESSAGE": "Are you sure you want to cancel recording? Any data will be lost.",
     "CANCEL": "Yes, cansel",
-    "CONTINUE": "No, continue"
+    "CONTINUE": "No, continue",
+    
+    "VERSION": "City-r-us v0.9.5"
 }
