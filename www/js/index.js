@@ -58,8 +58,8 @@ module.run(function ($translate) {
 
 module.controller('AppController', function ($scope, $http, $window, $filter, $translate) {
     window.analytics.startTrackerWithId('UA-31632742-15');
-    window.analytics.debugMode();
     window.analytics.trackView('login');
+    window.analytics.trackEvent('Page', 'View', 'Login');
     
     var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
     if (mission !== null) {
@@ -78,7 +78,6 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     };
 
     $scope.register = function (username, email, password, terms) {
-        window.analytics.trackView('register');
         if (checkConnection($filter, true)) {
             console.log(terms)
             if (terms === 'undefined' || !terms) {
@@ -166,7 +165,8 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
 
     $scope.showMission = function (index) {
         window.analytics.trackView('mission');
-        window.analytics.trackEvent('Action', 'Opened mission', '', index);
+        window.analytics.trackEvent('Page', 'View', 'Mission');
+        window.analytics.trackEvent('Mission', 'Opened', '', missions[index].id);
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
     };
@@ -174,11 +174,11 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     $scope.startMission = function (missionType) {
         switch (missionType) {
             case "1":
-                window.analytics.trackEvent('Action', 'Started mission', 'Point', $scope.mission.id);
+                window.analytics.trackEvent('Mission', 'Started', 'Point', $scope.mission.id);
                 myNavigator.pushPage('point_tagging_mission.html');
                 break;
             case "2":
-                window.analytics.trackEvent('Action', 'Started mission', 'Route', $scope.mission.id);
+                window.analytics.trackEvent('Mission', 'Started', 'Route', $scope.mission.id);
                 myNavigator.pushPage('route_tagging_mission.html');
                 break;
             default:
@@ -192,6 +192,7 @@ module.controller('MissionsController', function ($scope) {
         $scope.callMissions();
     }
     window.analytics.trackView('missions');
+    window.analytics.trackEvent('Page', 'View', 'Missions');
 });
 
 module.controller('TabsController', function ($scope, $translate) {
@@ -220,9 +221,14 @@ module.controller('TabsController', function ($scope, $translate) {
     });
 });
 
+module.controller('RegisterController', function($scope) {
+    window.analytics.trackView('register');
+    window.analytics.trackEvent('Page', 'View', 'Register');
+});
 
 module.controller('AccountController', function ($scope, $http, $translate, $filter) {
     window.analytics.trackView('account');
+    window.analytics.trackEvent('Page', 'View', 'Account');
 
     if (checkConnection($filter, false)) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
@@ -320,6 +326,7 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
     window.analytics.trackView('point_tagging_mission');
+    window.analytics.trackEvent('Page', 'View', 'Point Tagging Mission');
     if (checkConnection($filter, true)) {
 
         loading.show();
@@ -361,7 +368,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
     };
 
     $scope.sendLocation = function () {
-        window.analytics.trackEvent('Action', 'Compled mission', 'Point', $scope.mission.id);
+        window.analytics.trackEvent('Mission', 'Completed', 'Point', $scope.mission.id);
         if (checkConnection($filter, true)) {
             if (map.getMarkers().length > 0) {
                 loading.show();
@@ -428,6 +435,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
     window.analytics.trackView('route_tagging_mission');
+    window.analytics.trackEvent('Page', 'View', 'Route Tagging Vision');
 
     $scope.first = true;
 
@@ -446,13 +454,13 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     };
 
     $scope.cancelRoute = function () {
-        window.analytics.trackEvent('Action', 'Canceled mission', 'Route', $scope.mission.id);
+        window.analytics.trackEvent('Mission', 'Canceled', 'Route', $scope.mission.id);
         document.removeEventListener("backbutton", $scope.backButtonPressed);
         window.localStorage.removeItem('recording_mission');
         myNavigator.off('prepop');
         backgroundGeoLocation.stop();
         backPrevention.hide();
-        myNavigator.popPage()();
+        myNavigator.popPage();
     };
 
     $scope.continueRoute = function () {
@@ -545,7 +553,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
     //send the route to the server and stop tracking the user location
     $scope.sendRoute = function () {
-        window.analytics.trackEvent('Action', 'Compled mission', 'Route', $scope.mission.id);
+        window.analytics.trackEvent('Mission', 'Completed', 'Route', $scope.mission.id);
         if (checkConnection($filter, true)) {
             if (map.getMarkers().length > 1) {
                 backgroundGeoLocation.stop();
@@ -621,6 +629,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
 module.controller('InviteController', function ($scope, $translate, $filter, $http) {
     window.analytics.trackView('invite');
+    window.analytics.trackEvent('Page', 'View', 'Invite');
 
     $scope.msg = $filter('translate')('INVITE_MSG_PLACEHOLDER');
 
@@ -673,6 +682,7 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
 
 module.controller('SuggestMissionController', function ($scope, $translate, $filter, $http) {
     window.analytics.trackView('suggest');
+    window.analytics.trackEvent('Page', 'View', 'Suggest');
 
     $scope.suggest = function (description) {
         if (checkConnection($filter, true)) {
