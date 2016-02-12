@@ -45,22 +45,21 @@ module.run(function ($translate) {
     }
 
     function onDeviceReady() {
+        window.analytics.startTrackerWithId('UA-31632742-15');
         var login = checkLogin();
         if (login) {
             myNavigator.replacePage('tabs.html', {params: {tab: 0}});
         } else {
             setTimeout(function () {
+                window.analytics.trackView('login');
+                window.analytics.trackEvent('Page', 'View', 'Login');
                 myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
-            }, 3000);
+            }, 1000);
         }
     }
 });
 
 module.controller('AppController', function ($scope, $http, $window, $filter, $translate) {
-    window.analytics.startTrackerWithId('UA-31632742-15');
-    window.analytics.trackView('login');
-    window.analytics.trackEvent('Page', 'View', 'Login');
-    
     var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
     if (mission !== null) {
         window.localStorage.removeItem('recording_mission');
@@ -221,7 +220,7 @@ module.controller('TabsController', function ($scope, $translate) {
     });
 });
 
-module.controller('RegisterController', function($scope) {
+module.controller('RegisterController', function ($scope) {
     window.analytics.trackView('register');
     window.analytics.trackEvent('Page', 'View', 'Register');
 });
@@ -475,11 +474,11 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         //track the user location
         backgroundGeoLocation.configure(function (location) {
             console.log(location);
-            
+
             if (location.accuracy > 30) {
                 return;
             }
-            
+
             if ($scope.first) {
                 console.log('first');
                 $scope.first = false;
@@ -527,7 +526,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
                 myNavigator.popPage();
             }, 2000);
         }, $scope.geoConfig);
-        
+
         window.localStorage.setItem('recording_mission', JSON.stringify($scope.mission));
         backgroundGeoLocation.start();
     } else {
