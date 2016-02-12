@@ -57,6 +57,10 @@ module.run(function ($translate) {
 });
 
 module.controller('AppController', function ($scope, $http, $window, $filter, $translate) {
+    window.analytics.startTrackerWithId('UA-31632742-15');
+    window.analytics.debugMode();
+    window.analytics.trackView('login');
+    
     var mission = JSON.parse(window.localStorage.getItem('recording_mission'));
     if (mission !== null) {
         window.localStorage.removeItem('recording_mission');
@@ -74,6 +78,7 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     };
 
     $scope.register = function (username, email, password, terms) {
+        window.analytics.trackView('register');
         if (checkConnection($filter, true)) {
             console.log(terms)
             if (terms === 'undefined' || !terms) {
@@ -160,6 +165,8 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     };
 
     $scope.showMission = function (index) {
+        window.analytics.trackView('mission');
+        window.analytics.trackEvent('Action', 'Opened mission', '', index);
         $scope.mission = missions[index];
         myNavigator.pushPage('mission.html');
     };
@@ -167,9 +174,11 @@ module.controller('AppController', function ($scope, $http, $window, $filter, $t
     $scope.startMission = function (missionType) {
         switch (missionType) {
             case "1":
+                window.analytics.trackEvent('Action', 'Started mission', 'Point', $scope.mission.id);
                 myNavigator.pushPage('point_tagging_mission.html');
                 break;
             case "2":
+                window.analytics.trackEvent('Action', 'Started mission', 'Route', $scope.mission.id);
                 myNavigator.pushPage('route_tagging_mission.html');
                 break;
             default:
@@ -182,6 +191,7 @@ module.controller('MissionsController', function ($scope) {
     if (typeof $scope.missions === "undefined") {
         $scope.callMissions();
     }
+    window.analytics.trackView('missions');
 });
 
 module.controller('TabsController', function ($scope, $translate) {
@@ -212,6 +222,7 @@ module.controller('TabsController', function ($scope, $translate) {
 
 
 module.controller('AccountController', function ($scope, $http, $translate, $filter) {
+    window.analytics.trackView('account');
 
     if (checkConnection($filter, false)) {
         $http.defaults.headers.common.Authorization = 'Bearer ' + localStorage.getItem("logintoken");
@@ -308,6 +319,7 @@ module.controller('AccountController', function ($scope, $http, $translate, $fil
 
 
 module.controller('PointTaggingMissionController', function ($scope, $http, $translate, $filter) {
+    window.analytics.trackView('point_tagging_mission');
     if (checkConnection($filter, true)) {
 
         loading.show();
@@ -349,6 +361,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
     };
 
     $scope.sendLocation = function () {
+        window.analytics.trackEvent('Action', 'Compled mission', 'Point', $scope.mission.id);
         if (checkConnection($filter, true)) {
             if (map.getMarkers().length > 0) {
                 loading.show();
@@ -414,6 +427,7 @@ module.controller('PointTaggingMissionController', function ($scope, $http, $tra
 
 
 module.controller('RouteTaggingMissionController', function ($scope, $http, $translate, $filter) {
+    window.analytics.trackView('route_tagging_mission');
 
     $scope.first = true;
 
@@ -432,6 +446,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
     };
 
     $scope.cancelRoute = function () {
+        window.analytics.trackEvent('Action', 'Canceled mission', 'Route', $scope.mission.id);
         document.removeEventListener("backbutton", $scope.backButtonPressed);
         window.localStorage.removeItem('recording_mission');
         myNavigator.off('prepop');
@@ -530,6 +545,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
     //send the route to the server and stop tracking the user location
     $scope.sendRoute = function () {
+        window.analytics.trackEvent('Action', 'Compled mission', 'Route', $scope.mission.id);
         if (checkConnection($filter, true)) {
             if (map.getMarkers().length > 1) {
                 backgroundGeoLocation.stop();
@@ -604,6 +620,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 });
 
 module.controller('InviteController', function ($scope, $translate, $filter, $http) {
+    window.analytics.trackView('invite');
 
     $scope.msg = $filter('translate')('INVITE_MSG_PLACEHOLDER');
 
@@ -655,6 +672,7 @@ module.controller('InviteController', function ($scope, $translate, $filter, $ht
 });
 
 module.controller('SuggestMissionController', function ($scope, $translate, $filter, $http) {
+    window.analytics.trackView('suggest');
 
     $scope.suggest = function (description) {
         if (checkConnection($filter, true)) {
@@ -741,6 +759,7 @@ function validateLogin(username, password, $filter) {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 modal.hide();
                 if (response.status == "success") {
+                    window.analytics.setUserId(response.message.token);
                     saveLocalStorage(response.message.token);
                     myNavigator.replacePage('tabs.html', {params: {tab: 0}});
                 } else {
@@ -872,6 +891,7 @@ function checkLogin() {
     if (localStorage.getItem("logintoken") === null) {
         return false;
     } else {
+        window.analytics.setUserId(localStorage.getItem("logintoken"));
         return true;
     }
 }

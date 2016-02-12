@@ -109,6 +109,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "gr.scify.cityrus"
+        },
+        "cordova-plugin-google-analytics": {
+            "PACKAGE_NAME": "gr.scify.cityrus"
         }
     },
     "dependent_plugins": {}
