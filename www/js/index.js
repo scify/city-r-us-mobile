@@ -764,7 +764,7 @@ function validateLogin(username, password, $filter) {
         xhttp.send();
 
         xhttp.onreadystatechange = function () {
-            var response = JSON.parse(xhttp.responseText)
+            var response = JSON.parse(xhttp.responseText);
             if (xhttp.readyState == 4 && xhttp.status == 200) {
                 modal.hide();
                 if (response.status == "success") {
