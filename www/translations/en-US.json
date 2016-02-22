@@ -23,7 +23,8 @@
     "ALREADY_HAVE_ACCOUNT": "I already have an account",
     "NAME": "name",
     "PASSWORD": "password",
-    "ACCEPT_TERMS": "I agree to the terms of use",
+    "ACCEPT_TERMS_A": " I agree to the ",
+    "ACCEPT_TERMS_B": "terms of use",
     "PLEASE_ACCEPT_TERMS": "Please accept the terms of use",
 
     "PLEASE_WAIT": "Please wait...",

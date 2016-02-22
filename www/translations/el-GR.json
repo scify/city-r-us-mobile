@@ -23,7 +23,8 @@
     "ALREADY_HAVE_ACCOUNT": "Έχω ήδη λογαριασμό",
     "NAME": "όνομα",
     "PASSWORD": "κωδικός",
-    "ACCEPT_TERMS": "Αποδέχομαι τους όρους χρήσης",
+    "ACCEPT_TERMS_A": " Αποδέχομαι τους ",
+    "ACCEPT_TERMS_B": "όρους χρήσης",
     "PLEASE_ACCEPT_TERMS": "Παρακαλώ αποδεχτείτε τους όρους χρήσης",
 
     "PLEASE_WAIT": "Παρακαλώ περιμένετε...",
