@@ -412,6 +412,14 @@ h7 {
     line-height: 1.6em;
 }
 
+#mission .map-link {
+    color: #59CAB5;
+    text-decoration: underline;
+    float: right;
+    margin-top: calc(-5% - 1em);
+    margin-bottom: 0px;
+}
+
 #recording {
     height: 65px;
     background-color: #ffffff;
