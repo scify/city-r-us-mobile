@@ -754,3 +754,9 @@ div.tab-bar ons-tab.active {
 .no-connection{
     margin-top:30%;
 }
+
+/*  IOS FIXES  */
+
+.page__status-bar-fill ~ ons-toolbar ~ .page__content {
+    top: 20px;
+}

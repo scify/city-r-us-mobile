@@ -33,6 +33,7 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <preference name="DisallowOverscroll" value="true"/>
     </platform>
     <preference name="orientation" value="portrait"/>
     <preference name="exit-on-suspend" value="false"/>
