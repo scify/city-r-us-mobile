@@ -475,7 +475,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
         backgroundGeoLocation.configure(function (location) {
             console.log(location);
 
-            if (location.accuracy > 30) {
+            if (device.platform === "Android" && location.accuracy > 30) {
                 return;
             }
 
@@ -516,6 +516,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
                 ];
                 map.drawLine(path);
             }
+            backgroundGeoLocation.finish();
         }, function (error) {
             console.log(error);
             window.localStorage.removeItem('recording_mission');
@@ -529,6 +530,7 @@ module.controller('RouteTaggingMissionController', function ($scope, $http, $tra
 
         window.localStorage.setItem('recording_mission', JSON.stringify($scope.mission));
         backgroundGeoLocation.start();
+        backgroundGeoLocation.changePace(true);
     } else {
         myNavigator.popPage();
     }

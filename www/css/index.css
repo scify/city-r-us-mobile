@@ -760,3 +760,11 @@ div.tab-bar ons-tab.active {
 .page__status-bar-fill ~ ons-toolbar ~ .page__content {
     top: 20px;
 }
+
+.page__status-bar-fill ~ #recording {
+    height: 85px;
+}
+
+.page__status-bar-fill ~ .page__content > #map-container {
+    height: calc(100vh - 20px);
+}
