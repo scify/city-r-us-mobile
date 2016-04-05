@@ -28,8 +28,14 @@ module.config(function ($translateProvider) {
         suffix: '.json'
     });
 
-    $translateProvider.preferredLanguage('el-GR');
     $translateProvider.fallbackLanguage('el-GR');
+    navigator.globalization.getPreferredLanguage(function (language) {
+        if (language.value.indexOf('el') > -1) {
+            $translateProvider.preferredLanguage('el-GR');
+        } else if (language.value.indexOf('en') > -1) {
+            $translateProvider.preferredLanguage('en-US');
+        }
+    }, null);
     $translateProvider.useSanitizeValueStrategy("escape");
 });
 
