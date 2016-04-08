@@ -29,20 +29,15 @@ module.config(function ($translateProvider) {
     });
 
     $translateProvider.fallbackLanguage('el-GR');
-    navigator.globalization.getPreferredLanguage(function (language) {
-        if (language.value.indexOf('el') > -1) {
-            $translateProvider.preferredLanguage('el-GR');
-        } else if (language.value.indexOf('en') > -1) {
-            $translateProvider.preferredLanguage('en-US');
-        }
-    }, null);
-    $translateProvider.useSanitizeValueStrategy("escape");
+    $translateProvider.preferredLanguage('el-GR');
+    $translateProvider.fallbackLanguage('el-GR');
+    $translateProvider.useSanitizeValueStrategy('escape');
 });
 
 
 module.run(function ($translate) {
     document.addEventListener('deviceready', onDeviceReady, false);
-    document.addEventListener("backbutton", onBackKeyDown, false);
+    document.addEventListener('backbutton', onBackKeyDown, false);
 
     function onBackKeyDown() {
         if (myNavigator.getCurrentPage().options.pagevalue === "loginPage") {
@@ -52,16 +47,37 @@ module.run(function ($translate) {
 
     function onDeviceReady() {
         window.analytics.startTrackerWithId('UA-31632742-15');
-        var login = checkLogin();
-        if (login) {
-            myNavigator.replacePage('tabs.html', {params: {tab: 0}});
-        } else {
-            setTimeout(function () {
-                window.analytics.trackView('login');
-                window.analytics.trackEvent('Page', 'View', 'Login');
-                myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
-            }, 1000);
-        }
+        navigator.globalization.getPreferredLanguage(function (language) {
+            console.log(language);
+            if (language.value.indexOf('el') > -1) {
+                $translate.use('el-GR');
+            } else if (language.value.indexOf('en') > -1) {
+                $translate.use('en-US');
+            }
+
+            var login = checkLogin();
+            if (login) {
+                myNavigator.replacePage('tabs.html', {params: {tab: 0}});
+            } else {
+                setTimeout(function () {
+                    window.analytics.trackView('login');
+                    window.analytics.trackEvent('Page', 'View', 'Login');
+                    myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
+                }, 1000);
+            }
+        }, function (error) {
+            console.log(error);
+            var login = checkLogin();
+            if (login) {
+                myNavigator.replacePage('tabs.html', {params: {tab: 0}});
+            } else {
+                setTimeout(function () {
+                    window.analytics.trackView('login');
+                    window.analytics.trackEvent('Page', 'View', 'Login');
+                    myNavigator.replacePage('login.html', {animation: "fade", pagevalue: "loginPage"});
+                }, 1000);
+            }
+        });
     }
 });
 
